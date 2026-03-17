@@ -1,15 +1,15 @@
 # CodeMeYo
 
-**Multi-LLM Autonomous Coding Agent** â€” a native desktop app that reads your project, writes code, runs tests, fixes errors, and commits, all on its own.
+**Multi-LLM Autonomous Coding Agent** — a native desktop app that reads your project, writes code, runs tests, fixes errors, and commits, all on its own.
 
-CodeMeYo integrates three of the most powerful LLMs â€” **Claude (Anthropic)**, **Grok (xAI)**, and **GPT (OpenAI)** â€” with full tool use / function calling support.
+CodeMeYo integrates three of the most powerful LLMs — **Claude (Anthropic)**, **Grok (xAI)**, and **GPT (OpenAI)** — with full tool use / function calling support.
 
 ## What Makes CodeMeYo Different
 
 - **It actually codes.** Give it a task and it reads your codebase, writes/edits files, installs deps, runs tests, fixes failures, commits, and pushes. Autonomously.
 - **Three LLMs, one app.** Pick one, round-robin between them, or use all three at once.
 - **Deep Think mode.** Send the same hard problem to all three simultaneously, compare their approaches side-by-side, pick the best one or synthesize a combined solution.
-- **Visual debugging.** Screenshot a bug on your screen â€” the agent sees it, reads the relevant code, fixes it, and verifies the fix.
+- **Visual debugging.** Screenshot a bug on your screen — the agent sees it, reads the relevant code, fixes it, and verifies the fix.
 - **You control the autonomy level.** From "ask me before every file edit" to "full autopilot, just get it done."
 
 ## Features
@@ -19,7 +19,7 @@ CodeMeYo integrates three of the most powerful LLMs â€” **Claude (Anthropic
 - Run shell commands (build, test, lint, install deps)
 - Git operations (add, commit, push, branch, checkout)
 - Screenshot capture and visual debugging with annotation
-- Project-aware context â€” indexes your codebase and selects relevant files automatically
+- Project-aware context — indexes your codebase and selects relevant files automatically
 
 ### Multi-Model Modes
 | Mode | Description |
@@ -60,7 +60,7 @@ CodeMeYo integrates three of the most powerful LLMs â€” **Claude (Anthropic
 | Ask Every Time | Agent proposes each action, user approves |
 | Auto-Read | Reads freely, asks before edits |
 | Auto-All | Works autonomously, asks before push/delete |
-| Full Auto | Complete autonomy â€” maximum speed |
+| Full Auto | Complete autonomy — maximum speed |
 
 ## Tech Stack
 
@@ -111,8 +111,8 @@ Add your keys in Settings after launching the app.
 
 ## Security
 
-- API keys stored locally only â€” never transmitted except to the respective provider
-- No telemetry â€” all data stays on your machine
+- API keys stored locally only — never transmitted except to the respective provider
+- No telemetry — all data stays on your machine
 - CSP headers enforced by Tauri
 - Command sandboxing with configurable timeouts
 - Local-only SQLite database
