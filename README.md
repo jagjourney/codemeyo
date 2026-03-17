@@ -16,6 +16,18 @@ Get the latest release from the [Releases](https://github.com/jagjourney/codemey
 | macOS | `.dmg` |
 | Linux | `.AppImage`, `.deb`, `.rpm` |
 
+---
+
+## See It In Action: MegaMart
+
+> **137 source files. 17,340 lines of code. 20 development phases. Zero human-written code.**
+
+We fed CodeMeYo a series of plain English prompts and it built a **complete Amazon-style multivendor e-commerce marketplace** from scratch. Customer storefront, vendor dashboard, admin panel, Stripe payments, full test suite. Every line written autonomously by AI.
+
+**[View the MegaMart Demo Project](https://github.com/jagjourney/megamart-codemeyo-demo)** to see the full source code, the exact prompts used, and which AI model built each phase.
+
+---
+
 ## Features
 
 - **Multi-LLM Support**: Claude (Anthropic), GPT (OpenAI), Grok (xAI)
@@ -38,11 +50,6 @@ Visit [codemeyo.com](https://codemeyo.com) for more information.
 
 - [Wiki / FAQ / How-To Guides](https://github.com/jagjourney/codemeyo/wiki)
 - [CodeMeYo vs Claude Desktop](https://github.com/jagjourney/codemeyo/wiki/CodeMeYo-vs-Claude-Desktop)
-
-## Demo Project
-
-See what CodeMeYo can build autonomously:
-[MegaMart](https://github.com/jagjourney/megamart-codemeyo-demo) - A full-stack multivendor e-commerce marketplace (137 files, 17,340 lines) built entirely by CodeMeYo with zero human-written code.
 
 ## Support
 
