@@ -27,6 +27,20 @@ To release:
 
 ---
 
+## [0.1.6] — 2026-03-18
+
+### Added
+- Grok 4.20 model family: Multi-Agent, Reasoning, and Non-Reasoning variants (2M context)
+- Grok 4 Fast Reasoning and Non-Reasoning models ($0.20/$0.50)
+- Grok 4 (grok-4-0709) with 256K context
+- Deep Think mode now uses Grok 4.20 Multi-Agent as flagship
+
+### Changed
+- Grok model registry expanded from 4 to 9 models
+- Grok 3 moved to balanced tier (no longer flagship)
+
+---
+
 ## [0.1.5] — 2026-03-18
 
 ### Fixed
