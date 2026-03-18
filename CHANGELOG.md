@@ -27,6 +27,16 @@ To release:
 
 ---
 
+## [0.1.5] — 2026-03-18
+
+### Fixed
+- Auto-updater: download errors are now shown to the user instead of silently hiding the notification
+- Auto-updater: added retry button when download/install fails
+- CI/CD: pipeline now validates updater artifacts (signatures and bundles) exist before generating latest.json
+- CI/CD: latest.json is no longer uploaded with empty signatures and incomplete URLs when signing key is missing
+
+---
+
 ## [0.1.0] — 2026-03-16
 
 ### Added
