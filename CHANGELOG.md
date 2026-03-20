@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [0.1.7] — 2026-03-20
+
+### Fixed
+- Grok multi-agent model (grok-4.20-multi-agent-beta-0309) now routes to xAI Responses API (`/v1/responses`) instead of Chat Completions — fixes "Multi Agent requests are not allowed on chat completions" error
+- Health check also routes correctly per model type
+
+---
+
 ## [0.1.6] — 2026-03-18
 
 ### Added
