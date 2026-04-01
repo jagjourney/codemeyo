@@ -27,6 +27,22 @@ To release:
 
 ---
 
+## [0.1.360] - 2026-04-01
+
+### Added
+- **Ollama auto-detection** — Automatically discovers locally installed Ollama models via `localhost:11434/api/tags`
+  - No more hardcoded model list — shows exactly what's installed on your machine
+  - Custom models (like fine-tuned or Modelfile-based models) appear automatically
+  - "Refresh" button in settings to re-scan for new models
+  - Model size and parameter info displayed in descriptions
+- Model count indicator in Ollama settings ("X models detected")
+
+### Changed
+- Ollama model list is now dynamic instead of static (was 6 hardcoded models)
+- Ollama models auto-load on app startup during settings initialization
+
+---
+
 ## [0.1.355] - 2026-04-01
 
 ### Added
