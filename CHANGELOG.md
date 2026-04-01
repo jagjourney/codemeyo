@@ -27,7 +27,59 @@ To release:
 
 ---
 
-## [0.1.7] — 2026-03-20
+## [0.1.355] - 2026-04-01
+
+### Added
+- **5 New LLM Providers**: Google Gemini, DeepSeek, Mistral AI, Ollama (local), and Groq
+  - 8 total providers now supported (up from 3)
+  - Each with full tool calling, health checks, and token tracking
+  - Ollama runs locally with no API key required
+- **Google Gemini provider** with native Gemini API support (not OpenAI-compatible)
+  - Supports functionDeclarations tool format, alternating role requirements, inlineData images
+- **OpenAI-compatible provider reuse** - DeepSeek, Mistral, Ollama, and Groq all use a configurable base URL on the OpenAI client
+- **Coding-specific models** for each provider:
+  - Grok Code Fast, Devstral 2, Codestral, Qwen 2.5 Coder (Ollama), Code Llama (Ollama), DeepSeek V3.2
+- **40+ models** across all providers with April 2026 pricing and specs
+- New provider colors in dark and light themes
+- Token usage tracking for all 8 providers
+- Deep Think mode support for all 8 providers with best-model selection
+- Internal feature comparison document (docs/FEATURE_COMPARISON.md)
+
+### Fixed
+- Deep Think token overflow crashing debate/synthesis phases
+  - Proposals capped at 30K tokens, critiques at 30K, task context at 8K
+  - Tool results in analysis phase capped at 8K tokens
+  - Empty tools array sent in text-only debate/synthesis phases (saves thousands of tokens)
+- CI/CD Windows build OOM (STATUS_STACK_BUFFER_OVERRUN) from Rustc compiling windows crate
+  - Added CARGO_BUILD_JOBS=1 environment variable
+  - Added cargo clean before builds
+  - Added release profile: codegen-units=16, lto=false
+- CI/CD deploy-website SSH key auth (gitlab-runner@s2 to codemez@s1)
+
+### Changed
+- Model registry updated to April 2026 latest for all providers
+- Grok model IDs updated (grok-4.20-0309-reasoning, grok-4.1-fast-reasoning)
+- OpenAI models updated (GPT-5.4 Mini/Nano, o3, o4-mini with correct pricing)
+- Gemini models updated (2.5 Pro, 2.5 Flash, 2.5 Flash-Lite)
+- DeepSeek updated to V3.2 (128K context, $0.28/$0.42)
+- Mistral updated (Large 3, Medium 3.1, Small 4, Devstral 2, Ministral 3B)
+- Groq updated (GPT-OSS 120B/20B, Llama 3.3 70B, Llama 4 Scout)
+- Ollama defaults updated (llama3.1, qwen3, qwen2.5-coder, deepseek-r1)
+- ModelSelector now only shows enabled providers (horizontal scroll for overflow)
+- Token usage grid changed from 3 to 4 columns, hides unused providers
+- Runner concurrency set to 2 for parallel CI jobs
+
+---
+
+## [0.1.8] - 2026-03-28
+
+### Fixed
+- Deep Think token overflow crashing debate/synthesis phases
+- CI: Windows build OOM - single-job compilation + cargo clean
+
+---
+
+## [0.1.7] - 2026-03-20
 
 ### Fixed
 - Grok multi-agent model (grok-4.20-multi-agent-beta-0309) now routes to xAI Responses API (`/v1/responses`) instead of Chat Completions — fixes "Multi Agent requests are not allowed on chat completions" error
