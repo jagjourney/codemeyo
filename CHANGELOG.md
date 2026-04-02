@@ -27,6 +27,42 @@ To release:
 
 ---
 
+## [0.1.725] - 2026-04-01
+
+### Fixed
+- **File Editor shows blank** - Files opened from Explorer now load content from disk via new `read_file_content` Tauri command
+- **Git tab spawns cmd.exe windows** - Added `CREATE_NO_WINDOW` flag to all `Command::new` calls on Windows (git_ops + run_command)
+- **Git panel hardcoded path** - Now uses the active project from project store instead of hardcoded path
+- **Git panel crashes without project** - Shows "Select a project first" when no project is active
+
+### Added
+- `read_file_content` Tauri command for code editor file loading
+- `write_file_content` Tauri command for editor save support
+
+### Changed
+- Help panel updated to list all 8 LLM providers with descriptions
+- Git panel uses active project path dynamically
+
+---
+
+## [0.1.710] - 2026-04-01
+
+### Fixed
+- **Chat history not persisting** - CSP was blocking all Tauri IPC calls to `ipc.localhost`, causing every `invoke()` to silently fail. Added `connect-src` directive for `ipc:`, `http://ipc.localhost`, and `http://localhost:11434`
+- **FOREIGN KEY constraint failed on messages** - `create_conversation` was fire-and-forget, so messages tried to save before the conversation existed in DB. Now properly awaited
+- **usage_log missing task_ref column** - Added schema migration to add `task_ref` column to existing databases created before v0.1.355
+- **Ollama model detection** - Uses Tauri backend command instead of browser fetch (CSP blocked localhost requests)
+- **Ollama requires no API key** - Skip API key gate for Ollama in chat and health checks
+- **Ollama tool calling** - Parse tool calls from JSON text/code fences for local models that don't use the tool_calls API
+- **Smart error messages** - Translate raw API errors into human-readable messages (OOM, model not found, connection refused, rate limit, auth, billing, context length)
+
+### Added
+- DevTools support in release builds (F12 to open)
+- Backend debug logging for create_conversation and save_message
+- Ollama auto-detect models on Settings mount with Refresh button
+
+---
+
 ## [0.1.360] - 2026-04-01
 
 ### Added
