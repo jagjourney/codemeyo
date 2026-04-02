@@ -27,6 +27,19 @@ To release:
 
 ---
 
+## [0.1.775] - 2026-04-01
+
+### Fixed
+- **File editor shows blank content** - Clicking files in Explorer now loads content from disk via `read_file_content` Tauri command
+- **Directories open as file tabs** - Clicking folders no longer opens blank editor tabs
+- **"does not support tools" error** - Smart error message when Ollama model lacks tool calling support, suggests compatible models
+- **Conversations not saving for new providers** - CSP fix in v0.1.710 enables all Tauri IPC calls including conversation persistence for all 8 providers
+
+### Changed
+- File explorer only opens actual files (files without extensions like Makefile/Dockerfile still open correctly)
+
+---
+
 ## [0.1.725] - 2026-04-01
 
 ### Fixed
