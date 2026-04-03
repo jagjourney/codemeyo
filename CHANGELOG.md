@@ -27,6 +27,21 @@ To release:
 
 ---
 
+## [0.1.855] - 2026-04-02
+
+### Fixed
+- **Conversations not saving for Gemini/DeepSeek/Mistral/Ollama/Groq** - Database only seeded 3 providers (Claude/Grok/OpenAI). Now seeds all 8 providers on init so messages persist for every LLM
+- **Deleted conversations keep coming back** - `deleteConversation` only removed from local state, never called the backend. Added `delete_conversation` Tauri command that deletes conversation + all its messages from SQLite
+- **Welcome screen only shows Claude/Grok/OpenAI badges** - Now dynamically shows all enabled providers
+- **Usage panel only tracks 3 providers** - Updated colors, labels, session grid, and filter dropdown to include all 8 providers
+- **Auto-updater** - Verified working, latest.json serves from GitHub. Will detect v0.1.855 on next launch
+
+### Added
+- `delete_conversation` Tauri command (deletes messages + conversation from DB)
+- All 8 providers seeded in database on first run
+
+---
+
 ## [0.1.775] - 2026-04-01
 
 ### Fixed
