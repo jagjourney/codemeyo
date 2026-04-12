@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [0.1.900] - 2026-04-11
+
+### Fixed
+- **Grok multi-agent "reasoningEffort" error** - Removed unsupported `reasoning` parameter from Grok multi-agent Responses API calls. Deep Think and Consensus modes with Grok now work correctly
+- **Deep Think/Consensus synthesis plan not saved** - The synthesized plan from multi-agent debate was only stored in ephemeral UI state and lost on app restart. Now persisted as the assistant message content in the database
+
+---
+
 ## [0.1.855] - 2026-04-02
 
 ### Fixed
