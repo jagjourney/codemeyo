@@ -27,6 +27,58 @@ To release:
 
 ---
 
+## [0.2.500] - 2026-04-12
+
+### Changed
+- **Code/Chat + Strategy architecture** - Complete redesign of the mode system:
+  - **Two interaction modes**: Code (autonomous agent) and Chat (interactive conversation)
+  - **Four strategies**: Single, Round Robin, Deep Think, Consensus
+  - **ALL strategies work with BOTH modes**: Chat + Deep Think = all AIs debate with you. Code + Deep Think = all AIs debate and execute autonomously.
+  - Top bar: [Providers] | [Code/Chat] | [Strategy]
+  - Title bar shows: "Chat | Deep Think" or "Code | Single" etc.
+  - `interactionMode` stored separately from `agentMode` (both persisted)
+  - Backend routes: chat -> conversation.rs, code -> agent loops as before
+
+---
+
+## [0.2.131] - 2026-04-12
+
+### Changed
+- **Redesigned mode selector** - Two primary modes: **Code** and **Chat**
+  - **Code** mode: autonomous coding agent with strategy selector (Single, Round Robin, Deep Think, Consensus)
+  - **Chat** mode: interactive multi-LLM conversation
+  - Code strategies only shown when in Code mode (cleaner UI)
+  - Deep Think and Consensus are execution strategies within Code, not separate top-level modes
+- Title bar shows "Code - Single", "Code - Round Robin", "Code - Deep Think", "Chat" etc.
+
+---
+
+## [0.2.130] - 2026-04-12
+
+### Added
+- **Conversation Mode (complete)** - Interactive multi-LLM roundtable with full feature set:
+  - ConversationView component with participant badges, turn indicators, round/free mode toggle
+  - ConversationState in chatStore (participants, currentSpeaker, mode, turnCount)
+  - @mention autocomplete in InputBar (type @ to mention specific AI, arrow keys to navigate, Enter to select)
+  - Each LLM response saved as separate message with provider badge (persists across app restart)
+  - "Execute Plan" button transitions from conversation to single-agent execution mode
+  - Free mode: user picks which AI speaks next via provider buttons
+  - Round mode: all enabled providers respond in sequence automatically
+  - Token truncation for long conversations (keeps first + last 18 messages)
+- **Mobile Responsive UI (Phase 2)** - all behind `@media (max-width: 768px)`, desktop untouched:
+  - MobileNav bottom tab bar (Chat, Files, Git, Settings, More)
+  - Sidebar hidden on mobile, MobileNav replaces it
+  - StatusBar hidden on mobile
+  - Full-screen chat, settings, explorer on mobile
+  - Monaco editor hidden on mobile (fallback to pre blocks)
+  - Terminal and browser debug panels hidden on mobile
+  - Git panel simplified (no inline diffs)
+  - Touch targets minimum 44px, safe area padding for notch/home bar
+  - Mode selector compact layout on mobile
+- **Android project initialized** via `pnpm tauri android init` (Phase 3 started)
+
+---
+
 ## [0.2.0] - 2026-04-12
 
 ### Added
