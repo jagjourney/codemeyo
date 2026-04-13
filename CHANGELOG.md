@@ -27,6 +27,28 @@ To release:
 
 ---
 
+## [0.2.900] - 2026-04-13
+
+### Added
+- **iOS build support** - CodeMeYo compiles for aarch64-apple-ios with Rust 1.88
+- **Android project initialized** - Tauri Android project at src-tauri/gen/android/
+- **Mobile capabilities** - Separate permission config for iOS/Android (no dialog/updater)
+- **Desktop-only gating** - xcap, screenshot, browser modules compile-gated for mobile
+- **Mobile stubs** - Screenshot/browser commands return "not available" on mobile instead of crashing
+
+### Changed
+- CI/CD macOS runner switched from Homebrew Rust 1.94 to rustup Rust 1.88 (fixes iOS cross-compilation)
+- CI/CD macOS before_script sets TMPDIR, IPHONEOS_DEPLOYMENT_TARGET, cargo/bin PATH priority
+- Cargo.toml: xcap is the only desktop-only dependency, all others available on all platforms
+
+### Fixed
+- **Chat mode injected project context** - Chat mode now sends raw user message
+- **Chat + Deep Think/Consensus ignored strategy** - Now routes correctly
+- **All LLMs: skip tools/tool_choice when empty** - Fixes Grok "no tools specified" error in Chat mode
+- **Mac runner disk full (249MB free)** - Cleaned to 32GB free
+
+---
+
 ## [0.2.515] - 2026-04-13
 
 ### Fixed
