@@ -27,6 +27,19 @@ To release:
 
 ---
 
+## [0.2.0] - 2026-04-12
+
+### Added
+- **Conversation Mode** - New interactive multi-LLM chat mode where you debate with multiple AIs in real-time. Each enabled provider responds in sequence. You steer the discussion, then switch to Single/Deep Think to execute the plan.
+- "Chat" button in mode selector (between Single and Round Robin)
+- Conversation events: thinking indicators per provider, error handling per provider, accumulated multi-provider responses
+
+### Changed
+- Mode selector now shows 5 modes: Single, Chat, Round Robin, Deep Think, Consensus
+- Title bar displays "Conversation" label when in Chat mode
+
+---
+
 ## [0.1.900] - 2026-04-11
 
 ### Fixed
