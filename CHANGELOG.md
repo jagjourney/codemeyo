@@ -27,6 +27,13 @@ To release:
 
 ---
 
+## [0.2.505] - 2026-04-12
+
+### Fixed
+- **Grok "tool_choice but no tools" error in Chat mode** - All providers (Claude, Grok, OpenAI) now skip sending `tools` and `tool_choice` when the tools array is empty. Fixes conversation/chat mode crashing on Grok and potentially other providers.
+
+---
+
 ## [0.2.500] - 2026-04-12
 
 ### Changed
