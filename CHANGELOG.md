@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [0.2.515] - 2026-04-13
+
+### Fixed
+- **Chat mode no longer injects project/coding context** - Chat mode now sends raw user message without project type, file list, or code context. LLMs treat conversations as genuine discussions, not coding tasks.
+- **Chat + Deep Think/Consensus now uses the strategy** - Chat + Single asks only active provider. Chat + Deep Think/Consensus runs the full debate engine (parallel analysis, debate, synthesis) for multi-AI discussion. Chat + Round Robin runs sequential conversation.
+
+---
+
 ## [0.2.510] - 2026-04-12
 
 ### Fixed
