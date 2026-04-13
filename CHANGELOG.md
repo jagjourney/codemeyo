@@ -27,6 +27,13 @@ To release:
 
 ---
 
+## [0.2.910] - 2026-04-13
+
+### Fixed
+- **Chat + Deep Think no longer scans codebase** - New text-only `run_debate()` replaces `run_deepthink()` for Chat mode. All analysis, debate, synthesis phases are pure conversation with zero file tools. Chat mode is completely tool-free across all strategies.
+
+---
+
 ## [0.2.900] - 2026-04-13
 
 ### Added
