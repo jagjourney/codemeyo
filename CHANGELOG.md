@@ -27,6 +27,13 @@ To release:
 
 ---
 
+## [0.2.510] - 2026-04-12
+
+### Fixed
+- **App crash on startup** - Reverted from rustls-tls back to native-tls for desktop builds. The rustls switch (for Android cross-compilation) broke TLS on Windows causing instant crash. Android will use rustls via target-specific config when mobile builds are ready.
+
+---
+
 ## [0.2.505] - 2026-04-12
 
 ### Fixed
