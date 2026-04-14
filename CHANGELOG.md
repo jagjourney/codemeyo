@@ -27,6 +27,15 @@ To release:
 
 ---
 
+## [1.0.000] - 2026-04-13
+
+### Added
+- **iOS CI/CD build** - Automatic iOS builds on Mac runner with codesign
+- **Android CI/CD build** - Automatic Android builds on RV PC runner (Runner #6)
+- Full 5-platform pipeline: Windows, macOS, Linux, iOS, Android
+
+---
+
 ## [0.2.910] - 2026-04-13
 
 ### Fixed
