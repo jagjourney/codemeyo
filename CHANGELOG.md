@@ -27,6 +27,146 @@ To release:
 
 ---
 
+## [1.5.9] - 2026-04-18
+
+### Added
+- **In-app Changelog viewer** — A new "Changelog" tab under Help shows release notes for every version, fetched live from our public CHANGELOG. Current version is highlighted, older versions are collapsible, and you can search the whole history.
+- **Release notes in the update prompt** — When the auto-updater detects a new version, you'll see what's actually changing before you click "Install".
+
+### Improved
+- Release notes are now backfilled all the way from v1.0.5, so every GitHub release page and every in-app changelog entry shows real, human-readable notes instead of "Release vX.X.X — see CHANGELOG.md".
+
+---
+
+## [1.5.8] - 2026-04-18
+
+### Fixed
+- **Android builds no longer time out.** The x86_64 Android variant was hanging for nearly two hours in the cross-compile step on Windows. Android APKs now build only for the ARM architectures real phones use (aarch64 + armv7), which is what the Play Store actually distributes. Cuts Android CI time roughly in half and avoids the hang entirely.
+
+---
+
+## [1.5.7] - 2026-04-18
+
+### Added
+- **Full Git client** — Branch picker with search (switch / create / delete branches, protected-branch guard on main/master), commit composer with optional "amend last commit", Fetch / Pull / Push toolbar, and inline per-file stage, unstage, and discard buttons on every changed file. Stage-all and Unstage-all toggles included.
+- **Robust terminal CLI** — Slash commands that mirror the whole GUI: `/project list|add|rm|switch`, `/git status|checkout|commit|push|pull|fetch|...`, `/chat new|list|switch|rename|delete`, `/mode code|chat`, `/strategy single|roundrobin|deepthink|consensus`, `/provider <name>`, `/status`, `/open <file>`, `/version`, `/help`, `/clear`. Accepts both `/cmd` and `cmy cmd`. Type `/help` in the terminal to see everything.
+- **25 new MCP servers** in the registry: **Unreal Engine 5.7**, Unity, Blender, Meshy AI, Leonardo.ai, Canva, Figma, Adobe Express, Stability AI, ElevenLabs, Runway, cPanel / WHM, Cloudflare, Vercel, Netlify, Railway, DigitalOcean, Supabase, Firebase, MongoDB, MySQL / MariaDB, Redis, Notion, Linear, Jira, Asana, Google Calendar, Gmail, OpenAI DALL·E, Perplexity, Stripe, Shopify, and WordPress.
+- **Help search** — Ctrl/Cmd+F in the Help tab searches across every feature description with term highlighting.
+- **Remove projects** — Inline trash icon on each project in the dropdown. Keeps files on disk; just removes the entry from CodeMeYo.
+
+### Improved
+- Project list is now sorted alphabetically everywhere it appears — dropdown, CLI, title bar.
+- Terminal now runs shell commands in your active project's directory automatically (no more hardcoded paths).
+- Terminal keeps command history — Up/Down arrows navigate through the last 200 commands. Ctrl+L clears the screen.
+- Terminal reacts live when you switch the active project.
+- Theme stays consistent — all the new Git controls respect your light/dark theme automatically.
+
+---
+
+## [1.5.6] - 2026-04-18
+
+### Added
+- **GitHub-style Git diff viewer** — Click any file in the Git tab and see its changes with line numbers, color-coded additions and removals, unchanged-line context, and collapsible per-file cards. Monospace rendering preserves whitespace exactly.
+
+### Improved
+- Git panel reorganized into a split layout — file list on the left, live diff viewer on the right.
+
+---
+
+## [1.5.5] - 2026-04-18
+
+### Fixed
+- The new LLM Providers and MCP Servers sections on codemeyo.com now render as proper cards matching the rest of the site's design (were unstyled in 1.5.4).
+
+---
+
+## [1.5.4] - 2026-04-18
+
+### Added
+- **Deep Think visual state persists across app restarts.** When you reopen a Deep Think conversation, all four proposal cards, every critique, the final synthesis, and the phase-progress indicator are fully restored — not just the text response.
+- Homepage at codemeyo.com fully refreshed — all 8 LLM providers highlighted, 22+ MCP servers listed by category, Deep Think and Conversation Mode featured, iOS/Android availability called out, privacy and terms pages linked.
+
+---
+
+## [1.5.3] - 2026-04-18
+
+### Fixed
+- Mac build runner back online and healthy, restoring macOS + iOS CI builds.
+
+---
+
+## [1.5.2] - 2026-04-18
+
+### Fixed
+- **Windows installer now appears on GitHub releases.** Previous release published empty because Windows artifacts were written to a new D:\ cache location that the CI upload step didn't know about. Junction added so artifacts land where expected.
+- **Auto-updater now detects Windows updates.** The `latest.json` published to GitHub now includes both Mac and Windows platform entries.
+
+---
+
+## [1.5.1] - 2026-04-18
+
+### Fixed
+- **Folders now render as folders** in the file tree — they were previously showing as generic files.
+- **File editor loads file contents** when you click a file — was showing blank.
+- **Conversations no longer crash with "FOREIGN KEY constraint failed"** when saving messages.
+- **New conversations from the sidebar "+" button persist immediately** — previously they'd disappear on restart unless you sent a message first.
+
+### Improved
+- Windows CI cache moved to a persistent `D:\codemeyo-cache` — after the first warm-up, subsequent Windows builds drop from ~32 minutes to ~8 minutes.
+
+---
+
+## [1.5.0] - 2026-04-17
+
+### Added
+- **Writable code editor** — Edit any file directly in the app. Auto-saves 1.5 seconds after you stop typing, or Ctrl+S to save immediately. Supports 40+ languages with bracket colorization, minimap, find/replace, and format-on-paste.
+- **Conversation rename** — Hover any conversation in the sidebar, click the pencil, rename inline.
+- **Real folder icons in the file tree** — Closed folders vs open folders look different, color-coded files by extension (TypeScript blue, Rust orange, Python green, JSON yellow, images green, and more).
+
+### Fixed
+- **All AI responses now persist across app restarts** — Deep Think conversations with Claude, Grok, OpenAI, and Gemini no longer vanish when you close the app. The message-save path had gaps for synthesis responses and certain strategies.
+
+### Improved
+- **Linux CI time: 50 minutes → 6 minutes.** Pre-built container image with cached Rust toolchain and cargo registry volumes eliminates per-build package installs.
+
+---
+
+## [1.0.11 — 1.0.12] - 2026-04-17
+
+### Fixed
+- **Windows desktop app no longer crashes on startup.** A prior change to enable Android cross-compilation had swapped the TLS backend and broken Windows networking. Now uses the right TLS per platform automatically (native-tls on desktop, rustls on mobile builds).
+
+---
+
+## [1.0.10] - 2026-04-17
+
+### Fixed
+- Android cross-compilation no longer fails on missing OpenSSL.
+
+---
+
+## [1.0.9] - 2026-04-17
+
+### Fixed
+- iOS signing works reliably in CI — keychain access now configured correctly for SSH-initiated builds.
+
+---
+
+## [1.0.7] - 2026-04-17
+
+### Improved
+- Linux CI builds now use all available CPU cores on the build host.
+- All CI jobs bumped to a 2-hour timeout (was 1 hour), accommodating cold-cache runs.
+
+---
+
+## [1.0.5] - 2026-04-17
+
+### Changed
+- **Version numbering fixed to strict semver.** No more leading zeros like `1.0.012` — the auto-updater requires valid semver to detect new releases.
+
+---
+
 ## [1.0.000] - 2026-04-13
 
 ### Added
