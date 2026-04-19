@@ -1,58 +1,45 @@
 ### CodeMeYo Wiki
 
-**[Home](Home)**
+**[Home](Home)** — v1.9.1
 
 ---
 
-**Getting Started**
-- [Installation](Getting-Started#installation)
-- [First Launch](Getting-Started#first-launch-walkthrough)
-- [Build from Source](Getting-Started#building-from-source)
+**Install & Use**
+- [Getting Started](Getting-Started)
+- [Configuration](Configuration)
+- [Auto-Updater](Auto-Updater)
+- [Mobile App](Mobile-App)
 
-**[Features](Features)**
-- [Multi-LLM Support](Features#multi-llm-support)
-- [Autonomous Agent](Features#autonomous-coding-agent)
-- [MCP Integration](Features#mcp-server-integration)
-- [Browser Automation](Features#browser-automation)
-- [Project Indexing](Features#project-indexing)
-- [Screenshot Capture](Features#screenshot-and-screen-capture)
-- [Monaco Editor](Features#monaco-editor)
-- [Terminal](Features#terminal)
-- [Chat Persistence](Features#sqlite-chat-persistence)
-- [Keychain Storage](Features#secure-keychain-storage)
+**Features**
+- [LLM Providers](LLM-Providers)
+- [MCP Servers](MCP-Servers)
+- [Deep Think](Deep-Think)
+- [Browser Debug Guide](Browser-Debug-Guide)
+- [Terminal Commands](Terminal-Commands)
 
-**[Configuration](Configuration)**
-- [API Key Setup](Configuration#api-key-setup)
-- [MCP Servers](Configuration#mcp-server-configuration)
-- [Settings Panel](Configuration#settings-panel-walkthrough)
-- [Project Indexing](Configuration#project-indexing-setup)
+**Account & Cloud**
+- [Account System](Account-System)
+- [Backend API](Backend-API)
+- [Donations](Donations)
 
-**[FAQ](FAQ)**
+**Admin (codemeyo.com)**
+- [Admin Panel](Admin-Panel)
+- [CMS Page Builder](CMS-Page-Builder)
 
-**[Troubleshooting](Troubleshooting)**
-- [App Won't Start](Troubleshooting#app-wont-start)
-- [API Key Errors](Troubleshooting#api-key-errors)
-- [Build Issues](Troubleshooting#build-from-source-issues)
-- [MCP Issues](Troubleshooting#mcp-server-issues)
-- [Log Locations](Troubleshooting#log-file-locations)
-- [Reset Settings](Troubleshooting#how-to-reset-settings)
-
-**[Architecture](Architecture)**
-- [Frontend](Architecture#frontend)
-- [Backend](Architecture#backend)
-- [Agent System](Architecture#agent-system)
-- [LLM Adapters](Architecture#llm-adapter-pattern)
-- [MCP Client](Architecture#mcp-client-integration)
-- [Browser Automation](Architecture#browser-automation)
-- [Database](Architecture#database)
-- [IPC](Architecture#ipc-tauri-commands)
-- [Security](Architecture#security-model)
+**Reference**
+- [Architecture](Architecture)
+- [Release Notes](Release-Notes)
+- [Roadmap](Roadmap)
+- [Troubleshooting](Troubleshooting)
+- [FAQ](FAQ)
+- [Contributing](Contributing)
 
 ---
 
 **Links**
-- [GitHub Repository](https://github.com/jagjourney/codemeyo)
-- [Website](https://codemeyo.com)
+- [codemeyo.com](https://codemeyo.com)
+- [Download](https://codemeyo.com/download)
+- [Dashboard](https://codemeyo.com/dashboard)
+- [GitHub Releases](https://github.com/jagjourney/codemeyo/releases)
 - [Report a Bug](https://github.com/jagjourney/codemeyo/issues/new)
-- [Contributing](https://github.com/jagjourney/codemeyo/blob/main/CONTRIBUTING.md)
-- [Donate](https://jagjourney.ai/shop/codemeyo-donation/)
+- [Donate](https://codemeyo.com/donate)
