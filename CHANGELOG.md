@@ -27,6 +27,21 @@ To release:
 
 ---
 
+## [1.9.1] - 2026-04-19
+
+Pipeline fixes + homepage CMS wiring.
+
+### Fixed
+- Android build no longer fails on duplicate `BuildTask` Kotlin class — stale `com/codemeyo/app/` buildSrc files from the bundle ID rename are removed; replaced with the `com/jagjourney/codemeyo/` equivalents.
+- `build-website` CI job now passes `--ignore-platform-req=ext-sodium` so composer install works on the s2 runner (AlmaLinux doesn't ship ext-sodium by default).
+- `proguard-tauri.pro` updated to reference the new `com.jagjourney.codemeyo.TauriActivity` class name.
+
+### Added
+- Homepage (`/`) now renders from the `cms_pages` row with slug `home` when blocks are populated. Falls back to the static Blade template if the row is missing — so fresh installs still work.
+- SMTP "Send Test Email" header action on `/admin/settings` → Mail tab. One click, auto-fills your admin email, sends a diagnostic message so you know the mail config is wired up before real users rely on it.
+
+---
+
 ## [1.9.0] - 2026-04-19
 
 Last major release before v2.0.0. Lays the full account + CMS + billing
