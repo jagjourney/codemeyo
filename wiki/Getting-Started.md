@@ -1,171 +1,188 @@
 # Getting Started
 
-This guide walks you through installing CodeMeYo, setting up your API keys, and running your first autonomous coding task.
+This page walks you through installing CodeMeYo, creating your free account, adding your first API key, and running your first autonomous task.
+
+As of v1.9.0, downloads are gated behind a free [codemeyo.com](https://codemeyo.com) account. The app itself remains free to use — the account exists so you can receive auto-updates, pair mobile devices, and (when it ships) unlock [Remote PC Code](Mobile-App#remote-pc-code).
 
 ---
 
-## System Requirements
+## 1. Create a free account
 
-| Requirement | Details |
+1. Go to [codemeyo.com/register](https://codemeyo.com/register).
+2. Enter an email, password, and click **Create account**.
+3. Check your inbox for the verification link. Verified email is required before Pro features unlock. You can download immediately without verification — but [Backend API](Backend-API) access and (later) Pro need it.
+4. Optional but recommended: turn on **2FA** from [/dashboard/profile](https://codemeyo.com/dashboard/profile). See [Account System → 2FA](Account-System#2fa-setup).
+
+No credit card. Free forever for the desktop + mobile app itself. See [Account System](Account-System) for the full tour.
+
+---
+
+## 2. Download and install
+
+Go to [codemeyo.com/download](https://codemeyo.com/download) while signed in. You'll be offered the installer for your current platform with the right architecture pre-selected.
+
+### System requirements
+
+| Platform | Minimum |
 |---|---|
-| **OS** | Windows 10+, macOS 11+, Linux (Ubuntu 20.04+, Fedora 38+, etc.) |
-| **RAM** | 4 GB minimum, 8 GB recommended |
-| **Disk** | ~200 MB for the application |
-| **Internet** | Required for LLM API calls (not required for Ollama local models) |
-| **WebView** | WebView2 (Windows, pre-installed on Windows 10+), WebKitGTK (Linux) |
-
----
-
-## Installation
+| Windows | Windows 10 (1803+) or Windows 11, WebView2 |
+| macOS | macOS 11 Big Sur+, Apple Silicon or Intel |
+| Linux | Ubuntu 20.04+, Fedora 38+, or any distro with WebKitGTK 4.1 |
+| iOS | iOS 15+ (TestFlight during preview — see [Mobile App](Mobile-App)) |
+| Android | Android 10+ (aarch64 / armv7 — [Mobile App](Mobile-App)) |
 
 ### Windows
 
-1. Download the latest `.msi` or `.exe` installer from the [Releases page](https://github.com/jagjourney/codemeyo/releases/latest).
-2. Run the installer and follow the prompts.
-3. Launch CodeMeYo from the Start Menu or desktop shortcut.
-
-> **Note:** Windows may show a SmartScreen warning for unsigned builds. Click "More info" then "Run anyway" to proceed.
+1. Download the `.msi` or `.exe` installer for your architecture.
+2. Run the installer.
+3. If SmartScreen flags the installer as unrecognized, click **More info** → **Run anyway**. We're working toward full EV code-signing; until then it shows as unsigned.
+4. Launch from the Start Menu.
 
 ### macOS
 
-1. Download the latest `.dmg` file from the [Releases page](https://github.com/jagjourney/codemeyo/releases/latest).
-2. Open the `.dmg` and drag CodeMeYo to your Applications folder.
-3. On first launch, right-click the app and select "Open" to bypass Gatekeeper.
+1. Download the `.dmg`.
+2. Open the DMG and drag **CodeMeYo** to **Applications**.
+3. On first launch right-click the app and choose **Open** to bypass Gatekeeper. (Or **System Settings → Privacy & Security → Open Anyway**.)
+4. If the app reports as damaged after download: `xattr -cr /Applications/CodeMeYo.app`
 
-> **Note:** If macOS blocks the app, go to **System Settings > Privacy & Security** and click "Open Anyway."
+If you had v1.8.x or earlier installed under the old bundle ID `com.codemeyo.app`, v1.9.0+ registers as `com.jagjourney.codemeyo` and will show up beside your old copy. Drag the old one to the Trash after you've signed in on v1.9.
 
 ### Linux
 
-Download the appropriate package for your distribution from the [Releases page](https://github.com/jagjourney/codemeyo/releases/latest):
-
-**Debian/Ubuntu (.deb):**
 ```bash
-sudo dpkg -i codemeyo_0.1.0_amd64.deb
-sudo apt-get install -f  # Install any missing dependencies
+# Debian / Ubuntu
+sudo dpkg -i codemeyo_1.9.1_amd64.deb
+sudo apt-get install -f        # if any deps are missing
+
+# Fedora / RHEL
+sudo rpm -i codemeyo-1.9.1-1.x86_64.rpm
+
+# Universal (AppImage)
+chmod +x CodeMeYo_1.9.1_amd64.AppImage
+./CodeMeYo_1.9.1_amd64.AppImage
 ```
 
-**Fedora/RHEL (.rpm):**
+Runtime dependencies (Debian/Ubuntu):
 ```bash
-sudo rpm -i codemeyo-0.1.0-1.x86_64.rpm
-```
-
-**AppImage (universal):**
-```bash
-chmod +x CodeMeYo_0.1.0_amd64.AppImage
-./CodeMeYo_0.1.0_amd64.AppImage
-```
-
-**Required Linux dependencies:**
-```bash
-# Debian/Ubuntu
 sudo apt install libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev
-
-# Fedora
-sudo dnf install webkit2gtk4.1-devel libappindicator-gtk3-devel librsvg2-devel
 ```
 
 ---
 
-## First Launch Walkthrough
+## 3. Sign in from inside the app
 
-### Step 1: Open the Settings Panel
+Open CodeMeYo. In the sidebar, click the **Account** tab (person icon).
 
-When you first launch CodeMeYo, open the **Settings** panel by clicking the gear icon in the sidebar or pressing `Ctrl+,` (Windows/Linux) or `Cmd+,` (macOS).
+You have two sign-in paths:
 
-### Step 2: Add Your API Keys
+- **Email + password** — just type your credentials from step 1.
+- **Device-code flow** (recommended for mobile or when you don't want to type a password) — click **Sign in via browser**, CodeMeYo opens your default browser to `codemeyo.com/device`, you confirm the short code it displays, and the app picks up the session automatically. Same pattern as `gh auth login`. See [Account System → Device-code login](Account-System#device-code-login).
 
-CodeMeYo requires API keys from the LLM providers you want to use. You need at least one key to get started.
+Once signed in, the sidebar shows your plan (Free / Pro / Team), avatar, and a link to your dashboard. The auto-updater now runs on your account — see [Auto-Updater](Auto-Updater).
 
-| Provider | Where to Get a Key | Link |
-|---|---|---|
-| **Anthropic (Claude)** | Anthropic Console | [console.anthropic.com](https://console.anthropic.com) |
-| **OpenAI (GPT)** | OpenAI Platform | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
-| **xAI (Grok)** | xAI Console | [console.x.ai](https://console.x.ai) |
-| **Google (Gemini)** | Google AI Studio | [aistudio.google.com](https://aistudio.google.com) |
-| **DeepSeek** | DeepSeek Platform | [platform.deepseek.com](https://platform.deepseek.com) |
-| **Ollama (local)** | Install Ollama | [ollama.com](https://ollama.com) |
+---
 
-Enter your API key in the corresponding field under **Settings > Providers**. Enable each provider you want to use with the toggle switch.
+## 4. Add your first API key
 
-> **Security:** API keys are stored in your operating system's secure keychain (Windows Credential Manager, macOS Keychain, or Linux Secret Service). They are never transmitted anywhere except directly to the respective provider's API.
+CodeMeYo uses **bring your own key** (BYOK) for all 8 LLM providers. You need at least one working key to do anything useful.
 
-### Step 3: Choose a Model
+1. Open **Settings** (gear icon, or `Ctrl+,` / `Cmd+,`).
+2. Find the **Providers** section. Toggle a provider **on** and paste your key.
+3. Pick a model from the dropdown.
 
-Each provider offers multiple models with different capabilities, speeds, and costs. Select a model from the dropdown for each enabled provider. The Settings panel shows context window size, output limits, and pricing for each model.
+Full provider-by-provider key acquisition steps are on the [LLM Providers](LLM-Providers) page. Shortest path for each:
 
-**Recommended starting models:**
-
-| Provider | Recommended Model | Why |
-|---|---|---|
-| Claude | Claude Sonnet 4.6 | Best balance of speed and intelligence |
-| GPT | GPT-5.4 | Latest frontier model |
-| Grok | Grok 3 | Most capable Grok model |
-
-### Step 4: Open a Project
-
-Click the folder icon in the sidebar or use `Ctrl+O` / `Cmd+O` to open a project directory. CodeMeYo will index your codebase to understand the project structure and provide relevant context to the agent.
-
-### Step 5: Start Coding
-
-Type a task in the chat input at the bottom of the screen and press Enter. For example:
-
-- "Add a dark mode toggle to the settings page"
-- "Fix the failing tests in the auth module"
-- "Create a REST API endpoint for user registration"
-- "Refactor the database layer to use connection pooling"
-
-The agent will read your codebase, plan its approach, execute changes using its tools, and verify the results.
-
-### Step 6: Control Autonomy
-
-Set your preferred permission level in Settings:
-
-| Level | Behavior |
+| Provider | Get a key |
 |---|---|
-| **Ask Every Time** | Agent proposes each action, you approve |
-| **Auto-Read** | Reads files freely, asks before edits |
-| **Auto-All** | Works autonomously, asks before push/delete |
-| **Full Auto** | Complete autonomy for maximum speed |
+| Anthropic (Claude) | [console.anthropic.com](https://console.anthropic.com) → API Keys |
+| OpenAI (GPT) | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
+| xAI (Grok) | [console.x.ai](https://console.x.ai) |
+| Google (Gemini) | [aistudio.google.com](https://aistudio.google.com) |
+| DeepSeek | [platform.deepseek.com](https://platform.deepseek.com) |
+| Mistral | [console.mistral.ai](https://console.mistral.ai) |
+| Groq | [console.groq.com](https://console.groq.com) |
+| Ollama (local) | [ollama.com](https://ollama.com) — no key, runs on `localhost:11434` |
+
+Keys are stored in your **operating system's native keychain** (Windows Credential Manager / macOS Keychain / Linux Secret Service). They are never written to plaintext files, the SQLite database, or any CodeMeYo server. Outbound traffic goes directly from the app to the provider's API.
 
 ---
 
-## Building from Source
+## 5. Open a project and run your first task
 
-If you prefer to build CodeMeYo yourself:
+1. Click the folder icon in the sidebar, or `Ctrl+O` / `Cmd+O`.
+2. Pick a project directory. CodeMeYo indexes it — no contents uploaded anywhere, just paths and metadata.
+3. Type a task in the chat input at the bottom and press Enter:
+   - `"Add a dark mode toggle to the settings page."`
+   - `"Fix the failing tests in the auth module."`
+   - `"Create a REST API endpoint for user registration."`
+4. Watch it go. The agent plans, reads files, edits them, runs commands, and verifies.
 
-### Prerequisites
+### Code vs Chat mode
 
-- **Rust** (latest stable) — install via [rustup.rs](https://rustup.rs)
-- **Node.js** 20+ and **pnpm** 9+
-- **Tauri CLI** — `cargo install tauri-cli`
-- Platform-specific build tools:
-  - **Windows:** Visual Studio C++ Build Tools, WebView2
-  - **macOS:** Xcode Command Line Tools
-  - **Linux:** `libwebkit2gtk-4.1-dev`, `libappindicator3-dev`, `librsvg2-dev`
+Top bar has **Code** / **Chat** selector. In **Code** mode the agent runs tools (reads files, writes files, runs commands, commits). In **Chat** mode it just talks — no tools, no file edits. Useful for brainstorming before you commit to an approach.
 
-### Build Steps
+### Strategies
 
-```bash
-# Clone the repository
-git clone https://github.com/jagjourney/codemeyo.git
-cd codemeyo
+Within either mode, pick a **strategy**:
 
-# Install frontend dependencies
-pnpm install
+| Strategy | What it does |
+|---|---|
+| **Single** | One provider does the whole task |
+| **Round Robin** | Rotates between enabled providers each turn |
+| **Deep Think** | All providers analyze in parallel, debate, and synthesize a single answer. See [Deep Think](Deep-Think). |
+| **Consensus** | Like Deep Think but optimized for correctness — debate continues until providers converge |
 
-# Run in development mode (with hot reload)
-pnpm tauri dev
+### Permission levels
 
-# Build production release
-pnpm tauri build
-```
+In Settings → Permissions, pick how much autonomy the agent has:
 
-The built application will be in `src-tauri/target/release/bundle/`.
+| Level | Reads | Writes | Commands | Git push/delete |
+|---|---|---|---|---|
+| Ask Every Time | Ask | Ask | Ask | Ask |
+| Auto-Read | Auto | Ask | Ask | Ask |
+| Auto-All | Auto | Auto | Auto | Ask |
+| Full Auto | Auto | Auto | Auto | Auto |
+
+Start on **Auto-Read** while you get comfortable.
 
 ---
 
-## Next Steps
+## 6. Try Deep Think
 
-- [Features](Features) — learn about all of CodeMeYo's capabilities
-- [Configuration](Configuration) — detailed configuration options
-- [FAQ](FAQ) — common questions and answers
+The headline multi-LLM feature. On any task:
+
+1. Enable at least two providers in Settings.
+2. In the top bar switch the strategy from Single to **Deep Think**.
+3. Ask a question or describe a task.
+
+All enabled providers will analyze the problem in parallel, critique each other's proposals, and synthesize a final answer. You'll see four panels update live: **Analysis**, **Debate**, **Synthesis**, **Execution**. See [Deep Think](Deep-Think) for the full walkthrough.
+
+---
+
+## 7. Pair a phone (Coming Soon)
+
+The **Remote** tab in the sidebar currently shows a Coming Soon card. When we open the feature up:
+
+1. You'll open Remote on desktop, get a short pair code.
+2. Install the iOS or Android app (see [Mobile App](Mobile-App)).
+3. Enter the code on the phone.
+4. Drive your desktop agent from anywhere.
+
+Remote PC Code will be a Pro-tier feature sold through Apple App Store + Google Play only. Sign in with a free account now to be first in line.
+
+---
+
+## Where to go next
+
+- [LLM Providers](LLM-Providers) — detailed key setup + recommended models.
+- [MCP Servers](MCP-Servers) — extend the agent with external tools.
+- [Deep Think](Deep-Think) — multi-model debate + synthesis.
+- [Configuration](Configuration) — every setting, every config path.
+- [Troubleshooting](Troubleshooting) — fixes for common issues.
+- [FAQ](FAQ) — the short answers.
+
+---
+
+## Building from source?
+
+Source is **closed**. We don't accept pull requests and the repository is not public. Bug reports and feature requests go to [GitHub Issues](https://github.com/jagjourney/codemeyo/issues). See [Contributing](Contributing).
