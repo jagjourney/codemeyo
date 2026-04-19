@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.9.3] - 2026-04-19
+
+### Fixed
+- Clean installer assets on release pages — no more leftover files from older versions showing up next to the current one.
+- Sign-in nudge now disappears automatically once you sign in; the update check re-runs without needing an app restart.
+
+---
+
 ## [1.9.2] - 2026-04-19
 
 ### Fixed
