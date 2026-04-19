@@ -27,6 +27,16 @@ To release:
 
 ---
 
+## [1.9.5] - 2026-04-19
+
+### Fixed
+- The "Sign in for automatic updates" banner now disappears immediately once you sign in.
+
+### Added
+- Homepage download buttons can be wired to direct download URLs from the admin CMS per platform.
+
+---
+
 ## [1.9.4] - 2026-04-19
 
 ### Fixed
