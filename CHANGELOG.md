@@ -27,7 +27,14 @@ To release:
 
 ---
 
-## [1.9.5] - 2026-04-19
+## [1.9.6] - 2026-04-19
+
+### Fixed
+- Sign-in now truly persists across app restarts on all platforms — we switched to a file-backed session store so the app survives any OS keychain quirks.
+- Homepage console errors cleaned up (null DOM guards).
+
+### Added
+- Android builds are now attached to the GitHub release so you can sideload from any platform.
 
 ### Fixed
 - The "Sign in for automatic updates" banner now disappears immediately once you sign in.
