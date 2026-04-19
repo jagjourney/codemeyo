@@ -361,9 +361,9 @@ The database file (`codemeyo.db`) is stored in the platform-specific application
 
 | OS | Location |
 |---|---|
-| Windows | `%APPDATA%\com.codemeyo.app\codemeyo.db` |
-| macOS | `~/Library/Application Support/com.codemeyo.app/codemeyo.db` |
-| Linux | `~/.config/com.codemeyo.app/codemeyo.db` |
+| Windows | `%APPDATA%\com.jagjourney.codemeyo\codemeyo.db` |
+| macOS | `~/Library/Application Support/com.jagjourney.codemeyo/codemeyo.db` |
+| Linux | `~/.config/com.jagjourney.codemeyo/codemeyo.db` |
 
 ### Schema
 
