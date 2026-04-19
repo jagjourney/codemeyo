@@ -1,151 +1,138 @@
 # Configuration
 
-This guide covers all configuration options in CodeMeYo.
+Every setting, every config file, every path. This page covers the desktop + mobile app only — see [Admin Panel](Admin-Panel) for the Filament `/admin/settings` backoffice.
+
+As of v1.9.0 the bundle ID changed from `com.codemeyo.app` to `com.jagjourney.codemeyo`. All app-data paths now use the new identifier. If you're upgrading from v1.8.x or earlier, your old data directory is still on disk — nothing is migrated automatically. See [Upgrading from older bundle ID](#upgrading-from-older-bundle-id) below.
 
 ---
 
-## API Key Setup
+## Application data location
+
+CodeMeYo stores the local SQLite database, MCP config, cached entitlements, and a few small JSON files in the platform-standard app-data directory:
+
+| OS | Path |
+|---|---|
+| Windows | `%APPDATA%\com.jagjourney.codemeyo\` |
+| macOS | `~/Library/Application Support/com.jagjourney.codemeyo/` |
+| Linux | `~/.config/com.jagjourney.codemeyo/` |
+
+Inside that directory:
+
+| File | What it holds |
+|---|---|
+| `codemeyo.db` | SQLite — conversations, messages, settings, project history |
+| `mcp_servers.json` | MCP server configurations (Claude Desktop-compatible format) |
+| `entitlement_cache.json` | Signed-in user's cached plan (24h TTL) |
+| `updater_cache.json` | Latest-version info pulled from the authenticated updater endpoint |
+
+### Upgrading from older bundle ID
+
+If you had v1.8.x or earlier installed, your old directory (`%APPDATA%\com.codemeyo.app\`, etc.) still exists after upgrading to v1.9.x. Nothing in it is used by the new app. Two options:
+
+- **Fresh start** — nothing to do. v1.9.x creates the new directory on first launch and you reset your settings by signing in again.
+- **Migrate manually** — copy `codemeyo.db` and `mcp_servers.json` from the old directory to the new one, close CodeMeYo first. Conversation history and MCP servers come with you. API keys do not (they live in the OS keychain under the old service name — re-enter them once).
+
+After you've confirmed the new setup works, you can delete the old directory.
+
+---
+
+## API key setup
 
 ### Accessing Settings
 
-Open the Settings panel using one of these methods:
+Open Settings by clicking the **gear icon** in the sidebar or pressing `Ctrl+,` (Windows/Linux) / `Cmd+,` (macOS).
 
-- Click the **gear icon** in the sidebar
-- Press `Ctrl+,` (Windows/Linux) or `Cmd+,` (macOS)
+### Configuring providers
 
-### Configuring Providers
+Each of the 8 LLM providers has three fields:
 
-Each LLM provider has its own section in Settings with three fields:
+1. **Enable toggle** — turns the provider on or off.
+2. **API key** — your secret key from the provider.
+3. **Model** — which model to use.
 
-1. **Enable/Disable toggle** — turns the provider on or off
-2. **API Key** — your secret key from the provider
-3. **Model** — which model to use (dropdown with all available models)
+Provider-by-provider setup with links and recommended models is on the [LLM Providers](LLM-Providers) page.
 
-### Provider-Specific Setup
+### Where keys are stored
 
-#### Anthropic (Claude)
+API keys are stored in your **operating system's native secure keychain**:
 
-1. Create an account at [console.anthropic.com](https://console.anthropic.com)
-2. Navigate to **API Keys** and create a new key
-3. Copy the key (starts with `sk-ant-`)
-4. Paste it into the **Claude API Key** field in CodeMeYo Settings
-5. Select a model (recommended: **Claude Sonnet 4.6** for general use)
-
-#### OpenAI (GPT)
-
-1. Create an account at [platform.openai.com](https://platform.openai.com)
-2. Navigate to **API Keys** and create a new secret key
-3. Copy the key (starts with `sk-`)
-4. Paste it into the **OpenAI API Key** field in CodeMeYo Settings
-5. Select a model (recommended: **GPT-5.4** for best quality or **GPT-4.1 Nano** for cost efficiency)
-
-#### xAI (Grok)
-
-1. Create an account at [console.x.ai](https://console.x.ai)
-2. Navigate to **API Keys** and create a new key
-3. Copy the key
-4. Paste it into the **Grok API Key** field in CodeMeYo Settings
-5. Select a model (recommended: **Grok 3** for general use)
-
-#### Google (Gemini)
-
-1. Get an API key from [Google AI Studio](https://aistudio.google.com)
-2. CodeMeYo connects to Gemini through an OpenAI-compatible endpoint
-3. Enter the key and endpoint URL in Settings
-
-#### DeepSeek
-
-1. Get an API key from [platform.deepseek.com](https://platform.deepseek.com)
-2. CodeMeYo connects to DeepSeek through an OpenAI-compatible endpoint
-3. Enter the key and endpoint URL in Settings
-
-#### Ollama (Local Models)
-
-1. Install Ollama from [ollama.com](https://ollama.com)
-2. Pull a model: `ollama pull llama3` (or any supported model)
-3. Ollama runs on `http://localhost:11434` by default
-4. In CodeMeYo Settings, enable Ollama and select your model
-5. No API key is required
-
-### Key Security
-
-All API keys are stored in your operating system's native secure keychain:
-
-| OS | Storage Backend |
+| OS | Storage backend |
 |---|---|
 | Windows | Windows Credential Manager |
 | macOS | macOS Keychain |
 | Linux | Secret Service (GNOME Keyring / KDE Wallet) |
 
-Keys are never written to plaintext files, environment variables, or the SQLite database.
+Keys are never written to plaintext files, environment variables, or the SQLite database. Only the `keyring` Rust crate accesses them, scoped to service name `com.jagjourney.codemeyo`. The OS returns them to the app at runtime and they flow directly over HTTPS to the provider.
 
 ---
 
-## MCP Server Configuration
+## Settings panel — 8 tabs
 
-### Adding an MCP Server
+### General
 
-1. Open the **MCP panel** in the sidebar
-2. Click the **Servers** tab
-3. Click **Add Server**
-4. Choose the transport type:
-
-#### Stdio Transport (Local Servers)
-
-For MCP servers that run as local processes:
-
-```json
-{
-  "mcpServers": {
-    "my-server": {
-      "transport": "stdio",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/dir"],
-      "env": {
-        "NODE_ENV": "production"
-      },
-      "autoStart": true
-    }
-  }
-}
-```
-
-| Field | Description |
+| Setting | Options |
 |---|---|
-| `command` | The executable to run |
-| `args` | Command-line arguments |
-| `env` | Environment variables (supports `${VAR}` and `${VAR:-default}` syntax) |
-| `autoStart` | Whether to start the server automatically when CodeMeYo launches |
+| **Theme** | Dark, Light, System |
+| **Active Provider** | Any enabled provider — default for new conversations |
+| **Interaction Mode** | Code, Chat |
+| **Strategy** | Single, Round Robin, Deep Think, Consensus |
+| **Permission Level** | Ask Every Time, Auto-Read, Auto-All, Full Auto |
 
-#### HTTP Transport (Remote Servers)
+### Providers
 
-For MCP servers hosted on the internet:
+Per-provider enable / API key / model. See [LLM Providers](LLM-Providers).
 
-```json
-{
-  "mcpServers": {
-    "remote-server": {
-      "transport": "http",
-      "url": "https://api.example.com/mcp",
-      "headers": {
-        "X-Custom-Header": "value"
-      },
-      "authToken": "your-bearer-token",
-      "autoStart": true
-    }
-  }
-}
-```
+### Agent
 
-| Field | Description |
+| Setting | Description |
 |---|---|
-| `url` | The remote MCP endpoint URL |
-| `headers` | Custom HTTP headers (supports `${VAR}` syntax) |
-| `authToken` | Bearer token for the Authorization header |
+| **Command timeout** | Default 120s, max 600s for `RunCommand` tool |
+| **Max self-correction retries** | Default 5 — how many times the agent re-runs a failing build before asking you |
+| **Working directory** | Auto-tracks the active project, override here if needed |
 
-### MCP Configuration File
+### Privacy
 
-Server configurations are stored in a JSON file compatible with Claude Desktop's format. The file location is:
+| Setting | Default | Description |
+|---|---|---|
+| **Opt-in anonymous usage telemetry** | Off | Sends LLM call counts per provider to `codemeyo.com/api/v1/usage/events`. Never prompts, code, or API responses. Signed-in accounts only. |
+| **Send crash reports** | Off | Stack traces only, PII-stripped. |
+
+Both require a verified account before they even appear.
+
+### Updates
+
+See [Auto-Updater](Auto-Updater). Toggle between "auto install", "notify me", and "manual only".
+
+### MCP
+
+Browse, add, and configure MCP servers. See [MCP Servers](MCP-Servers).
+
+### Keyboard Shortcuts
+
+Remap any shortcut. Defaults:
+
+| Shortcut | Action |
+|---|---|
+| `Ctrl+N` / `Cmd+N` | New chat |
+| `Ctrl+K` / `Cmd+K` | Command palette |
+| `Ctrl+,` / `Cmd+,` | Settings |
+| `Ctrl+O` / `Cmd+O` | Open project |
+| `Ctrl+E` / `Cmd+E` | Toggle editor |
+| `Ctrl+S` / `Cmd+S` | Save current file |
+| `Ctrl+Shift+I` / `Cmd+Option+I` | Toggle DevTools |
+| `F12` | Toggle DevTools (release builds too, since v0.1.710) |
+
+### About
+
+Version, build commit, bundle ID, update channel, and a link to [Release Notes](Release-Notes) and the in-app changelog.
+
+---
+
+## MCP server configuration
+
+### Config file path
+
+MCP server configs are stored in a JSON file compatible with Claude Desktop's format:
 
 | OS | Path |
 |---|---|
@@ -153,117 +140,108 @@ Server configurations are stored in a JSON file compatible with Claude Desktop's
 | macOS | `~/Library/Application Support/com.jagjourney.codemeyo/mcp_servers.json` |
 | Linux | `~/.config/com.jagjourney.codemeyo/mcp_servers.json` |
 
-You can edit this file directly if you prefer working with JSON.
+You can edit this file directly or manage servers in **MCP panel → Servers** tab.
 
-### Environment Variable Resolution
+### Example — stdio (local) server
 
-MCP server configs support environment variable references:
-
-- `${VAR}` — resolves to the value of the environment variable `VAR`
-- `${VAR:-default}` — resolves to `VAR` if set, otherwise uses `default`
-
-Example:
 ```json
 {
-  "env": {
-    "DATABASE_URL": "${DATABASE_URL:-postgresql://localhost:5432/mydb}",
-    "API_KEY": "${MY_SERVICE_KEY}"
+  "mcpServers": {
+    "filesystem": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/me/projects"],
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "autoStart": true,
+      "riskLevel": "medium"
+    }
   }
 }
 ```
 
-### MCP Server Risk Levels
+### Example — HTTP (remote) server
 
-Each server can be assigned a risk level that affects permission prompts:
+```json
+{
+  "mcpServers": {
+    "cloud-db": {
+      "transport": "http",
+      "url": "https://mcp.example.com/v1",
+      "headers": {
+        "X-Workspace": "${WORKSPACE_ID}"
+      },
+      "authToken": "${MY_BEARER_TOKEN}",
+      "autoStart": false,
+      "riskLevel": "high"
+    }
+  }
+}
+```
 
-| Risk Level | Behavior |
-|---|---|
-| **Low** | Tools execute without confirmation |
-| **Medium** | Confirmation required for potentially destructive operations |
-| **High** | Every tool invocation requires explicit approval |
-
-### Installing MCP Bundles
-
-CodeMeYo supports `.mcpb` bundle files for one-click MCP server installation:
-
-1. Download a `.mcpb` file
-2. Open CodeMeYo and go to the **MCP > Bundles** tab
-3. Click **Install Bundle** and select the file
-4. The bundle is validated for security and installed automatically
-
-### MCP Registry
-
-Browse curated MCP servers directly in the app:
-
-1. Open the **MCP > Registry** tab
-2. Browse or search the available servers
-3. Click **Install** on any server to add it to your configuration
-
-### OAuth Authentication
-
-Some MCP servers require OAuth authentication:
-
-1. When connecting to an OAuth-protected server, CodeMeYo opens your browser
-2. Authenticate with the service
-3. CodeMeYo receives the token via the OAuth 2.1 PKCE flow
-4. The token is stored securely and refreshed automatically
+Env var syntax: `${VAR}` (required) or `${VAR:-default}` (optional with fallback). See [MCP Servers](MCP-Servers) for the full list of bundled/registry servers and per-server config details.
 
 ---
 
-## Settings Panel Walkthrough
+## Project indexing
 
-### General Settings
+Opening a project triggers the indexer. It scans the directory, identifies the project type (Node, Rust, Python, Go, etc.), detects package manager / build system / test framework, and builds a lightweight file-path-and-metadata index.
 
-| Setting | Options | Description |
-|---|---|---|
-| **Theme** | Dark, Light | Application color scheme |
-| **Active Provider** | Claude, GPT, Grok, Gemini, DeepSeek, Ollama | Default LLM provider for new conversations |
-| **Agent Mode** | Single, Round Robin, Deep Think, Consensus | How the agent uses multiple LLMs |
-| **Permission Level** | Ask Every Time, Auto-Read, Auto-All, Full Auto | Agent autonomy level |
+The index is **never uploaded anywhere**. It's stored in memory and rebuilt per session. File contents only leave your machine when the agent explicitly sends them as context to the LLM you chose.
 
-### Per-Provider Settings
-
-For each provider:
-
-| Setting | Description |
-|---|---|
-| **Enabled** | Toggle to enable/disable the provider |
-| **API Key** | Your secret key (stored in OS keychain) |
-| **Model** | Specific model to use, with details on context window, output limits, and pricing |
-
-### Usage Tracking
-
-The usage panel shows real-time statistics for the current session:
-
-- Input tokens consumed per provider
-- Output tokens generated per provider
-- Estimated cost in USD based on the model's pricing
-- Reset button to clear session usage
+Excluded by default: `node_modules`, `.git`, `target`, `dist`, `build`, `.next`, `.venv`, `vendor`, `.gradle`. Edit `.codemeyoignore` at the project root to add more.
 
 ---
 
-## Project Indexing Setup
+## Terminal
 
-### How Indexing Works
+120-second default timeout per command (max 600s). Dangerous patterns (`rm -rf /`, `format`, `shutdown`, `dd if=`) are blocked regardless of permission level. Output is capped at 50,000 characters to prevent memory issues. See [Terminal Commands](Terminal-Commands) for the full built-in slash-command reference.
 
-When you open a project directory, CodeMeYo automatically:
+---
 
-1. Scans the directory structure
-2. Identifies the project type (Node.js, Rust, Python, etc.)
-3. Detects the package manager, build system, and test framework
-4. Creates a lightweight index for fast file discovery
+## Browser automation
 
-### Indexing Behavior
+CDP debugging and extension bridge. See [Browser Debug Guide](Browser-Debug-Guide) for setup.
 
-- **Automatic:** Indexing runs when you open a project
-- **Incremental:** The index updates as files change
-- **Selective:** Common directories like `node_modules`, `.git`, `target`, and `dist` are excluded by default
-- **Lightweight:** The index stores file paths and metadata, not file contents
+Config lives inline in Settings → Browser:
 
-### Opening a Project
+| Setting | Default |
+|---|---|
+| **CDP port** | 9222 |
+| **Extension server port** | 9333 |
+| **Preferred browser** | Brave, Chrome, Edge, Firefox |
+| **Screenshot downscale target** | 1280px |
 
-- Click the **folder icon** in the sidebar
-- Press `Ctrl+O` (Windows/Linux) or `Cmd+O` (macOS)
-- Or use the file dialog to select a project directory
+---
 
-The file tree explorer in the sidebar shows your project structure with real-time navigation.
+## Sign-in state
+
+Your sign-in session token is stored in the OS keychain under service `com.jagjourney.codemeyo` / account `sanctum_token`. Delete it to force re-sign-in without clearing your conversations.
+
+```bash
+# macOS
+security delete-generic-password -s com.jagjourney.codemeyo -a sanctum_token
+
+# Linux
+secret-tool clear service com.jagjourney.codemeyo account sanctum_token
+
+# Windows (PowerShell)
+# Open "Credential Manager" → Windows Credentials → find com.jagjourney.codemeyo → Remove
+```
+
+---
+
+## Reset everything
+
+If you want a clean slate without reinstalling: see [Troubleshooting → Reset Settings](Troubleshooting#reset-all-settings).
+
+---
+
+## Related pages
+
+- [Getting Started](Getting-Started) — install + first launch.
+- [LLM Providers](LLM-Providers) — every provider's key setup + models.
+- [MCP Servers](MCP-Servers) — server registry + adding custom ones.
+- [Auto-Updater](Auto-Updater) — update behavior once signed in.
+- [Troubleshooting](Troubleshooting) — when something goes wrong.
