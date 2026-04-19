@@ -27,52 +27,44 @@ To release:
 
 ---
 
-## [1.9.1] - 2026-04-19
-
-Pipeline fixes + homepage CMS wiring.
+## [1.9.2] - 2026-04-19
 
 ### Fixed
-- Android build no longer fails on duplicate `BuildTask` Kotlin class — stale `com/codemeyo/app/` buildSrc files from the bundle ID rename are removed; replaced with the `com/jagjourney/codemeyo/` equivalents.
-- `build-website` CI job now passes `--ignore-platform-req=ext-sodium` so composer install works on the s2 runner (AlmaLinux doesn't ship ext-sodium by default).
-- `proguard-tauri.pro` updated to reference the new `com.jagjourney.codemeyo.TauriActivity` class name.
+- **Sign-in now persists across app restarts.** If you signed in on 1.9.0 and had to re-enter your credentials every launch, that's fixed — your session is remembered.
+- **Automatic data migration** for users updating from 1.5.x. If your API keys, conversations, or usage history appeared to be missing after the update, they're restored on the next launch.
+
+---
+
+## [1.9.1] - 2026-04-19
+
+Small polish release on top of 1.9.0.
+
+### Fixed
+- Build + packaging fixes that affected some platforms in the previous release.
 
 ### Added
-- Homepage (`/`) now renders from the `cms_pages` row with slug `home` when blocks are populated. Falls back to the static Blade template if the row is missing — so fresh installs still work.
-- SMTP "Send Test Email" header action on `/admin/settings` → Mail tab. One click, auto-fills your admin email, sends a diagnostic message so you know the mail config is wired up before real users rely on it.
+- A few small admin tooling improvements.
 
 ---
 
 ## [1.9.0] - 2026-04-19
 
-Last major release before v2.0.0. Lays the full account + CMS + billing
-infrastructure behind codemeyo.com, renames the bundle identifier, and
-teases Remote PC Code as a "Coming Soon" feature for paid unlock later.
+Free accounts, a refreshed website, and a preview of what's coming next.
 
 ### Added
-- **Account system** — create a free codemeyo.com account inside the app via device-code flow (`cmy login`-style). Email + password, optional 2FA, verified email required before Pro features unlock. Account tab in the sidebar on all platforms.
-- **Remote PC Code (teaser)** — a new "Remote" tab in the sidebar + mobile nav. Currently shows a "Coming Soon" card with early-access signup nudge. When we flip the gate, this will let you pair your phone and drive your desktop agent from anywhere.
-- **Auto-updater now authenticated** — signed-in users get real-time update checks from `codemeyo.com/api/v1/updater/latest/*`. Unsigned-in users see a "Sign in for updates" prompt.
-- **Opt-in usage telemetry** — anonymized LLM call counts (no prompts, no code content) help us see which providers/models are getting used. Off by default, toggle in Settings → Privacy, signed-in accounts only.
-- **Admin panel** at `codemeyo.com/admin` — users, donations, subscriptions, entitlements, blog posts, announcements, CMS pages, feature flags, audit log, media library, and a **block-based page builder** with 10 block types.
-- **Donations** at `codemeyo.com/donate` — one-time or monthly via Stripe. Tracks test vs live mode.
+- **Free CodeMeYo accounts.** Sign in from the Account tab to get automatic updates and early access to new features. Your own API keys still stay on your device — nothing changes there.
+- **Remote PC Code — Coming Soon.** A new tab in the app previews an upcoming feature that'll let you drive the desktop agent from your phone. Not live yet; sign in now to be among the first to try it.
+- **Privacy-respecting telemetry (opt-in).** If you'd like to help us understand which providers and models get the most use, toggle it on in Settings → Privacy. Off by default. We never see prompts or code.
+- **Refreshed donations page.** One-time or monthly options at codemeyo.com/donate.
 
 ### Changed
-- **Bundle identifier renamed** from `com.codemeyo.app` to `com.jagjourney.codemeyo`. This matches the rest of the `com.jagjourney.*` family and avoids a Tauri warning about the `.app` suffix colliding with macOS bundle conventions.
-  - **On macOS**: v1.9.0 may show up as a separate app alongside your existing install. Delete the old `CodeMeYo.app` after your first sign-in on v1.9.0 if you want a clean slate.
-  - **On Windows + Linux**: the installer updates in place.
-- **Pricing page** at `codemeyo.com/subscribe` now shows App Store + Google Play badges instead of web Stripe Checkout. Pro will be sold exclusively through the mobile stores when it launches.
-- **Downloads require a free account** now that source is closed. Create-and-download is one flow.
+- **Bundle ID updated.** The app's internal identifier changed from `com.codemeyo.app` to `com.jagjourney.codemeyo`.
+  - **Windows / Linux**: the installer updates in place. A one-time migration in 1.9.2 copies your settings, conversations, and API keys over automatically if anything landed in the wrong folder.
+  - **macOS**: v1.9.0 may appear as a separate app alongside your existing install. Once you've confirmed everything carried over, you can delete the old icon.
+- Website refresh at codemeyo.com with updated Privacy, Terms, and pricing information.
 
 ### Fixed
-- `/home` no longer 404s after login — Fortify now redirects to `/dashboard`.
-- `/dashboard/billing` no longer 500s for users without a Stripe customer record — replaced with a native page showing donation history + OS-level subscription deep-links.
-- Privacy and Terms pages rewritten to reflect the new account model and "never sold, shared, or rented" data posture.
-
-### Security
-- **Apple IAP** webhook now does real ES256 JWS verification with Apple Root CA G3 pinning, cert validity-window checks, bundleId + environment assertions, and a replay-guard ledger.
-- **Google Play** RTDN webhook now does RS256 JWT verification with JWKS caching, Pub/Sub service-account email match, packageName guard, and replay protection.
-- **Admin panel** gated to `role=admin` only via `canAccessPanel()`. Banned users cannot log in (admin has Ban/Unban action with reason prompt + audit log).
-- **Download gate** enforced at `/download/{platform}` — guests bounced to `/register` first.
+- Miscellaneous stability and login-flow fixes.
 
 ---
 
