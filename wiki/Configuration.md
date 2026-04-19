@@ -149,9 +149,9 @@ Server configurations are stored in a JSON file compatible with Claude Desktop's
 
 | OS | Path |
 |---|---|
-| Windows | `%APPDATA%\com.codemeyo.app\mcp_servers.json` |
-| macOS | `~/Library/Application Support/com.codemeyo.app/mcp_servers.json` |
-| Linux | `~/.config/com.codemeyo.app/mcp_servers.json` |
+| Windows | `%APPDATA%\com.jagjourney.codemeyo\mcp_servers.json` |
+| macOS | `~/Library/Application Support/com.jagjourney.codemeyo/mcp_servers.json` |
+| Linux | `~/.config/com.jagjourney.codemeyo/mcp_servers.json` |
 
 You can edit this file directly if you prefer working with JSON.
 
