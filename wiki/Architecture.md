@@ -1,250 +1,202 @@
 # Architecture
 
-A technical overview of CodeMeYo's system design and implementation.
+A technical overview of CodeMeYo's system design, from the Rust backend through the React frontend through the Laravel platform at codemeyo.com.
+
+Source is **closed** but the architecture shape is worth documenting — both for future maintainers and for developers integrating with the public [Backend API](Backend-API).
 
 ---
 
-## High-Level Architecture
+## The full stack in one picture
 
 ```
-+-------------------------------------------------------------------+
-|                        CodeMeYo Desktop App                        |
-|                                                                    |
-|  +-----------------------------+  +-----------------------------+  |
-|  |        Frontend (React)     |  |       Backend (Rust)        |  |
-|  |                             |  |                             |  |
-|  |  React 19 + TypeScript      |  |  Tauri 2 + Tokio           |  |
-|  |  Vite 7 (bundler)           |  |  reqwest (HTTP client)     |  |
-|  |  Tailwind CSS 4             |  |  rusqlite (database)       |  |
-|  |  Zustand (state)            |  |  rmcp (MCP client)         |  |
-|  |  Monaco Editor              |  |  keyring (secure storage)  |  |
-|  |  xterm.js (terminal)        |  |  xcap (screenshots)        |  |
-|  |                             |  |  tokio-tungstenite (WS)    |  |
-|  +-------------+---------------+  +-------------+---------------+  |
-|                |          Tauri IPC              |                  |
-|                +----------(commands)-------------+                  |
-+-------------------------------------------------------------------+
-                               |
-              +----------------+----------------+
-              |                |                |
-        LLM APIs        MCP Servers       Browser CDP
-    (Claude, GPT,      (stdio, HTTP)    (DevTools Protocol)
-     Grok, Gemini,
-     DeepSeek, Ollama)
++---------------------------------------------------------------------+
+|                    User's machine / phone                            |
+|                                                                      |
+|  +---------------------+     +---------------------+                 |
+|  |  Desktop app        |     |  Mobile app         |                 |
+|  |  (Tauri 2)          |     |  (Tauri 2 mobile)   |                 |
+|  |                     |     |                     |                 |
+|  |  React 19 + TS      |     |  React 19 + TS      |                 |
+|  |  Vite 7             |     |  Vite 7             |                 |
+|  |  Tauri IPC          |     |  Tauri IPC          |                 |
+|  |  Rust backend       |     |  Rust backend       |                 |
+|  |                     |     |  (mobile-gated)     |                 |
+|  +----------+----------+     +----------+----------+                 |
+|             |                           |                            |
+|             |                           |                            |
+|   +---------+---------+       +---------+---------+                  |
+|   | OS Keychain       |       | iOS Keychain /    |                  |
+|   | (API keys)        |       | Android Keystore  |                  |
+|   +-------------------+       +-------------------+                  |
++-----------+-----------------------------+---------------------------+
+            |                             |
+            | HTTPS (BYOK)               | HTTPS (BYOK)
+            |                             |
+            v                             v
+     +-------------+               +-------------+
+     | Claude API  |               | Claude API  |
+     | OpenAI API  |               | OpenAI API  |
+     | Grok / etc. |               | Grok / etc. |
+     +-------------+               +-------------+
+            |
+            | Also: HTTPS w/ Sanctum bearer (cloud-backed features only)
+            v
++---------------------------------------------------------------------+
+|                    codemeyo.com — Laravel 12 + Filament v5          |
+|                    (s1, behind Cloudflare)                           |
+|                                                                      |
+|  /               /dashboard        /admin           /api/v1          |
+|  (marketing     (user area)       (Filament)       (REST API)       |
+|   + CMS)                                                             |
+|                                                                      |
+|  +-------------------+  +-------------------+  +-------------------+ |
+|  | Laravel Cashier   |  | Sanctum tokens    |  | Horizon queues    | |
+|  | Stripe donations  |  | 2FA via Fortify   |  | Redis cache       | |
+|  +-------------------+  +-------------------+  +-------------------+ |
+|                                                                      |
+|  MySQL 8 · Redis · S3/MinIO · Cloudflare R2 for assets               |
++---------------------------------------------------------------------+
+            |                             |
+            | Stripe webhooks             | Apple / Google RTDN
+            v                             v
+     +-------------+               +-------------+
+     | Stripe      |               | App Store / |
+     | (donations) |               | Play Store  |
+     +-------------+               | (IAP)       |
+                                   +-------------+
 ```
+
+Two subsystems, connected by the REST API:
+
+1. **The desktop + mobile app** — native binaries the user installs. Does the real work.
+2. **The codemeyo.com platform** — Laravel + Filament stack handling accounts, billing, and the REST API.
+
+Almost all LLM traffic is **direct from the app to the provider** — the codemeyo.com platform is never in that loop.
 
 ---
 
-## Frontend
+## Desktop + mobile app
 
-### Technology Stack
+### Frontend — React 19 + TypeScript
 
 | Technology | Version | Purpose |
 |---|---|---|
 | **React** | 19 | UI framework |
-| **TypeScript** | 5.8 | Type-safe JavaScript |
-| **Vite** | 7 | Build tool and dev server |
+| **TypeScript** | 5.8 | Type-safe JS |
+| **Vite** | 7 | Build + dev server |
 | **Tailwind CSS** | 4 | Utility-first CSS |
-| **Zustand** | 5 | Lightweight state management |
-| **Monaco Editor** | 0.55 | Code editor (VS Code engine) |
-| **xterm.js** | 6 | Terminal emulator |
+| **Zustand** | 5 | State management |
+| **Monaco Editor** | 0.55 | Code editor (VS Code engine) — desktop only |
+| **xterm.js** | 6 | Terminal emulator — desktop only |
 | **react-markdown** | 10 | Markdown rendering in chat |
-| **lucide-react** | — | Icon library |
+| **lucide-react** | — | Icons |
 
-### Directory Structure
+**Directory layout** (`src/`):
 
 ```
 src/
-├── App.tsx                 # Root component
-├── main.tsx                # Entry point
-├── vite-env.d.ts           # Vite type declarations
+├── App.tsx
+├── main.tsx
 ├── components/
-│   ├── agent/              # Agent activity display
-│   ├── browser/            # Browser automation UI
-│   ├── chat/               # Chat interface
-│   ├── editor/             # Monaco editor wrapper
-│   ├── explorer/           # File tree explorer
-│   ├── git/                # Git panel (status, branches, log)
-│   ├── help/               # Help and documentation views
-│   ├── layout/             # App layout, sidebar, title bar
-│   ├── mcp/                # MCP server management (6 tabs)
-│   ├── settings/           # Settings panel
-│   ├── terminal/           # xterm.js terminal
-│   └── usage/              # Token usage tracking
-├── hooks/                  # Custom React hooks
-├── lib/                    # Utility functions
-├── stores/                 # Zustand state stores
-│   ├── chatStore.ts        # Conversation state
-│   ├── settingsStore.ts    # Settings, providers, models
-│   ├── projectStore.ts     # Project files and indexing
-│   ├── mcpStore.ts         # MCP server state
-│   └── browserStore.ts     # Browser automation state
-└── styles/                 # Global CSS
+│   ├── account/           # Account sign-in / plan display
+│   ├── agent/             # Agent activity panel
+│   ├── browser/           # Browser automation UI
+│   ├── chat/              # Chat interface + conversation mode
+│   ├── editor/            # Monaco wrapper (desktop only)
+│   ├── explorer/          # File tree
+│   ├── git/               # Git client (diff, branches, stage/unstage)
+│   ├── help/              # Help panel
+│   ├── layout/            # Sidebar, title bar, layout
+│   ├── mcp/               # MCP panel (6 tabs)
+│   ├── remote/            # Remote PC Code (currently teaser)
+│   ├── settings/          # Settings
+│   ├── terminal/          # xterm.js (desktop only)
+│   └── usage/             # Token usage + cost tracking
+├── hooks/
+├── lib/
+├── stores/
+│   ├── accountStore.ts    # Sign-in state + entitlements
+│   ├── chatStore.ts       # Conversations, messages, streaming
+│   ├── settingsStore.ts   # Providers, API keys, theme
+│   ├── projectStore.ts    # Open project + indexing
+│   ├── mcpStore.ts        # MCP servers
+│   └── browserStore.ts    # CDP + extension state
+└── styles/
 ```
 
-### State Management
+**Mobile-specific behaviors** live behind `@media (max-width: 768px)`. Desktop-only components (Monaco, terminal, browser debug) are hidden at that breakpoint. Everything else uses the `<MobileNav>` bottom tab bar in place of the sidebar.
 
-CodeMeYo uses **Zustand** for all client-side state. Each domain has its own store:
-
-| Store | Responsibility |
-|---|---|
-| `chatStore` | Conversations, messages, streaming state, conversation branching |
-| `settingsStore` | Provider configs, API keys, theme, permissions, token usage tracking |
-| `projectStore` | Open project path, file tree, project index |
-| `mcpStore` | MCP server list, connection status, tools, resources, prompts |
-| `browserStore` | CDP connections, browser tabs, extension bridge state |
-
-Settings are persisted to the SQLite database via Tauri commands. The frontend calls `invoke("save_setting", { key, value })` and `invoke("load_all_settings")` for persistence.
-
----
-
-## Backend
-
-### Technology Stack
+### Backend — Rust + Tauri 2
 
 | Crate | Purpose |
 |---|---|
-| **tauri** 2 | Desktop framework, windowing, IPC |
-| **tokio** 1 | Async runtime |
-| **reqwest** 0.12 | HTTP client for LLM API calls |
-| **rusqlite** 0.32 | SQLite database (bundled) |
-| **serde** / **serde_json** | Serialization |
-| **rmcp** 1.2 | MCP client (stdio + HTTP transport) |
-| **keyring** 3 | OS keychain integration |
-| **xcap** 0.9 | Cross-platform screenshot capture |
-| **tokio-tungstenite** 0.24 | WebSocket client (CDP) |
-| **dashmap** 6 | Concurrent hash map |
-| **chrono** 0.4 | Date/time handling |
-| **uuid** 1 | Unique ID generation |
-| **image** 0.25 | Image processing (PNG/JPEG) |
-| **zip** 2 | ZIP archive handling (MCP bundles) |
-| **sha2** / **hex** | Cryptographic hashing |
-| **tiny_http** 0.12 | Lightweight HTTP server (OAuth callback) |
-| **url** 2 | URL parsing |
-| **open** 5 | Open URLs in default browser |
-| **base64** 0.22 | Base64 encoding (screenshots, images) |
-| **async-trait** 0.1 | Async trait support |
-| **futures** 0.3 | Async stream utilities |
+| `tauri` 2 | Desktop framework, windowing, IPC |
+| `tokio` 1 | Async runtime |
+| `reqwest` 0.12 | HTTP client (LLM calls) |
+| `rusqlite` 0.32 | SQLite — bundled, no external deps |
+| `serde` / `serde_json` | Serialization |
+| `rmcp` 1.2 | MCP client (stdio + HTTP) |
+| `keyring` 3 | OS keychain |
+| `xcap` 0.9 | Desktop-only — screenshots |
+| `tokio-tungstenite` 0.24 | WebSocket (CDP) |
+| `dashmap` 6 | Concurrent hash map |
+| `tiny_http` 0.12 | Local HTTP (OAuth callback, extension bridge) |
+| `base64`, `sha2`, `hex` | Crypto basics |
+| `zip` 2 | `.mcpb` bundle extraction |
+| `open` 5 | Open URLs in default browser |
 
-### Directory Structure
+**Directory layout** (`src-tauri/src/`):
 
 ```
 src-tauri/src/
-├── main.rs                 # Tauri entry point
-├── lib.rs                  # Library crate root
+├── main.rs
+├── lib.rs
 ├── agent/
-│   ├── mod.rs              # Agent loop, system prompt, tool execution
-│   └── deepthink.rs        # Deep Think multi-model analysis
+│   ├── mod.rs           # Agent loop, system prompt, tool execution
+│   └── deepthink.rs     # Deep Think multi-model analysis
 ├── llm/
-│   ├── mod.rs              # LLMProvider trait, provider factory
-│   ├── claude.rs           # Anthropic Claude adapter
-│   ├── openai.rs           # OpenAI GPT adapter (also Gemini, DeepSeek, Ollama)
-│   └── grok.rs             # xAI Grok adapter
-├── tools/
-│   ├── mod.rs              # ToolResult type
-│   ├── registry.rs         # Tool schema definitions
-│   ├── read_file.rs        # ReadFile tool
-│   ├── write_file.rs       # WriteFile tool
-│   ├── edit_file.rs        # EditFile tool
-│   ├── search_files.rs     # SearchFiles tool
-│   ├── search_content.rs   # SearchContent tool
-│   ├── list_dir.rs         # ListDir tool
-│   ├── run_command.rs       # RunCommand tool
-│   ├── git_ops.rs          # GitOps tool
-│   ├── screenshot.rs       # CaptureScreenshot tool
-│   ├── browser.rs          # Browser window tools
-│   └── project_index.rs    # ProjectIndex tool
-├── browser/
-│   ├── mod.rs              # Module declarations
-│   ├── cdp_client.rs       # CDP WebSocket client
-│   ├── cdp_manager.rs      # CDP connection manager
-│   ├── cdp_types.rs        # CDP protocol types
-│   └── extension_server.rs # Browser extension bridge server
-├── mcp/
-│   ├── mod.rs              # MCPManager (server lifecycle)
-│   ├── client.rs           # MCP JSON-RPC client
-│   ├── config.rs           # Config file load/save, env var resolution
-│   ├── types.rs            # MCPServerConfig, transport types
-│   ├── keychain.rs         # Secure key storage for MCP
-│   ├── oauth.rs            # OAuth 2.1 PKCE flow
-│   ├── bundle.rs           # .mcpb bundle installer
-│   └── primitives.rs       # Resources and Prompts
-├── db/
-│   └── mod.rs              # SQLite schema, queries, migrations
-└── commands/               # Tauri command handlers (IPC)
+│   ├── mod.rs           # LLMProvider trait, factory
+│   ├── claude.rs        # Anthropic
+│   ├── openai.rs        # OpenAI (also Gemini native + OpenAI-compatible providers)
+│   └── grok.rs          # xAI (with /v1/responses routing for multi-agent)
+├── tools/               # Built-in agent tools (27 total)
+├── browser/             # CDP client + extension server (desktop only)
+├── mcp/                 # MCP client, config, OAuth, bundles
+├── db/                  # SQLite schema + migrations
+└── commands/            # Tauri IPC command handlers
 ```
 
----
+**Compile-time gating for mobile:** `src-tauri/Cargo.toml` uses target-specific features. On iOS and Android, `xcap`, screenshot commands, and browser debug are compiled out entirely. The rest of the app is the same binary logic.
 
-## Agent System
-
-### Agent Loop
-
-The agent operates in a loop that continues until the task is complete or the LLM signals it is done:
+### Agent loop
 
 ```
-              ┌──────────────────────────────────┐
-              │         User sends task           │
-              └──────────────┬───────────────────┘
-                             │
-                             v
-              ┌──────────────────────────────────┐
-              │    Build system prompt + tools    │
-              │  (built-in tools + MCP tools)     │
-              └──────────────┬───────────────────┘
-                             │
-                             v
-              ┌──────────────────────────────────┐
-              │      Send to LLM provider        │◄───────┐
-              └──────────────┬───────────────────┘        │
-                             │                            │
-                  ┌──────────┴──────────┐                 │
-                  │                     │                 │
-                  v                     v                 │
-           ┌───────────┐        ┌──────────────┐         │
-           │   Text    │        │   ToolUse    │         │
-           │ response  │        │   response   │         │
-           └─────┬─────┘        └──────┬───────┘         │
-                 │                     │                 │
-                 v                     v                 │
-           ┌───────────┐     ┌──────────────────┐       │
-           │   Done    │     │  Execute tools   │       │
-           │  (return) │     │  (with perms)    │       │
-           └───────────┘     └────────┬─────────┘       │
-                                      │                 │
-                                      v                 │
-                              ┌──────────────────┐      │
-                              │  Append results  │      │
-                              │  to messages     │──────┘
-                              └──────────────────┘
+     User task
+         |
+         v
+Build system prompt + tools (builtins + MCP)
+         |
+         v
+Send to LLM provider ────> Text response ────> Done
+         |                                       ^
+         └──> ToolUse response                   |
+                  |                              |
+                  v                              |
+             Validate permissions                |
+                  |                              |
+                  v                              |
+             Execute tools (builtin in Rust,     |
+             MCP over JSON-RPC)                  |
+                  |                              |
+                  v                              |
+             Append results to messages ─────────┘
 ```
 
-### LLM Response Types
+The loop continues until the LLM returns `Done`, a hard error, or the iteration cap (defaults to 50) is hit.
 
-The `LLMResponse` enum normalizes responses across all providers:
+### LLM adapter pattern
 
-| Variant | Meaning |
-|---|---|
-| `Text` | The LLM returned a text response (may continue the loop) |
-| `ToolUse` | The LLM wants to call one or more tools |
-| `Done` | The LLM considers the task complete |
-| `Error` | An error occurred during the API call |
-
-### Tool Execution
-
-When the LLM returns a `ToolUse` response:
-
-1. Each tool call is validated against the permission level
-2. Built-in tools are executed directly via their Rust implementations
-3. MCP tools are routed to the appropriate MCP server via JSON-RPC
-4. Results are collected and appended to the conversation
-5. The updated conversation is sent back to the LLM
-
----
-
-## LLM Adapter Pattern
-
-All LLM providers implement the `LLMProvider` trait:
+Every provider implements:
 
 ```rust
 #[async_trait]
@@ -261,103 +213,40 @@ pub trait LLMProvider: Send + Sync {
 }
 ```
 
-Each adapter handles:
-- Message format conversion (Anthropic uses a different format than OpenAI)
-- Tool schema translation (each provider has slightly different tool calling formats)
-- Response normalization into the unified `LLMResponse` enum
-- Streaming support
-- Error handling and retries
+The factory routes model names to adapters:
 
-The `create_provider` factory function routes model names to the correct adapter:
-- `claude-*` models use the Claude adapter
-- `gpt-*`, `o1-*`, `o3-*`, `o4-*`, `o5-*` models use the OpenAI adapter
-- `grok-*` models use the Grok adapter
-- All other models default to the OpenAI-compatible adapter (covers Gemini, DeepSeek, Ollama)
+- `claude-*` → Claude
+- `gpt-*`, `o1-*`, `o3-*`, `o4-*`, `o5-*` → OpenAI
+- `grok-*` → Grok (multi-agent variants go to `/v1/responses`, others to chat completions)
+- Gemini uses its native adapter (not OpenAI-compatible) since v0.1.355
+- DeepSeek, Mistral, Ollama, Groq use the OpenAI-compatible path with configurable base URL
 
----
+Response normalization: every adapter returns one of `Text` / `ToolUse` / `Done` / `Error`. Format differences between providers (Anthropic uses content blocks, OpenAI uses delta chunks, Gemini uses function parts) all collapse into the same enum.
 
-## MCP Client Integration
+### MCP client
 
-CodeMeYo implements the MCP (Model Context Protocol) specification using the `rmcp` crate.
+Wraps `rmcp` with two transports:
 
-### Architecture
+- **stdio** — spawns a child process with `tokio::process::Command`, wires stdin/stdout into the MCP JSON-RPC frame parser.
+- **Streamable HTTP** — POSTs JSON-RPC frames to the server URL, handles SSE-style streaming responses.
 
-```
-MCPManager
-├── Server Registry (HashMap<String, MCPServerConfig>)
-├── Active Connections (DashMap<String, MCPClient>)
-├── Config Persistence (JSON file)
-└── OAuth Handler (PKCE flow)
+Per-server lifecycle:
 
-MCPClient
-├── Stdio Transport (child process via tokio)
-│   └── JSON-RPC 2.0 over stdin/stdout
-└── HTTP Transport (reqwest)
-    └── JSON-RPC 2.0 over HTTP POST (Streamable HTTP)
-```
+1. **Config load** — from `mcp_servers.json`.
+2. **Start** — spawn process or open HTTP.
+3. **Initialize** — JSON-RPC `initialize` handshake.
+4. **Discovery** — `tools/list`, `resources/list`, `prompts/list`.
+5. **Operation** — `tools/call` invocations from the agent.
+6. **Health monitoring** — periodic `ping` with auto-reconnect.
+7. **Shutdown** — graceful on app exit.
 
-### Server Lifecycle
+Tool merging: on every agent loop iteration, built-in tools + all MCP tools (namespaced by server) are sent to the LLM as one unified list.
 
-1. **Configuration** — server configs loaded from `mcp_servers.json`
-2. **Start** — spawn process (stdio) or establish HTTP connection
-3. **Initialization** — JSON-RPC `initialize` handshake
-4. **Discovery** — `tools/list`, `resources/list`, `prompts/list`
-5. **Operation** — tool calls routed from agent via `tools/call`
-6. **Health monitoring** — periodic checks with auto-reconnect
-7. **Shutdown** — graceful cleanup on app close
+### Local database
 
-### Tool Merging
+SQLite 3 via `rusqlite` with the `bundled` feature (statically links — no system SQLite dep).
 
-When the agent loop prepares tool schemas for an LLM call, it merges:
-1. Built-in tools (from `registry.rs`)
-2. Tools from all connected MCP servers (namespaced by server name)
-
-This produces a single unified tool list that the LLM can call transparently.
-
----
-
-## Browser Automation
-
-### CDP (Chrome DevTools Protocol)
-
-```
-CodeMeYo Backend
-    │
-    ├── CDPManager
-    │   └── Manages connections to browser instances
-    │
-    ├── CDPClient
-    │   └── WebSocket connection to chrome://devtools
-    │       └── Sends CDP commands (Page, DOM, Runtime, Network, etc.)
-    │
-    └── CDPTypes
-        └── Typed representations of CDP protocol messages
-```
-
-The CDP client connects via WebSocket (`tokio-tungstenite`) to a browser running with `--remote-debugging-port=9222`. It sends JSON-RPC commands to interact with the page at a DevTools level.
-
-### Extension Bridge
-
-```
-Browser Extension                    CodeMeYo Backend
-    │                                      │
-    └── HTTP POST ──────────────> ExtensionServer (tiny_http)
-    └── <─────────── JSON Response ────────┘
-```
-
-The browser extension communicates with CodeMeYo via a lightweight HTTP server (`tiny_http`). This enables DOM mutation tracking, localStorage access, and CSS injection without requiring CDP.
-
----
-
-## Database
-
-### Technology
-
-SQLite via `rusqlite` with the `bundled` feature (statically links SQLite, no external dependency).
-
-### Storage
-
-The database file (`codemeyo.db`) is stored in the platform-specific application data directory:
+Path:
 
 | OS | Location |
 |---|---|
@@ -365,81 +254,120 @@ The database file (`codemeyo.db`) is stored in the platform-specific application
 | macOS | `~/Library/Application Support/com.jagjourney.codemeyo/codemeyo.db` |
 | Linux | `~/.config/com.jagjourney.codemeyo/codemeyo.db` |
 
-### Schema
+Stores: conversations, messages, settings, project history, MCP server state, usage events. Migrations auto-run on startup.
 
-The database stores:
-- **Conversations** — metadata (id, title, created_at, project_path)
-- **Messages** — chat messages (id, conversation_id, role, content, timestamp)
-- **Settings** — key-value pairs for all application settings
-- **Project history** — recently opened projects
+### IPC
 
-Migrations are applied automatically on startup.
+React → Rust via Tauri's `invoke("command_name", {args})`. Rust → React via event emission (`app.emit("event", payload)`). Streaming LLM tokens, agent activity, MCP status changes all flow through events.
 
----
-
-## IPC (Tauri Commands)
-
-Frontend-backend communication uses Tauri's command system. The frontend calls `invoke("command_name", { args })` which maps to a Rust function annotated with `#[tauri::command]`.
-
-### Key Commands
-
-| Command | Direction | Purpose |
-|---|---|---|
-| `send_message` | Frontend -> Backend | Send a chat message and start the agent loop |
-| `save_setting` / `load_all_settings` | Both | Persist/retrieve settings |
-| `list_conversations` / `load_conversation` | Frontend -> Backend | Conversation management |
-| `open_project` | Frontend -> Backend | Open and index a project directory |
-| `mcp_*` commands | Frontend -> Backend | MCP server management |
-| `browser_*` commands | Frontend -> Backend | Browser automation |
-
-### Event System
-
-The backend emits events to the frontend using Tauri's event system (`app.emit()`). This is used for:
-
-- **Streaming LLM responses** — tokens are emitted as they arrive
-- **Agent activity updates** — tool calls, results, progress
-- **MCP server status changes** — connection, disconnection, errors
-
-The frontend subscribes to these events via `listen("event_name", callback)`.
-
----
-
-## Security Model
+### Security boundaries
 
 | Layer | Protection |
 |---|---|
-| **API Keys** | OS keychain (never in plaintext files or databases) |
-| **CSP** | Content Security Policy enforced by Tauri (restricts script/style sources) |
-| **IPC** | Tauri command allowlist (only declared commands are accessible) |
-| **Command Execution** | Configurable timeouts, permission-gated |
-| **Network** | Direct HTTPS to LLM providers only (no proxy, no intermediate servers) |
-| **MCP** | Per-server risk levels, OAuth 2.1 PKCE for authenticated servers |
-| **Data** | All data local (SQLite DB, JSON configs, OS keychain) |
+| API keys | OS keychain only — never in plaintext / DB / env |
+| Sanctum tokens | Also OS keychain |
+| CSP | Tauri-enforced — script / style sources locked down |
+| IPC | Command allowlist — only declared commands callable from JS |
+| Command exec | Dangerous-pattern blocklist + per-command timeout (max 600s) |
+| Network | Direct HTTPS to providers + codemeyo.com only |
+| MCP | Risk levels + OAuth 2.1 PKCE for auth'd servers |
 
 ---
 
-## Build and CI/CD
+## codemeyo.com platform
 
-### Build System
+### Laravel 12 + Filament v5
 
-- **Frontend:** Vite 7 builds the React app to `dist/`
-- **Backend:** Cargo builds the Rust binary, Tauri bundles it with the frontend
+Hosted on s1 behind Cloudflare (see `docs/PLAN_PHASE7_SAAS_PLATFORM.md`).
 
-### CI/CD Pipeline
+| Component | Purpose |
+|---|---|
+| **Laravel 12** | HTTP framework |
+| **Filament v5** | Admin panel UI at `/admin` |
+| **Fortify** | Auth (register / login / 2FA / email verification) |
+| **Sanctum** | API bearer tokens for `/api/v1/*` |
+| **Cashier (Stripe)** | Donation checkouts + webhooks |
+| **Horizon** | Redis-backed queues (webhook processing, email, background jobs) |
+| **MySQL 8** | Primary database |
+| **Redis** | Cache + queues + sessions |
+| **S3 / MinIO / R2** | Media library (via Storage in `/admin/settings`) |
 
-GitLab CI/CD handles cross-platform builds:
+### Surface areas
 
-- **Trigger:** Version tags only (e.g., `v0.1.0`)
-- **Platforms:** Windows (MSVC), macOS (x86_64 + ARM64), Linux (x86_64)
-- **Output:** `.msi`, `.exe`, `.dmg`, `.AppImage`, `.deb`, `.rpm`
-- **Release:** Automatic GitLab release creation with changelog extraction
+- `/` — marketing home (CMS-driven since v1.9.1 when `cms_pages.slug=home` exists; static Blade fallback otherwise).
+- `/{slug}` — catch-all CMS route, see [CMS Page Builder](CMS-Page-Builder).
+- `/register`, `/login`, `/forgot-password` — Fortify-backed auth.
+- `/dashboard/*` — user area (overview, devices, usage, API tokens, pair, profile, billing).
+- `/admin/*` — Filament panel for Jag Journey staff, see [Admin Panel](Admin-Panel).
+- `/donate` — Stripe donations, see [Donations](Donations).
+- `/subscribe` — App Store + Play Store badges only (no web Stripe checkout).
+- `/api/v1/*` — public REST API, see [Backend API](Backend-API).
+- `/api/webhooks/stripe` — donation webhook (outside `/api/v1` for historical reasons).
 
-### Development Workflow
+### Feature flags
 
-```bash
-pnpm tauri dev     # Development with hot reload (frontend) and auto-rebuild (backend)
-pnpm tauri build   # Production build
-cargo clippy       # Lint Rust code
-cargo fmt          # Format Rust code
-npx tsc --noEmit   # Type-check TypeScript
-```
+Boolean toggles stored in the `feature_flags` table, used as route middleware (`->middleware('feature:<flag>')`). Flip at `/admin/feature-flags`. Current flags:
+
+`donations_enabled`, `blog_enabled`, `public_api_docs`, `auto_updater`, `remote_pc_code_enabled` (off), `referral_credits` (off), `usage_cost_alerts` (off).
+
+---
+
+## How the two sides talk
+
+The desktop + mobile app talks to codemeyo.com for **five things only**:
+
+1. **Authentication** — `POST /api/v1/auth/*`.
+2. **Entitlements check** — `GET /api/v1/entitlements` (cached 24h locally).
+3. **Device registration** — `POST /api/v1/devices/register` on sign-in.
+4. **Auto-update** — `GET /api/v1/updater/latest/*`, signed-in users only.
+5. **Opt-in usage telemetry** — `POST /api/v1/usage/events`, anonymized counts only.
+
+Everything else — LLM calls, file edits, agent loops, Deep Think, MCP — happens locally. We are never in the loop between the user and their LLM provider.
+
+---
+
+## CI/CD
+
+GitLab CI on s1 runners + the JAGASUS-100 Windows/Android runner + the Mac runner. Tag-triggered only. Full 5-platform pipeline since v1.0.000:
+
+- `.msi` + `.exe` for Windows
+- `.dmg` for macOS (Apple Silicon + Intel)
+- `.AppImage` + `.deb` + `.rpm` for Linux
+- `.ipa` for iOS (signed, queued for TestFlight / App Store)
+- `.apk` + `.aab` for Android (aarch64 + armv7 only since v1.5.8)
+
+All binaries land on the **GitHub Releases** page (source stays closed on GitLab). The Laravel updater endpoint proxies to GitHub signed URLs.
+
+Post-1.0 CI improvements:
+- v1.5.0 — Linux container image with pre-cached Rust toolchain. 50min → 6min.
+- v1.5.1 — Windows persistent cache on `D:\codemeyo-cache`. 32min → 8min.
+- v1.5.8 — Dropped x86_64 Android. ~50% faster.
+
+---
+
+## Directory reference
+
+| Path | Contents |
+|---|---|
+| `src/` | React frontend |
+| `src-tauri/` | Rust backend |
+| `src-tauri/gen/android/` | Tauri Android project (Gradle) |
+| `src-tauri/gen/apple/` | Tauri iOS project (Xcode) |
+| `extensions/codemeyo-bridge/` | Browser extension (Manifest V3) |
+| `website-app/` | Laravel 12 + Filament v5 platform |
+| `website-app/routes/` | api.php, web.php, dashboard.php |
+| `website-app/app/Http/Controllers/Api/V1/` | REST API controllers |
+| `website-app/app/Filament/Admin/` | Admin panel Resources + Pages |
+| `website-app/resources/views/cms/blocks/` | CMS block templates |
+| `docs/` | Internal planning docs (not shipped) |
+| `wiki/` | This documentation |
+
+---
+
+## Related pages
+
+- [Getting Started](Getting-Started) — install + first launch.
+- [Configuration](Configuration) — every setting + app-data paths.
+- [Backend API](Backend-API) — REST endpoints.
+- [Admin Panel](Admin-Panel) — Filament surface.
+- [Release Notes](Release-Notes) — what's shipped when.
