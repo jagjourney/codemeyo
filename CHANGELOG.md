@@ -27,6 +27,13 @@ To release:
 
 ---
 
+## [1.9.4] - 2026-04-19
+
+### Fixed
+- Release notes and packaged assets are tidier — no infrastructure paths, and no stale installers from old versions.
+
+---
+
 ## [1.9.3] - 2026-04-19
 
 ### Fixed
@@ -161,7 +168,7 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 - **New conversations from the sidebar "+" button persist immediately** — previously they'd disappear on restart unless you sent a message first.
 
 ### Improved
-- Windows CI cache moved to a persistent `D:\codemeyo-cache` — after the first warm-up, subsequent Windows builds drop from ~32 minutes to ~8 minutes.
+- Windows CI cache strategy reworked — subsequent Windows builds drop from ~32 minutes to ~8 minutes.
 
 ---
 
@@ -456,7 +463,7 @@ Free accounts, a refreshed website, and a preview of what's coming next.
   - Added CARGO_BUILD_JOBS=1 environment variable
   - Added cargo clean before builds
   - Added release profile: codegen-units=16, lto=false
-- CI/CD deploy-website SSH key auth (gitlab-runner@s2 to codemez@s1)
+- CI/CD deploy-website authentication
 
 ### Changed
 - Model registry updated to April 2026 latest for all providers
