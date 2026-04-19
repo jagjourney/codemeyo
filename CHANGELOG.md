@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.9.7] - 2026-04-19
+
+### Fixed
+- Signed-in users now see their profile immediately on app start — no more "Loading your profile from codemeyo.com…" spinner while the server round-trip runs. The last-known profile is cached locally and rendered instantly; the background refresh updates it silently.
+- Shorter network timeout so any real connection issue surfaces as an error quickly instead of looking like an indefinite hang.
+
+---
+
 ## [1.9.6] - 2026-04-19
 
 ### Fixed
