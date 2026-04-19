@@ -27,6 +27,40 @@ To release:
 
 ---
 
+## [1.9.0] - 2026-04-19
+
+Last major release before v2.0.0. Lays the full account + CMS + billing
+infrastructure behind codemeyo.com, renames the bundle identifier, and
+teases Remote PC Code as a "Coming Soon" feature for paid unlock later.
+
+### Added
+- **Account system** — create a free codemeyo.com account inside the app via device-code flow (`cmy login`-style). Email + password, optional 2FA, verified email required before Pro features unlock. Account tab in the sidebar on all platforms.
+- **Remote PC Code (teaser)** — a new "Remote" tab in the sidebar + mobile nav. Currently shows a "Coming Soon" card with early-access signup nudge. When we flip the gate, this will let you pair your phone and drive your desktop agent from anywhere.
+- **Auto-updater now authenticated** — signed-in users get real-time update checks from `codemeyo.com/api/v1/updater/latest/*`. Unsigned-in users see a "Sign in for updates" prompt.
+- **Opt-in usage telemetry** — anonymized LLM call counts (no prompts, no code content) help us see which providers/models are getting used. Off by default, toggle in Settings → Privacy, signed-in accounts only.
+- **Admin panel** at `codemeyo.com/admin` — users, donations, subscriptions, entitlements, blog posts, announcements, CMS pages, feature flags, audit log, media library, and a **block-based page builder** with 10 block types.
+- **Donations** at `codemeyo.com/donate` — one-time or monthly via Stripe. Tracks test vs live mode.
+
+### Changed
+- **Bundle identifier renamed** from `com.codemeyo.app` to `com.jagjourney.codemeyo`. This matches the rest of the `com.jagjourney.*` family and avoids a Tauri warning about the `.app` suffix colliding with macOS bundle conventions.
+  - **On macOS**: v1.9.0 may show up as a separate app alongside your existing install. Delete the old `CodeMeYo.app` after your first sign-in on v1.9.0 if you want a clean slate.
+  - **On Windows + Linux**: the installer updates in place.
+- **Pricing page** at `codemeyo.com/subscribe` now shows App Store + Google Play badges instead of web Stripe Checkout. Pro will be sold exclusively through the mobile stores when it launches.
+- **Downloads require a free account** now that source is closed. Create-and-download is one flow.
+
+### Fixed
+- `/home` no longer 404s after login — Fortify now redirects to `/dashboard`.
+- `/dashboard/billing` no longer 500s for users without a Stripe customer record — replaced with a native page showing donation history + OS-level subscription deep-links.
+- Privacy and Terms pages rewritten to reflect the new account model and "never sold, shared, or rented" data posture.
+
+### Security
+- **Apple IAP** webhook now does real ES256 JWS verification with Apple Root CA G3 pinning, cert validity-window checks, bundleId + environment assertions, and a replay-guard ledger.
+- **Google Play** RTDN webhook now does RS256 JWT verification with JWKS caching, Pub/Sub service-account email match, packageName guard, and replay protection.
+- **Admin panel** gated to `role=admin` only via `canAccessPanel()`. Banned users cannot log in (admin has Ban/Unban action with reason prompt + audit log).
+- **Download gate** enforced at `/download/{platform}` — guests bounced to `/register` first.
+
+---
+
 ## [1.5.9] - 2026-04-18
 
 ### Added
