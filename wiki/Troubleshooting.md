@@ -145,9 +145,9 @@ CodeMeYo stores logs and data in platform-specific directories:
 
 | OS | Application Data Directory |
 |---|---|
-| **Windows** | `%APPDATA%\com.codemeyo.app\` |
-| **macOS** | `~/Library/Application Support/com.codemeyo.app/` |
-| **Linux** | `~/.config/com.codemeyo.app/` |
+| **Windows** | `%APPDATA%\com.jagjourney.codemeyo\` |
+| **macOS** | `~/Library/Application Support/com.jagjourney.codemeyo/` |
+| **Linux** | `~/.config/com.jagjourney.codemeyo/` |
 
 Key files in this directory:
 
@@ -178,17 +178,17 @@ Delete the application database to reset all settings, conversations, and projec
 
 **Windows:**
 ```powershell
-Remove-Item "$env:APPDATA\com.codemeyo.app\codemeyo.db"
+Remove-Item "$env:APPDATA\com.jagjourney.codemeyo\codemeyo.db"
 ```
 
 **macOS:**
 ```bash
-rm ~/Library/Application\ Support/com.codemeyo.app/codemeyo.db
+rm ~/Library/Application\ Support/com.jagjourney.codemeyo/codemeyo.db
 ```
 
 **Linux:**
 ```bash
-rm ~/.config/com.codemeyo.app/codemeyo.db
+rm ~/.config/com.jagjourney.codemeyo/codemeyo.db
 ```
 
 > **Warning:** This deletes all conversation history and settings. API keys stored in the OS keychain are not affected.
@@ -199,17 +199,17 @@ Delete the MCP configuration file:
 
 **Windows:**
 ```powershell
-Remove-Item "$env:APPDATA\com.codemeyo.app\mcp_servers.json"
+Remove-Item "$env:APPDATA\com.jagjourney.codemeyo\mcp_servers.json"
 ```
 
 **macOS:**
 ```bash
-rm ~/Library/Application\ Support/com.codemeyo.app/mcp_servers.json
+rm ~/Library/Application\ Support/com.jagjourney.codemeyo/mcp_servers.json
 ```
 
 **Linux:**
 ```bash
-rm ~/.config/com.codemeyo.app/mcp_servers.json
+rm ~/.config/com.jagjourney.codemeyo/mcp_servers.json
 ```
 
 ---
