@@ -27,6 +27,22 @@ To release:
 
 ---
 
+## [1.9.50] - 2026-04-20
+
+### Added
+- **Pro — Remote PC Code.** Pair your phone with your desktop once, then drive your coding agent from anywhere. Send a new task, approve a risky tool call, or check progress from your phone even when you're away from your desk.
+- The phone app also works standalone — write code and chat with LLMs on your phone without a desktop.
+- **codemeyo.com Pair Device page** now lists your active pair codes and paired devices, with a one-click **Unpair** button for each.
+
+### Changed
+- New internal admin view for the Jag Journey team to see active pair sessions — used strictly for answering support tickets.
+
+### Fixed
+- Mobile viewport rendering on iOS and Android — the UI now fills the full screen, including notched iPhones (no more cut-off bottom nav).
+- Browser extension no longer logs a Chrome runtime async warning on some Stripe-related pages.
+
+---
+
 ## [1.9.13] - 2026-04-20
 
 ### Fixed
