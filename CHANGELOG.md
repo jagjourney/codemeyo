@@ -27,14 +27,23 @@ To release:
 
 ---
 
-## [1.9.12] - 2026-04-20
-
-### Changed
-- CI/CD signing keys moved to per-runner `~/.codemeyo-keys/` — rotation is now one SCP per runner instead of GitLab CI/CD variable edits. Only `APPLE_ASC_ISSUER_ID` remains a CI variable (Apple doesn't expose it in any downloadable file).
-- Android signing + Google Play Internal upload are now unconditional for every tag build (no more "skipped because env var missing" silent falls).
+## [1.9.13] - 2026-04-20
 
 ### Fixed
-- GitLab pwsh runner cleanup step no longer fails the job when a secret file doesn't exist — every `Remove-Item` is guarded with `Test-Path` so `$?=True` stays intact.
+- Your **codemeyo.com** account dashboard now loads with proper styling — no more unstyled "Pair Device" page.
+- **Start pairing** on the web dashboard now works instead of failing with an error — you can generate a code from the browser without needing a device registered first.
+
+---
+
+## [1.9.12] - 2026-04-20
+
+Reliability polish by Jag Journey, LLC.
+
+### Changed
+- Release process hardened so every platform build is signed and shipped consistently. No user-facing behavior change — just fewer missed uploads on our side.
+
+### Fixed
+- Release builds no longer fail spuriously during their final cleanup step.
 
 ---
 
