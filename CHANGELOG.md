@@ -27,6 +27,47 @@ To release:
 
 ---
 
+## [1.9.12] - 2026-04-20
+
+### Changed
+- CI/CD signing keys moved to per-runner `~/.codemeyo-keys/` — rotation is now one SCP per runner instead of GitLab CI/CD variable edits. Only `APPLE_ASC_ISSUER_ID` remains a CI variable (Apple doesn't expose it in any downloadable file).
+- Android signing + Google Play Internal upload are now unconditional for every tag build (no more "skipped because env var missing" silent falls).
+
+### Fixed
+- GitLab pwsh runner cleanup step no longer fails the job when a secret file doesn't exist — every `Remove-Item` is guarded with `Test-Path` so `$?=True` stays intact.
+
+---
+
+## [1.9.11] - 2026-04-19
+
+App Improvements for the better good of seamless updates by Jag Journey, LLC!
+
+### Added
+- **Automated store uploads from CI.** Tag a version (e.g. `v1.9.11`) and the pipeline signs + uploads Android `.aab` to Play Console Internal, iOS `.ipa` to TestFlight, and macOS `.pkg` to App Store Connect automatically — with a human still doing the final "Submit for Review" click in each store. All uploads are gated on CI variables and skip gracefully when the secrets aren't set, so the build never breaks.
+- `scripts/sync-versions.mjs` — single source of truth (`src-tauri/tauri.conf.json`) propagates the version to `package.json`, `Cargo.toml`, `Cargo.lock`, and the browser extension manifest on every `pnpm build`. Bump one file, everything follows.
+- Gradle Play Publisher wired into the Android project; `:app:publishReleaseBundle` ships the signed AAB to the Internal track.
+
+### Fixed
+- Browser extension no longer spams `TypeError: Cannot read properties of undefined (reading 'sendMessage')` on pages like dashboard.stripe.com when the extension reloads mid-session.
+- De-hardcoded per-user Windows paths in `.gitlab-ci.yml` — `C:\Users\jimmy\...` / `C:\Users\jim\...` now resolve from each runner's `$USERPROFILE` so jobs move cleanly between the laptop and the RV PC.
+- Drive-level build cache location is now configurable via `CODEMEYO_CACHE_DIR` (defaults to `D:\codemeyo-cache`) instead of being hardcoded to D:.
+
+---
+
+## [1.9.10] - 2026-04-19
+
+### Added
+- First iOS + macOS + Android store submissions to Apple App Store, Mac App Store, and Google Play (Closed + Open Testing tracks).
+- Google Play Console store listing with full set of graphics: 512×512 icon, 1024×500 feature graphic, phone screenshots, 7" + 10" tablet screenshots.
+- `/admin/settings` tab for Apple + Google IAP: Team ID, Bundle ID, App Shared Secret, ASC API Key, Play package name, Play service-account JSON, Pub/Sub audience.
+- `.keys/` directory (gitignored) for Apple IAP + Android signing credentials.
+
+### Fixed
+- Android local build now produces a signed `.aab` suitable for Play Console upload (`keystore.properties` + signingConfigs wired into `app/build.gradle.kts`).
+- Stale placeholder URL in `/admin` Pub/Sub audience field corrected from `api/webhooks/google` to `api/v1/iap/google/notify` (matches the actual Laravel route).
+
+---
+
 ## [1.9.7] - 2026-04-19
 
 ### Fixed
