@@ -3,11 +3,54 @@
 // responds to commands from the background service worker.
 
 (() => {
+  // ── Extension-context-safe messaging ───────────────────────────────
+  // chrome.runtime becomes undefined when the extension is disabled,
+  // reloaded, or updated while a content script is still running. Any
+  // sendMessage call in that window throws `TypeError: Cannot read
+  // properties of undefined (reading 'sendMessage')` and spams the host
+  // page's console (first reported on dashboard.stripe.com, 2026-04-19).
+  // Treat a missing chrome.runtime.id as a signal that the port is dead
+  // and silently shut ourselves down.
+  let contextAlive = true;
+
+  function safeSendMessage(msg) {
+    if (!contextAlive) return;
+    // Short-circuit if the extension was unloaded mid-session.
+    if (typeof chrome === "undefined" || !chrome.runtime || !chrome.runtime.id) {
+      contextAlive = false;
+      teardown();
+      return;
+    }
+    try {
+      chrome.runtime.sendMessage(msg);
+    } catch (e) {
+      // The port went away between our guard check and the call.
+      const txt = e && e.message ? String(e.message) : "";
+      if (
+        txt.indexOf("Extension context invalidated") !== -1 ||
+        txt.indexOf("message port closed") !== -1 ||
+        txt.indexOf("receiving end does not exist") !== -1
+      ) {
+        contextAlive = false;
+        teardown();
+        return;
+      }
+      // Any other error: swallow so we don't pollute the host page.
+    }
+  }
+
+  function teardown() {
+    try { observer && observer.disconnect(); } catch {}
+    try { if (mutationTimer) { clearTimeout(mutationTimer); mutationTimer = null; } } catch {}
+    mutationBatch.length = 0;
+  }
+
   // ── DOM Mutation Observer ──────────────────────────────────────────
   let mutationBatch = [];
   let mutationTimer = null;
 
   const observer = new MutationObserver((mutations) => {
+    if (!contextAlive) return;
     for (const m of mutations) {
       const entry = {
         mutation_type: m.type,
@@ -46,7 +89,7 @@
     if (mutationBatch.length === 0) return;
     const batch = mutationBatch.splice(0, 50); // max 50 per flush
     for (const entry of batch) {
-      chrome.runtime.sendMessage({ type: "dom_mutation", data: entry });
+      safeSendMessage({ type: "dom_mutation", data: entry });
     }
   }
 
@@ -75,7 +118,7 @@
         const text = args
           .map((a) => (typeof a === "string" ? a : JSON.stringify(a)))
           .join(" ");
-        chrome.runtime.sendMessage({
+        safeSendMessage({
           type: "console_entry",
           data: {
             level,
@@ -100,6 +143,9 @@
   // ── Command Handler ────────────────────────────────────────────────
   let injectedStyleEl = null;
 
+  // Listener registration — also guarded; if the context died before the
+  // script reached this point, skip silently.
+  if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.onMessage) {
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     const { action, params } = msg;
 
@@ -178,6 +224,7 @@
         return true;
     }
   });
+  }
 
   // ── Utility ────────────────────────────────────────────────────────
 

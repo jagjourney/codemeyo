@@ -1,17 +1,27 @@
 {
   "manifest_version": 3,
   "name": "CodeMeYo Bridge",
-  "version": "1.0.0",
+  "version": "1.9.12",
   "description": "Connects your browser to the CodeMeYo coding agent for live DOM inspection, console capture, storage access, and CSS injection.",
-  "permissions": ["activeTab", "storage", "scripting"],
-  "host_permissions": ["<all_urls>"],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
