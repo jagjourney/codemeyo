@@ -21,16 +21,40 @@
       teardown();
       return;
     }
+    // Using the callback form (instead of the Promise form) is deliberate.
+    // chrome.runtime.sendMessage(msg) with no callback returns a Promise
+    // that rejects asynchronously when the runtime disappears mid-flight —
+    // and async rejections can't be caught by the sync try/catch around
+    // the send itself, so they surface in the browser's "Extension errors"
+    // panel as unhandled. Passing a callback suppresses the Promise and
+    // lets us ack the runtime via chrome.runtime.lastError instead.
+    const isDeadContextError = (txt) =>
+      txt.indexOf("Extension context invalidated") !== -1 ||
+      txt.indexOf("message port closed") !== -1 ||
+      txt.indexOf("receiving end does not exist") !== -1 ||
+      txt.indexOf("Could not establish connection") !== -1;
+
     try {
-      chrome.runtime.sendMessage(msg);
+      chrome.runtime.sendMessage(msg, () => {
+        // Reading lastError inside the callback is what signals Chrome
+        // that we've handled it. Without this, Chrome logs the error
+        // even though the callback form is supposed to swallow it.
+        const err = chrome.runtime && chrome.runtime.lastError;
+        if (err) {
+          const txt = err.message ? String(err.message) : "";
+          if (isDeadContextError(txt)) {
+            contextAlive = false;
+            teardown();
+          }
+          // Any other runtime error: silently drop so the host page's
+          // console stays clean. Nothing we send here is critical.
+        }
+      });
     } catch (e) {
-      // The port went away between our guard check and the call.
+      // Synchronous throws still happen if chrome.runtime goes undefined
+      // between our guard above and the call below.
       const txt = e && e.message ? String(e.message) : "";
-      if (
-        txt.indexOf("Extension context invalidated") !== -1 ||
-        txt.indexOf("message port closed") !== -1 ||
-        txt.indexOf("receiving end does not exist") !== -1
-      ) {
+      if (isDeadContextError(txt)) {
         contextAlive = false;
         teardown();
         return;
