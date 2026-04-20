@@ -27,6 +27,17 @@ To release:
 
 ---
 
+## [1.9.51] - 2026-04-20
+
+### Changed
+- Every tagged release now pushes iOS, macOS, and Android store uploads automatically from GitLab — no more manual Transporter runs. You tag a version, the pipeline builds and signs all three mobile/desktop targets and ships them to TestFlight + TestFlight macOS + Play Console Internal Testing on its own.
+
+### Fixed
+- Android `versionCode` now increments on every release (previously every build after v1.9.10 silently re-used `1009010`, so Google Play deduped the upload even though gradle reported success).
+- Minor bug fixes.
+
+---
+
 ## [1.9.50] - 2026-04-20
 
 ### Added
