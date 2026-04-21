@@ -27,6 +27,48 @@ To release:
 
 ---
 
+## [1.9.60] - 2026-04-20
+
+### Added
+- **SideKick with Claude (new).** Run CodeMeYo on your Claude Max / Pro subscription — no API key, no CodeMeYo Pro required. Install Claude Code, run `claude login` once, then pick "SideKick with Claude" in Settings → API Keys & Models. Usage is billed against your Claude subscription, not CodeMeYo. Auto-detects the CLI on mount with a re-check button, and shows a clear "install / sign-in / active" state so you always know where the flow stands.
+- **Your devices show up at codemeyo.com/dashboard/devices now.** The desktop/mobile app registers itself with codemeyo.com in the background on sign-in so each machine appears in your account. Previously that page was always empty.
+- **Daily cleanup of expired pair codes.** Scheduled job prunes pair-session rows whose expiry is more than 7 days old and that were never consumed. Successful pairings stay as an audit trail.
+- **App Store Connect Draft versions auto-create on release tags.** Once a tagged pipeline finishes uploading to TestFlight, a new `attach-asc-build` CI job polls App Store Connect until Apple finishes processing each build, creates (or reuses) a Draft version for iOS and macOS at `/distribution/{ios,macos}/version/inflight`, attaches the build, and populates "What's New" from the matching CHANGELOG section. You still click "Submit for Review" yourself — on purpose.
+
+### Fixed
+- **Android Play uploads no longer silently succeed.** v1.9.11 through v1.9.52 showed green in CI but never actually published to Play Console. Gradle's `publishReleaseBundle` was failing 18s in ("A problem occurred starting process 'pnpm.bat'") because Tauri Mobile auto-generates `rustBuild*` tasks that `exec` pnpm without inheriting the parent shell's PATH. Two fixes: (1) exclude the `rustBuild*` tasks from the publish call so the child pnpm never runs (the AAB is already built by the prior tauri android build step); (2) check `$LASTEXITCODE` after gradle and fail the job loud if it returns non-zero, instead of echoing "AAB uploaded" regardless. Same class of bug as the macOS altool silent-success we fixed in v1.9.54.
+- **macOS TestFlight uploads reliably.** v1.9.53's first macOS pipeline rejected with Apple error 90296 ("App sandbox not enabled") because the MAS provisioning profile was being embedded into the .app bundle *after* `codesign` ran. Apple's cloud validator reads the DER-encoded entitlement chain at inspection time; without the profile inside the bundle at sign time, the app-identifier chain can't resolve. Reordered the build-macos step so profile-embed + chmod happen BEFORE codesign.
+- **Android signing on the local Windows runner** no longer 403's when Gradle reads the Play service-account JSON. The `.codemeyo-keys\*` files had inheritance stripped but no user grant applied on that machine; re-granted `JAGJIMMYLAP\jimmy:F` + `NT AUTHORITY\SYSTEM:F` on every key file.
+
+### Changed
+- CI build-macos step renumbered for clarity: 1. embed profile, 1b. chmod, 2. re-sign, 3. productbuild, 4. altool upload.
+- altool + gradle failures both fail the job loud instead of printing "upload failed, human submit required" and passing green.
+- `docs/PLAN_PHASE4_REMOTE_CODING.md` audited — 53 of 74 checklist items flipped to done to match the v1.9.14–v1.9.53 LAN+Relay transport that's actually live. Remaining gaps (push notifications, current-task UI, token-usage counter, file-diff preview, auto-deny timer) kept open.
+
+### Versioning
+- `tauri.conf.json` 1.9.53 → 1.9.60; sync-versions.mjs propagates. (We're walking the patch digit toward v2.0.0 per our per-release bump rule — 1.9.55 through 1.9.59 are intentionally skipped.)
+
+---
+
+## [1.9.53] - 2026-04-20
+
+### Added
+- **iOS QR pairing works.** Open the iOS TestFlight app → Remote PC Code → Scan QR, and the camera decodes the QR on screen and pairs you in one shot. Previously the QR tab on mobile was a placeholder and only the 6-digit code worked.
+- Real QR image on the desktop side too (no more ASCII fallback).
+
+### Fixed
+- **macOS TestFlight uploads reliably now.** Apple's server-side validator reads DER-encoded entitlements, not the legacy plist. `codesign` on Xcode 14.3+ doesn't emit DER by default — we now pass `--generate-entitlement-der`, and altool accepts the .pkg instead of silently rejecting with "App sandbox not enabled" (error 90296).
+- The build pipeline also fails loudly if altool rejects an upload, instead of printing "human submit required" and letting the job look green. No more TestFlight surprises a day later.
+- **codemeyo.com admins can create users with passwords.** The /admin Create User form was missing a password field, so submit errored with `Field 'password' doesn't have a default value`. Fixed with a required-on-create password input (optional on edit).
+- **Revoke button on /dashboard/pair** no longer 404s — the POST route + controller + audit-log entry are wired up.
+- **QR code on the dashboard Pair Device page** renders immediately instead of hanging on "Loading QR…". The qrcode library was loaded with `defer` and the click handler fired before it was ready.
+- A nested-Frameworks `find` in the macOS signing step no longer kills the whole job when the bundle has no Frameworks directory (which is every Tauri build).
+
+### Changed
+- Verification step now inspects the inner Mach-O directly (what altool actually looks at), and logs the CodeDirectory identity + TeamID so signing regressions are obvious in the CI log.
+
+---
+
 ## [1.9.52] - 2026-04-20
 
 ### Added
