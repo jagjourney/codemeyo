@@ -27,6 +27,17 @@ To release:
 
 ---
 
+## [1.9.70] - 2026-04-21
+
+### Fixed
+- **iPhone portrait and landscape layouts.** The bottom menu no longer gets clipped by the home indicator in portrait, and the left rail no longer disappears behind the Dynamic Island in landscape. Also polished the chat input and the title bar to respect every safe area.
+- **Friendlier sign-in and billing error messages.** Raw server responses have been replaced with clear copy — "Sign-in failed. Check your email and password.", "Your Pro subscription has ended.", "Can't reach the server.", etc. — across the Sign-in and Upgrade screens.
+
+### Added
+- **Refresh account status.** Settings → Billing has a new "Refresh account status" button that re-syncs your Pro entitlement with your account on the fly, so you never have to reinstall to pick up a fresh subscription.
+
+---
+
 ## [1.9.61] - 2026-04-21
 
 ### Added
