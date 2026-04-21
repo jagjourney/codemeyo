@@ -27,6 +27,18 @@ To release:
 
 ---
 
+## [1.9.52] - 2026-04-20
+
+### Added
+- **Remote PC Code is live.** Pair your phone with a signed-in desktop and drive the agent from anywhere. (Was previously gated behind a "Coming Soon" card.)
+- Admin can now **comp a user to Pro for free** from `/admin/users` — a new "Comp (grant Pro)" action on each user row lets staff grant Pro access with a reason and optional expiry, with a one-click revoke. Fully logged to audit_logs.
+
+### Fixed
+- Deep Think no longer shows duplicate proposals after multiple sends — stale event listeners were accumulating on every send, so by the 3rd message each LLM's output showed up 3×. The listener now unregisters before re-registering.
+- macOS App Store uploads now include the full icon sizes Apple validates for (up to 512×512 @2x / 1024×1024) and sign every nested binary with the sandbox entitlement properly embedded.
+
+---
+
 ## [1.9.51] - 2026-04-20
 
 ### Changed
