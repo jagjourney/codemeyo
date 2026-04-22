@@ -27,6 +27,31 @@ To release:
 
 ---
 
+## [1.9.76] - 2026-04-22
+
+Build-green follow-up to v1.9.75. v1.9.75's iOS build hit the same provisioning-profile mismatch macOS had — the deep-link plugin's mobile section auto-adds an entitlement the iOS provisioning profile doesn't yet carry. Dropped the mobile section for now (desktop custom-scheme `codemeyo://` still works). Universal Links on iOS + macOS are coming once the provisioning profiles are refreshed.
+
+---
+
+## [1.9.75] - 2026-04-22
+
+Reliability-only follow-up to v1.9.73. Same user-facing fixes — profile auto-refresh on launch, pair device actually pairs, Windows sign-in sticks, QR panel shows errors clearly, `codemeyo://pair/<CODE>` scheme works on desktop. macOS Universal Links at `https://codemeyo.com/pair/<CODE>` are coming in a follow-up once our Mac App Store provisioning is refreshed; the in-app QR/code flow is the full end-to-end path in the meantime.
+
+---
+
+## [1.9.73] - 2026-04-21
+
+### Fixed
+- **Account tier auto-refreshes at launch.** If your Pro status changed on the server since the last time you opened the app — a new comp, a renewal, an expired subscription — CodeMeYo now re-syncs silently a moment after startup instead of waiting for you to hit the manual Refresh button.
+- **Pair Device actually pairs.** Device pairing could fail with an "Unauthenticated" error even for signed-in Pro users, which also left the QR code stuck on "Generating QR…" forever. The pairing panel now uses your signed-in session correctly on the first try.
+- **Windows sign-in now persists.** Your auth token is now saved to Windows Credential Manager as intended, so quitting and relaunching keeps you signed in without re-entering your password.
+- **QR panel shows a clear error instead of hanging.** When a pair code can't be generated (e.g. you're signed out, or on Free tier), the QR tile now shows an error state pointing at the detail below it, rather than the indefinite "Generating QR…" spinner.
+
+### Added
+- **Deep-link support for `codemeyo://pair/<CODE>` and Universal Links.** Scanning a pair QR from your phone now opens CodeMeYo directly on desktop (via `codemeyo://`) or on iPhone (via `https://codemeyo.com/pair/<CODE>`), and auto-fills the code so pairing is one step instead of three.
+
+---
+
 ## [1.9.70] - 2026-04-21
 
 ### Fixed
