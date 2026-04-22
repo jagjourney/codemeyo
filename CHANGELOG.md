@@ -27,6 +27,25 @@ To release:
 
 ---
 
+## [1.9.79] - 2026-04-22
+
+Release reliability polish. No user-visible behavior change — the iPad launch-crash fix from v1.9.77 is now validated end-to-end in every release pipeline so it can't silently regress in a future build.
+
+---
+
+## [1.9.78] - 2026-04-22
+
+Build-green follow-up. v1.9.78's release pipeline hit platform-signing wiring bugs (Mac/iOS/Android uploads couldn't complete). No user-facing change here on its own; the iPad launch-crash fix shipped in v1.9.77 remains in place, and the signing pipeline is fixed in v1.9.79.
+
+---
+
+## [1.9.77] - 2026-04-22
+
+### Fixed
+- **iPad launch crash.** Previous builds could fail to start on iPad because of a Swift runtime library that wasn't getting bundled. The minimum iOS version is now 15.0 (which ships that library in the OS), so the app launches reliably on every supported iPad and iPhone.
+
+---
+
 ## [1.9.76] - 2026-04-22
 
 Build-green follow-up to v1.9.75. v1.9.75's iOS build hit the same provisioning-profile mismatch macOS had — the deep-link plugin's mobile section auto-adds an entitlement the iOS provisioning profile doesn't yet carry. Dropped the mobile section for now (desktop custom-scheme `codemeyo://` still works). Universal Links on iOS + macOS are coming once the provisioning profiles are refreshed.
