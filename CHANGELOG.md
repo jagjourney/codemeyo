@@ -27,6 +27,26 @@ To release:
 
 ---
 
+## [1.9.82] - 2026-04-22
+
+Android release polish — drops 32-bit ARM build to comply with Google Play's 64-bit requirement. All modern Android devices (2019+) support arm64, no user-visible change.
+
+---
+
+## [1.9.81] - 2026-04-22
+
+Universal Links restored — opening `https://codemeyo.com/pair/<CODE>` now launches CodeMeYo on macOS and mobile directly. Plus release reliability polish (Apple upload + GitHub release sync auto-recover from network blips instead of failing outright).
+
+Note: v1.9.80 was accidentally shipped with v1.9.79-labeled binaries due to a skipped version-bump step; the auto-updater loop it caused is resolved here.
+
+---
+
+## [1.9.80] - 2026-04-22
+
+Skipped — internal release mis-tag (binaries inside the v1.9.80 release were still labeled 1.9.79). No functional difference from v1.9.79. Use v1.9.81 or later.
+
+---
+
 ## [1.9.79] - 2026-04-22
 
 Release reliability polish. No user-visible behavior change — the iPad launch-crash fix from v1.9.77 is now validated end-to-end in every release pipeline so it can't silently regress in a future build.
