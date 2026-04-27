@@ -27,6 +27,24 @@ To release:
 
 ---
 
+## [1.9.84] - 2026-04-26
+
+Same model lineup refresh as v1.9.83, this time delivered. v1.9.83's release pipeline hit two infrastructure issues (Android upload stale-bundle bug, iOS build-host platform refresh) that blocked the binaries from reaching the stores. Both fixed here.
+
+The new models from v1.9.83 — Claude Opus 4.7, GPT-5.5, DeepSeek V4 Pro/Flash, Gemini 3.x previews, Qwen3 32B on Groq — now ship.
+
+---
+
+## [1.9.83] - 2026-04-26
+
+Refreshed model lineup — Claude Opus 4.7 (Anthropic's newest flagship, with a step-change improvement in agentic coding), GPT-5.5 (OpenAI's newest frontier model), DeepSeek V4 Pro and V4 Flash, and the Gemini 3.x preview series are now available in the model picker. Groq's lineup adds Qwen3 32B for high-speed reasoning. Mistral Small 4 description updated to reflect its merged reasoning, vision, and code capabilities.
+
+Models that the providers themselves have retired or deprecated are now clearly labeled so you can migrate before they're shut down.
+
+Bug fix: corrected an internal Grok 4.20 Multi-Agent model identifier that previously caused that specific selection to fail. Other Grok models were unaffected.
+
+---
+
 ## [1.9.82] - 2026-04-22
 
 Android release polish — drops 32-bit ARM build to comply with Google Play's 64-bit requirement. All modern Android devices (2019+) support arm64, no user-visible change.
