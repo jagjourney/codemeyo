@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.9.85] - 2026-04-29
+
+Pro entitlement now correctly recognized after sign-in. Earlier builds had a field-name mismatch between the app and the account API that caused every signed-in account to appear as Free, even when Pro was active. This hid Pro-gated features (Remote PC pairing, mobile device pair flow) from users who had legitimately purchased or been granted Pro. Resolved.
+
+The Refresh account status and Restore Purchases flows now also pull the correct tier on first try instead of silently retaining the old value.
+
+---
+
 ## [1.9.84] - 2026-04-26
 
 Same model lineup refresh as v1.9.83, this time delivered. v1.9.83's release pipeline hit two infrastructure issues (Android upload stale-bundle bug, iOS build-host platform refresh) that blocked the binaries from reaching the stores. Both fixed here.
