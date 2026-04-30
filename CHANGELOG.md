@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.9.86] - 2026-04-29
+
+App Store Review compliance pass for the macOS build. The "Sign in for automatic updates" prompt no longer appears on macOS — the Mac App Store handles updates natively. macOS users who installed from the Mac App Store will now receive updates the standard way through the App Store app. Direct-download users can grab the latest .dmg from the GitHub releases page when a new version ships.
+
+This release also tightens the macOS sandbox to use the minimum entitlements actually needed by the app, and addresses a few smaller App Store metadata items.
+
+---
+
 ## [1.9.85] - 2026-04-29
 
 Pro entitlement now correctly recognized after sign-in. Earlier builds had a field-name mismatch between the app and the account API that caused every signed-in account to appear as Free, even when Pro was active. This hid Pro-gated features (Remote PC pairing, mobile device pair flow) from users who had legitimately purchased or been granted Pro. Resolved.
