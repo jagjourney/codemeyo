@@ -27,6 +27,40 @@ To release:
 
 ---
 
+## [1.10.2] - 2026-04-30
+
+### Reliability
+- Build pipeline now auto-retries up to 2 times on transient failures (network blips during App Store / Play Console uploads, runner heartbeat hiccups, Gradle daemon quirks). Real code-signing or manifest errors still fail fast.
+- New "Sync to Stripe" admin action for the credit-pack catalog — one click creates Stripe Products + Prices for all active packs in the current Stripe mode (test/live). Existing prices stay intact so old receipts keep resolving.
+- Checkout now prefers the synced Stripe Price when available, falling back to inline price-data otherwise. Both paths produce identical user-facing checkouts.
+
+## [1.10.1] - 2026-04-30
+
+### Added — JagAI in the desktop app
+- **JagAI is now selectable in the provider list** — pick "JagAI (All-in-One)" and choose any of 12 models across the apex / nova / spark tiers (Claude Opus 4.7, GPT-5.5, Grok 4.20 Multi-Agent, Claude Sonnet 4.6, Grok 4.20, GPT-5.4 Mini, Gemini 2.5 Pro, Claude Haiku 4.5, GPT-5.4 Nano, Grok 4.1 Fast, Gemini 2.5 Flash-Lite, DeepSeek V4 Flash).
+- **Manage Credits button** — opens your default browser pre-authenticated to your account dashboard so you can buy credits without typing a password again.
+- **Live balance** in the JagAI settings card — see your credits and dollar equivalent at a glance, refresh on demand.
+- No API keys to manage — your CodeMeYo sign-in is the only auth needed.
+
+## [1.10.0] - 2026-04-30
+
+### Added — JagAI: All your favorite AI models in one place
+- **JagAI credit system on codemeyo.com** — One balance, every top model. Buy credit packs from `/dashboard/credits` (Starter $5.45, Builder $10.59, Pro $26.03, Power $51.75, Whale $103.20, Mega $257.55), no API keys required.
+- **Stripe Checkout** with the processing fee passed through at cost as a separate line item — admin reports always show honest revenue.
+- **Account dashboard "Credits" page** — current balance, full transaction history, one-click pack purchases.
+- **Admin credit management** — admins can grant or deduct credits with a required note that's logged to the append-only ledger and to audit_logs (every adjustment is traceable).
+- **Admin credit pack catalog** — add, disable, reprice, reorder packs without a deploy.
+- **Admin AI provider keys** — manage Anthropic, OpenAI, xAI, Google, DeepSeek, and Mistral keys from one screen; rotation propagates within minutes.
+- **Stripe TEST-mode banner** on `/dashboard/credits` so it's obvious when checkout is going through Stripe test cards.
+
+### Reliability
+- New append-only credit ledger with running balance snapshots — no recomputation on history reads, full audit trail on every credit movement (purchase, deduction, refund, comp, expiration, reservation, reservation release).
+- Atomic balance mutations (`SELECT … FOR UPDATE` on the user row) so concurrent JagAI requests can't double-spend.
+- Idempotent Stripe webhook for credit-pack purchases — Stripe retries (up to 75 hours) never grant the same credits twice.
+
+### Notes
+- The desktop app will gain a "JagAI" provider option in the next release; v1.10.0 ships the website + admin so the buy / manage / audit flow can be tested live.
+
 ## [1.9.86] - 2026-04-29
 
 App Store Review compliance pass for the macOS build. The "Sign in for automatic updates" prompt no longer appears on macOS — the Mac App Store handles updates natively. macOS users who installed from the Mac App Store will now receive updates the standard way through the App Store app. Direct-download users can grab the latest .dmg from the GitHub releases page when a new version ships.
