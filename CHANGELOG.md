@@ -27,6 +27,21 @@ To release:
 
 ---
 
+## [1.10.5] - 2026-04-30
+
+### Mobile remote control — bidirectional mirror live
+- **"Pair with mobile device" button now actually switches tabs.** Previously dispatched a custom event that nothing was listening for; App.tsx now wires up the listener.
+- **Phone shows your PC's chat live.** When the phone is paired, every chat message you type / receive on the desktop is broadcast through codemeyo.com's relay channel onto your phone in real time.
+- Phone activity feed now mirrors message updates (streaming → done) so the phone sees the same conversation flow as the PC.
+
+### Admin
+- **Per-provider toggle** at /admin → Settings → AI Provider Keys: enable / disable Anthropic, OpenAI, xAI, Google, DeepSeek, Mistral independently. Disabled providers return 503 from /api/v1/chat/completions and disappear from the customer-facing "Available models" list.
+- **/dashboard/credits now shows the available models** for each user — full provider catalog with ON/OFF state so customers know exactly which upstreams their credits buy time on.
+
+### Stripe consolidation
+- **Single Stripe webhook URL** now handles donations + JagAI credits + Cashier subscriptions: `https://codemeyo.com/api/v1/stripe/webhook`. The legacy `/api/webhooks/stripe` route stays as a no-op fallback.
+- Webhook signature verification reads from /admin → Settings → Stripe (test + live secrets), no env var required.
+
 ## [1.10.4] - 2026-04-30
 
 ### What changed since v1.10.2
