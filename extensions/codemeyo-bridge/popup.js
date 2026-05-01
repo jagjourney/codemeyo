@@ -6,6 +6,17 @@ const connectBtn = document.getElementById("connectBtn");
 const disconnectBtn = document.getElementById("disconnectBtn");
 const tokenInput = document.getElementById("tokenInput");
 const portInput = document.getElementById("portInput");
+const versionLabel = document.getElementById("versionLabel");
+
+// v1.10.12 — show the extension version in the header so users can
+// verify it matches the CodeMeYo desktop app they're pairing with.
+// Auto-populated from manifest.json so it always tracks the build.
+try {
+  const manifest = chrome.runtime.getManifest();
+  if (versionLabel && manifest && manifest.version) {
+    versionLabel.textContent = `v${manifest.version}`;
+  }
+} catch {}
 
 function showConnected() {
   statusDot.classList.add("connected");
