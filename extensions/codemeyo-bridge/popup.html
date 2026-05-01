@@ -19,6 +19,13 @@
       border-bottom: 1px solid #2d2e32;
     }
     .header h1 { font-size: 14px; font-weight: 600; }
+    .header .version {
+      margin-left: auto;
+      font-size: 10px;
+      color: #6b7280;
+      letter-spacing: 0.4px;
+      font-variant-numeric: tabular-nums;
+    }
     .status-dot {
       width: 8px; height: 8px;
       border-radius: 50%;
@@ -99,6 +106,7 @@
   <div class="header">
     <div class="status-dot" id="statusDot"></div>
     <h1>CodeMeYo Bridge</h1>
+    <span class="version" id="versionLabel"></span>
   </div>
 
   <div class="body">
