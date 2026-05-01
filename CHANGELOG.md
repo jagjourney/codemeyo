@@ -27,6 +27,22 @@ To release:
 
 ---
 
+## [1.10.4] - 2026-04-30
+
+### What changed since v1.10.2
+v1.10.3 was tagged with a broken `tauri.conf.json` iOS config (inline `infoPlist` map instead of a path string), which failed every build. v1.10.4 supersedes it with the correct config plus everything that v1.10.3 was meant to ship:
+
+### Mobile fixes — TestFlight feedback v1.9.86
+- **Bottom navigation no longer clips on iPhone home indicator** — added explicit safe-area reservation so tabs render fully above the gesture bar even when the WebView's viewport-fit handling is shaky.
+- **"Connect to your PC" flow on phone** — settings + remote tab now show the right copy when you're on a phone (you scan the PC's code, you don't host one). The pair button on mobile is now labeled "Scan PC's code" so testers know what they're doing.
+- **No more useless phone-side pair codes** — the remote tab no longer auto-mints a pair session on mobile devices. Mobile users land directly on the QR scanner.
+- **iOS camera permission** — added the camera, microphone, and photo-library usage descriptions so iOS actually shows the permission prompt when the QR scanner starts.
+- **Cleaner Remote tab icon** — switched from a phone icon (testers misread as a camera) to a cable icon that better signals "your phone is connected to your PC".
+
+### Credits — important policy fix
+- **Credits expire 360 days from purchase if unused.** The /dashboard/credits page no longer claims "credits never expire" — that wording was incorrect. Per-batch FIFO consumption (oldest credits used first), nightly expiry sweep, full audit trail in the ledger so every expired batch is traceable to a purchase.
+- Account dashboard now shows the **next expiration date + remaining credits in that batch** inline, so you always know which credits time out next.
+
 ## [1.10.2] - 2026-04-30
 
 ### Reliability
