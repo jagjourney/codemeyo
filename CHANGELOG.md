@@ -27,6 +27,15 @@ To release:
 
 ---
 
+## [1.10.14] - 2026-05-01
+
+### Pair Device — back to 6-digit numeric codes
+- **Pair codes are now 6 numeric digits, like SMS / 2FA / Apple ID / Google verifiers.** v1.10.13 briefly tried 8-character alphanumeric to maximise entropy, but every Apple TestFlight reviewer hit the alphanumeric keyboard mismatch on phone (the iOS numeric keyboard is one-handed and finger-friendly; the alphanumeric one is not). Switching to 6 numeric digits matches the universal SMS-code pattern users already know.
+- **All input boxes are numeric on every device** — phone, tablet, desktop browser, web dashboard. The desktop simply renders the same numeric component; non-digits are silently dropped.
+- **Defense in depth** — `/api/v1/pair/complete` is now throttled to 10 attempts/minute per user. Combined with the 5-minute TTL, single-use enforcement, and the existing requirement that the joiner own both the device and the pair session, brute-forcing a 6-digit code from another account is effectively impossible.
+- **Public `/pair/{code}` landing page on codemeyo.com** updated to accept the 6-digit format; previously it would 404 anything that wasn't 8 chars.
+- **iOS auto-fill works again** — `autoComplete="one-time-code"` lets iOS surface the SMS-style suggestion bar above the keyboard if the OS captured a code from a connected message.
+
 ## [1.10.13] - 2026-05-01
 
 ### Pair Device — phone QR scan & code entry now work
