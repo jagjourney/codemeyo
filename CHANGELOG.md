@@ -27,6 +27,13 @@ To release:
 
 ---
 
+## [1.10.13] - 2026-05-01
+
+### Pair Device — phone QR scan & code entry now work
+- **Fixed: phone could not type the desktop's pair code.** The phone app's pair-code box was hardcoded to 6 numeric digits while the desktop and web dashboard both display an 8-character alphanumeric code. Result: every paste failed and the QR scan silently dropped every payload because the extractor was also looking for 6 digits. Phone now uses a 8-box alphanumeric input with the same Crockford-readable alphabet (uppercase letters and 2–9, no I/O/0/1) the desktop has always shown, and an explicit on-screen reminder so users know what charset to type.
+- **Fixed: QR scan never matched.** The QR-payload decoder now correctly recognizes the real 8-character format in all three forms — raw code, deep-link URL (`codemeyo://pair/...`), and signed JSON-in-base64 payload — plus a last-ditch substring scan so vendor QR readers that wrap the payload still work.
+- All "enter the 6-digit code" copy across the desktop Settings panel, the in-app Remote pane, the website dashboard's "Pair with my phone" page, and the empty-input error message now correctly say "8-character code".
+
 ## [1.10.12] - 2026-05-01
 
 ### Credits & billing
