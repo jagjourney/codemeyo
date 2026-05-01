@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.10.15] - 2026-05-01
+
+### Pair Device — fixed "device id field is required" QR-scan error
+- **Pairing now works without registering the phone first.** Up through v1.10.14, scanning the QR code or typing a pair code produced a "device id field is required" validation error because the phone hadn't called the device-registration endpoint first. v1.10.15 makes the server lazy-create a Device row from the request itself when the client doesn't provide one, so scan-to-pair works on a brand-new install with zero extra ceremony. The dashboard's Devices list still shows the phone correctly — its platform is detected from the user-agent (iOS / Android / desktop).
+
+### Android — 16 KB memory page size support (Google Play requirement)
+- **Fixed the Play Console 16 KB rejection.** The Rust runtime's native `.so` files are now linker-aligned to a 16 KB page boundary so they can load on Android 15+ devices that use 16 KB pages. Previously every Play release was rejected with "Your app does not support 16 KB memory page sizes." This affects only Android — iOS and macOS / Windows / Linux builds were never impacted.
+
 ## [1.10.14] - 2026-05-01
 
 ### Pair Device — back to 6-digit numeric codes
