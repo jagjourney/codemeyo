@@ -27,6 +27,22 @@ To release:
 
 ---
 
+## [1.10.11] - 2026-05-01
+
+### JagAI multi-agent reliability
+- **Deep Think, Consensus, and Round Robin now only fan out to JagAI providers you actually have keys for.** Previously, picking JagAI in multi-agent modes always tried Claude + GPT + Grok regardless of which keys were configured, so requests for unconfigured providers failed. Now the desktop client checks which JagAI providers are available and only routes to those.
+- **Smarter failure messages.** If a multi-agent run can't get enough working providers to debate, the error now tells you exactly which providers failed and why — instead of a generic "need at least 2 providers."
+- **Boilerplate filter.** Agents that respond with refusals, "I'm just an AI" disclaimers, or get stuck emitting fake tool-call text are now treated as failed analyses instead of feeding into the debate.
+
+### Deep Think / Consensus UI polish
+- **Mode-aware section labels.** The view now properly distinguishes Deep Think (adversarial debate) from Consensus (reconciliation). Phase pill, section headings, and per-agent labels all swap to match the mode you picked.
+- **Failed agents are now visible.** When an agent's analysis fails, a red placeholder card appears in the analysis grid showing which agent dropped out — no more silently rendering two boxes when you had three agents.
+- **Synthesis failures stop the spinner.** If the final synthesis step itself fails, the spinner now clears and a failure banner explains what happened, instead of spinning forever.
+- **Cleaner section headers.** Section names no longer repeat the phase name (the pill strip already shows that) — just "Critiques" or "Reconciled Positions" instead of "Debate — Critiques" / "Reconcile — Reconciled Positions".
+
+### Credits dashboard polish
+- **Transaction history hides internal accounting rows.** Internal reservation/release pairs (the temporary holds we put on credits while a request is in flight) no longer clutter the history view. You only see actual purchases, deductions, refunds, comp credits, and expirations.
+
 ## [1.10.5] - 2026-04-30
 
 ### Mobile remote control — bidirectional mirror live
