@@ -27,6 +27,29 @@ To release:
 
 ---
 
+## [1.10.12] - 2026-05-01
+
+### Credits & billing
+- **Webhook double-grant prevention.** If a payment ever has to be recovered manually (server unreachable when Stripe first delivered the webhook, etc.) the system now correctly recognizes the eventual webhook retry as a duplicate and does not credit the same purchase twice.
+- **LIVE / TEST mode badge on every transaction.** The transaction history on /dashboard/credits now shows a green LIVE badge for real charges and a yellow TEST badge for Stripe test-mode purchases, so it's instantly clear which environment a credit grant came from.
+- **Cleaner Buy Credits cards.** The per-card "$X + $Y Processing Fee" math has been removed — just the final total is shown. The "Includes Processing Fee." hint above the grid covers the explainer.
+
+### MCP server bundles
+- **SHA-256 integrity verification on install.** When you install a `.mcpb` bundle that declares a `contentHash` in its manifest, CodeMeYo now verifies the file against that hash before extracting. Tampered bundles are refused with a clear error. Every successful install records the bundle's fingerprint for audit.
+- **Bulk secrets API.** Save / load / delete every environment variable for an MCP server in one go instead of one-by-one. Backed by your OS keychain (Windows Credential Manager, macOS Keychain, Linux Secret Service).
+- **Auth-token round-trip.** OAuth tokens stored by the PKCE flow can now be read back and cleared via the Settings panel, completing the symmetric save/load pair.
+- **"Open install folder" support.** The MCP install path is now exposed to the Settings panel so you can jump straight to where a bundle landed on disk.
+
+### Browser-debug & extension panel
+- **Fine-grained extension state.** Connection status, current pairing token, console feed, and storage snapshot are each individually addressable from the UI now (instead of only the all-or-nothing status blob).
+- **CDP connection pill.** Quick "is the DevTools debugger attached?" probe so the browser-debug toolbar can show a real-time connected/disconnected indicator without driving a roundtrip.
+
+### JagAI credits
+- **Faster balance refresh.** A dedicated balance endpoint replaces the full /me roundtrip after a chat turn, so the JagAI settings card stays current as deductions land server-side without the noticeable delay of the old path.
+
+### README & marketing
+- **Updated README** — current LLM lineup (Claude Opus 4.7, GPT-5.5, Grok 4.20 family, Gemini 3.1 Pro, DeepSeek V4) plus first-class explanations of the JagAI credits flow and SideKick (Claude Pro/Max via Claude Code CLI) modes.
+
 ## [1.10.11] - 2026-05-01
 
 ### JagAI multi-agent reliability
