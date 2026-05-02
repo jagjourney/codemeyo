@@ -27,6 +27,13 @@ To release:
 
 ---
 
+## [1.10.16] - 2026-05-01
+
+### Pair Device — Regenerate works, retries don't get stuck on "already used"
+- **Fixed: Regenerate button on the desktop pair tile didn't fire.** Up through v1.10.15 the button was permanently disabled after the first pair code was generated because the connection-status flag never transitioned out of "pairing". Click now correctly mints a fresh code.
+- **Fixed: "Pair code has already been used" lockout when the phone's connect step failed.** Previously, if `/pair/complete` succeeded server-side but the WebSocket / relay handshake failed on the phone immediately after (very common on iOS as a generic "Load failed"), the session was already consumed and every retry returned 409. v1.10.16 adds a 60-second grace window: when the SAME joiner device retries with the same code inside that window, the server treats the second call as a no-op and re-emits the relay info so the user can connect without regenerating.
+- **Better network-error diagnostics.** When the phone can't reach the backend at all (real network failure, ATS denial, blocked WAF rule, etc.), the error now includes the URL and a hint to toggle Wi-Fi / try cellular instead of the opaque "Load failed" iOS WebKit message. Surface for future debugging.
+
 ## [1.10.15] - 2026-05-01
 
 ### Pair Device — fixed "device id field is required" QR-scan error
