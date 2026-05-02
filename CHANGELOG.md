@@ -27,6 +27,11 @@ To release:
 
 ---
 
+## [1.10.17] - 2026-05-01
+
+### Pair Device — hotfix: pair-code generation no longer hangs
+- **Fixed: desktop QR tile stuck on "Generating QR…" forever after v1.10.16.** The error-detail wrapper added around the `fetch` call in v1.10.16 was correlated with the `/pair/initiate` request never resolving on the desktop. Reverted that wrapper to the simple pre-v1.10.16 form. The Regenerate-button fix from v1.10.16 and the server-side same-joiner grace period both stay in place.
+
 ## [1.10.16] - 2026-05-01
 
 ### Pair Device — Regenerate works, retries don't get stuck on "already used"
