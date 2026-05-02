@@ -27,6 +27,20 @@ To release:
 
 ---
 
+## [1.10.18] - 2026-05-01
+
+### iOS App Store compliance — re-submission for v1.10.17 rejection
+
+- **In-app sign-in only on iPhone and iPad.** The "Open sign-up in browser", "Sign in with device code (browser)", and "Reopen approval page" CTAs that bounced users out to Safari for sign-up / sign-in are now hidden on iOS. The native email + password form already shipping in the app remains the only sign-in path on iOS — desktop and Android keep the convenience web handoffs.
+- **All Pro subscribe / billing flows on iOS go through the App Store.** Buttons that opened Stripe checkout in the system browser ("Subscribe to Pro", "Manage Credits", "Manage billing", "Open dashboard", "Pair with phone" web link, "Upgrade" on the Pair screen) are hidden on iOS. The existing StoreKit subscription flow in Settings → Subscription & Billing is the only Pro-purchase path on iOS, exactly as Apple requires.
+- **Auto-update notification banner removed on iOS.** Auto-updates are handled by the App Store on iOS, so the in-app update banner has no purpose there and previously contained an external sign-up link.
+- **Belt-and-suspenders Rust guards.** Even if a stale UI ever attempted to call the magic-link or device-code Tauri commands on iOS, the Rust side now refuses to launch the system browser on iOS targets.
+
+### iOS privacy + compliance
+
+- **Privacy manifest shipped.** Every iOS build now includes `PrivacyInfo.xcprivacy` declaring exactly what the app collects (email, name, user ID, App Store purchase history — all linked to the user, none used for tracking, all used only for app functionality), the absence of tracking domains, and the required-reason API declaration for the `UserDefaults` access the embedded WebView performs.
+- **Encryption export compliance answered automatically.** The app's `Info.plist` now ships with `ITSAppUsesNonExemptEncryption=false` so App Store Connect no longer leaves the build in "Missing Compliance" state on every upload. (CodeMeYo only uses standard TLS for API calls, which is exempt under U.S. EAR §740.17(b).)
+
 ## [1.10.17] - 2026-05-01
 
 ### Pair Device — hotfix: pair-code generation no longer hangs
