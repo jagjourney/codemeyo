@@ -27,6 +27,18 @@ To release:
 
 ---
 
+## [1.10.21] - 2026-05-04
+
+### Fix: TestFlight upload, take 2 — re-sign survives the build pipeline
+
+- v1.10.20 tried to fix the v1.10.19 Invalid Binary failure by adding an explicit iOS entitlements file. The fix was correct but a pre-existing tool on the build pipeline reverted the entitlement late in the process, so the four build retries kept producing a binary that didn't match its provisioning profile. v1.10.21 adds a final re-sign step after the build completes so the entitlement is guaranteed to land in the .ipa that gets uploaded to App Store Connect. Same outcome as intended in v1.10.20, just with a more robust mechanism.
+
+## [1.10.20] - 2026-05-04
+
+### Fix: TestFlight upload no longer flips to "Invalid Binary"
+
+- v1.10.19 uploaded successfully but App Store Connect's deeper post-upload review marked the build "Invalid Binary" because the iOS app's signed entitlements were missing the Universal-Links capability that its provisioning profile required. v1.10.20 ships an explicit iOS entitlements file declaring `applinks:codemeyo.com`, so the binary's entitlements now match the profile and Apple's review accepts the upload. No user-visible change beyond "the build can actually be tested."
+
 ## [1.10.19] - 2026-05-04
 
 ### JagAI — fixes for users running JagAI on its own
