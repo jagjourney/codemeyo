@@ -27,6 +27,20 @@ To release:
 
 ---
 
+## [1.10.19] - 2026-05-04
+
+### JagAI — fixes for users running JagAI on its own
+
+- **The Enabled checkbox for JagAI (All-in-One) now persists when you relaunch the app.** Previously it would silently revert to off after every restart. Toggle once and it stays.
+- **JagAI now works standalone** — you no longer need a Claude / GPT / Grok / Gemini / DeepSeek API key configured underneath for JagAI to fire. Toggle JagAI on, leave everything else off, pick a JagAI model, and chat.
+- **JagAI is now a button in the chat top bar.** Up through v1.10.18 the chat header listed every other provider but JagAI itself was missing, so users with JagAI enabled and every other provider disabled had no way to actually select JagAI in the chat. Now there's a JagAI button there whenever JagAI is enabled.
+- **SideKick is now a chat top-bar button too**, for the same reason — it was previously enabled in Settings but invisible in the chat selector.
+- **Distinct JagAI + SideKick brand colors** so the new buttons read at a glance against Claude, Grok, GPT, etc.
+
+### iPhone + iPad sign-in is one tap from anywhere
+
+- **New Account tab on the bottom nav.** v1.10.18 added the in-app sign-in form Apple required, but the form was only reachable via the Remote → "Sign in" prompt — testers landing on Chat or Settings looked for a sign-in CTA, found none, and concluded the app couldn't be signed into. The bottom nav now surfaces an Account tab so the email + password form is one tap from anywhere on iPhone and iPad. Help → moved into Settings, where it already lives on desktop.
+
 ## [1.10.18] - 2026-05-01
 
 ### iOS App Store compliance — re-submission for v1.10.17 rejection
