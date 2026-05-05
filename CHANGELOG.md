@@ -27,6 +27,12 @@ To release:
 
 ---
 
+## [1.10.25] - 2026-05-05
+
+### Fix: TestFlight iOS — Apple's stricter privacy manifest validator
+
+- v1.10.24 uploaded clean and passed Apple's initial validation, but Apple's deeper post-upload review flagged it Invalid Binary with ITMS-91056 ("Invalid privacy manifest — keys and values must be valid"). The actual privacy manifest CONTENTS were the same as v1.10.18 (which Apple accepted previously), so the regression was in something else: the privacy manifest had ~50 lines of XML comments at the top, and Apple's stricter 2026 manifest validator now rejects manifests whose XML comments aren't tolerated by its parser. v1.10.25 ships PrivacyInfo.xcprivacy as bare XML with no comments — same exact 4 collected data types and same single required-reason API declaration as v1.10.18, just without the documentation comments. Build pipeline also gains a `plutil -lint` validation step that fails any future regression in 1 second instead of being caught 30 minutes later by Apple's review.
+
 ## [1.10.24] - 2026-05-04
 
 ### Fix: iOS upload — strip XML-spec violation from entitlements file
