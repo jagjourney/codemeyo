@@ -27,6 +27,12 @@ To release:
 
 ---
 
+## [1.10.26] - 2026-05-05
+
+### Fix: Android — force 16 KB memory page alignment so Google Play accepts the upload
+
+- Google Play (since late 2025) rejects new uploads whose native `.so` files aren't loadable on Android devices that use 16 KB memory pages. v1.10.24's release was blocked with the message "Your app does not support 16 KB memory page sizes." The repo has had a Cargo config setting the linker flag for this since v1.10.15, but the build pipeline was apparently not honoring it — the `libcodemeyo_lib.so` shipping in our `.aab` still had 4 KB-aligned segments. v1.10.26 sets the linker flag via the higher-precedence `RUSTFLAGS` environment variable in the build pipeline, which produces the correct 16 KB alignment, and adds an automated check that fails the build immediately if a future regression slips back to 4 KB. End result: the `.aab` produced by v1.10.26 onward is accepted by Google Play.
+
 ## [1.10.25] - 2026-05-05
 
 ### Fix: TestFlight iOS — Apple's stricter privacy manifest validator
