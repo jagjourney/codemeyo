@@ -27,6 +27,24 @@ To release:
 
 ---
 
+## [1.10.24] - 2026-05-04
+
+### Fix: iOS upload — strip XML-spec violation from entitlements file
+
+- v1.10.23's iOS entitlements file had a documentation comment block at the top whose body contained literal double-hyphens (in lines describing the `--entitlements` and `--force` flags). XML 1.0 §2.5 forbids `--` inside `<!-- -->` comments, and Apple's AMFI XML parser correctly rejects it during the codesign step. v1.10.24 ships the entitlements file as bare XML with no comments, and adds a `plutil -lint` validation gate in the build pipeline so any future regression fails immediately with a clear error rather than a 7-minute build that aborts mid-codesign.
+
+## [1.10.23] - 2026-05-04
+
+### Fix: iOS build can finish — drop conflicting pre-build entitlements copy
+
+- v1.10.22 added all five App Store entitlements to the iOS entitlements file but kept a build step that copied that file in BEFORE Tauri's initial build. Tauri's initial build signs against the auto-managed wildcard dev profile, which doesn't have `beta-reports-active` and uses `get-task-allow=true` — so Xcode rejected the build before it even started compiling. v1.10.23 leaves Tauri's initial build alone (default empty entitlements), and the existing post-export re-sign step plants all five distribution entitlements directly into the .ipa right before upload. End result is the same correct binary; the build can now actually run.
+
+## [1.10.22] - 2026-05-04
+
+### Fix: TestFlight iOS upload, take 3 — restore the four base entitlements
+
+- v1.10.21's post-export re-sign step replaced the binary's entitlements with only `applinks:codemeyo.com` and accidentally wiped out the four base entitlements every iOS build needs (`application-identifier`, `team-identifier`, `get-task-allow`, `beta-reports-active`). Apple's upload service rejected with code 90075 ("application-identifier entitlement is missing"), but the build job swallowed that error and reported success — which is why v1.10.20 and v1.10.21 showed up on the macOS TestFlight tab without a matching iOS build, even though the pipeline appeared green. v1.10.22 restores all five entitlements in the source file and makes the build job fail loud whenever the iOS upload errors, so this exact failure mode can't repeat silently.
+
 ## [1.10.21] - 2026-05-04
 
 ### Fix: TestFlight upload, take 2 — re-sign survives the build pipeline
