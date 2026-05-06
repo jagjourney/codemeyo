@@ -27,6 +27,24 @@ To release:
 
 ---
 
+## [1.10.29] - 2026-05-05
+
+### iOS — privacy manifest accepted by Apple's stricter validator
+
+- v1.10.28 was rejected with ITMS-91056 even though v1.10.25–27 with the same manifest had been accepted. Verified that the `.ipa` Apple received was identical to source — so Apple's validator got stricter, not the build pipeline. v1.10.29 adds three additional required-reason API declarations (file timestamp, system boot time, disk space) covering the framework calls the binary actually contains. Also adds a post-resign manifest verify gate so any future regression fails the build immediately instead of being caught 30 minutes later by Apple.
+
+### Phone-to-desktop pairing actually works now
+
+- The phone could complete the pair on the server, but the desktop never knew about it. The desktop now subscribes to its own pair channel as soon as the QR is shown and reacts in real time when the phone redeems the code. Sending typed messages, approving / denying agent permission prompts, and stopping a running agent from the phone all dispatch correctly to the desktop.
+
+### QR code on the desktop pair tile is reliably scannable
+
+- The desktop was encoding the long signed pair payload, which produced a dense QR that mobile cameras struggled to decode. Switched to the short `codemeyo://pair/<CODE>` deep link, lower density, with a proper quiet zone — the QR now scans on the first try.
+
+### codemeyo.com sign-in and dashboard navigation work after the Redis flip
+
+- v1.10.27's switch to Redis-backed sessions surfaced a latent issue where signed-in users were being redirected to a non-existent verify-email screen. Removed the unused email-verification gate, isolated session storage onto its own dedicated Redis connection so it can't collide with the cache store, and documented the new session/cache/queue Redis layout in `.env.example`.
+
 ## [1.10.28] - 2026-05-05
 
 ### Hotfix: blank-screen crash when JagAI or SideKick is the active provider
