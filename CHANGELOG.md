@@ -27,6 +27,20 @@ To release:
 
 ---
 
+## [1.10.28] - 2026-05-05
+
+### Hotfix: blank-screen crash when JagAI or SideKick is the active provider
+
+- After v1.10.19 added JagAI and SideKick as first-class providers, three lookup tables in the desktop app weren't updated to include them — the title bar, message bubbles, and the usage panel's session breakdown. If a user's active provider was JagAI or SideKick when the app started, the title bar tried to read `.color` on a missing entry and the whole window blanked out with a `Cannot read properties of undefined (reading 'color')` runtime error. v1.10.28 adds JagAI and SideKick to all three lookup tables, brand-colors message bubbles + usage cards correctly for them, and adds a defensive fallback so any future provider id added without a matching lookup entry can never blank-screen the app again.
+
+## [1.10.27] - 2026-05-05
+
+### codemeyo.com — Credits dashboard redesign + admin polish + faster page loads
+
+- **Redesigned the Credits dashboard at codemeyo.com/dashboard/credits.** The page now opens with a prominent balance card and three tabs: **Purchase** (the default — pick a credit pack and check out via Stripe), **Transactions** (your purchase + spend history with running balance and Stripe receipt links), and **Help** ("What's Included with your JagAI All-in-One Credits" — a clear breakdown of what credits route to across Apex / Nova / Spark tiers, plus the credit math, fee passthrough, expiry, and cross-device sync). Tabs deep-link via `?tab=purchase|transactions|help` so you can share specific views, and they collapse to a dropdown on mobile.
+- **Admin panel got a brand refresh and is faster.** Filament now uses the CodeMeYo orange + violet palette, navigation is grouped into Customers / Billing / Analytics / Content / Remote / System with the most-used screens up top, and dashboard stats (users, active Pro, MRR, last-30d usage) plus the revenue chart and usage rollups are now Redis-cached for 60–300 second windows so opening the panel is instant after the first hit.
+- **Server now uses Redis** for cache and session storage. Page loads on codemeyo.com that read settings, feature flags, or the dashboard are noticeably faster, and signed-in sessions persist across deploys instead of being flushed.
+
 ## [1.10.26] - 2026-05-05
 
 ### Fix: Android — force 16 KB memory page alignment so Google Play accepts the upload
