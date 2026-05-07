@@ -27,6 +27,12 @@ To release:
 
 ---
 
+## [1.10.34] - 2026-05-06
+
+### iOS — Apple's privacy manifest now actually accepted (real fix)
+
+- The privacy manifest contained the wrong key name for the array of API reason codes — every entry used `NSPrivacyAccessedAPIReasons` instead of Apple's documented `NSPrivacyAccessedAPITypeReasons` (with "Type" in the middle). The plist syntax linter accepted both, but Apple's deeper validator rejected the wrong key as "invalid" — which is what was causing every iOS upload since v1.10.18 to come back as Invalid Binary. Renaming the key to match Apple's published schema is the actual fix. Added a CI gate that fails the build if the wrong key sneaks back in.
+
 ## [1.10.33] - 2026-05-06
 
 ### iOS — privacy manifest now minimal (data-collection claims removed)
