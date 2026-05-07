@@ -27,6 +27,18 @@ To release:
 
 ---
 
+## [1.10.32] - 2026-05-06
+
+### iOS — privacy manifest accepted by Apple again
+
+- The privacy manifest content has been correct since v1.10.29, but Apple's stricter validator (rolled out around the v1.10.30 timeframe) started rejecting it as Invalid Binary anyway. Root cause: every other property list inside the bundle is binary-format, but our injected privacy manifest stayed XML — and the validator now treats that mismatch as invalid. The build now converts the manifest to binary plist on injection so the format matches everything else in the bundle, and a CI gate verifies the format before upload.
+
+## [1.10.31] - 2026-05-06
+
+### Pair flow no longer crashes when the relay isn't reachable
+
+- Entering a 6-digit pair code on a phone could crash the desktop app with a startup error if the WebSocket relay wasn't fully configured server-side. The QR + code generation worked, but as soon as a phone redeemed the code, the desktop tried to subscribe to a missing channel and threw. The desktop now checks for a valid relay before subscribing and shows a clean error state ("The pairing relay is not configured on the server") instead of crashing. Full phone-to-desktop pairing requires backend infrastructure that's still being completed; the fix here is making sure the app fails gracefully in the meantime.
+
 ## [1.10.30] - 2026-05-06
 
 ### JagAI — GPT routing fixed, every request now logged forever
