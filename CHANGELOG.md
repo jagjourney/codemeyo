@@ -27,6 +27,12 @@ To release:
 
 ---
 
+## [1.10.33] - 2026-05-06
+
+### iOS — privacy manifest now minimal (data-collection claims removed)
+
+- The privacy manifest still declares the four required-reason API categories the app's binary uses (UserDefaults, file timestamps, system boot time, disk space), but no longer enumerates the user data the backend collects (email, name, user ID, purchase history). Apple's stricter validator was rejecting that section as ITMS-91056. The data we collect is declared in our App Store Connect privacy nutrition labels and on codemeyo.com's privacy page, not in the app binary's manifest.
+
 ## [1.10.32] - 2026-05-06
 
 ### iOS — privacy manifest accepted by Apple again
