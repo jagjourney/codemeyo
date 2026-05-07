@@ -27,6 +27,22 @@ To release:
 
 ---
 
+## [1.10.30] - 2026-05-06
+
+### JagAI — GPT routing fixed, every request now logged forever
+
+- JagAI's GPT routing was returning 502 errors after three retries. Two real causes: the proxy's auto-retry didn't recognize the rephrased "Use 'X' instead" hints from OpenAI's newer error format, and gpt-5.5 chains rejections (first the temperature parameter, then `max_tokens` which OpenAI now requires renamed to `max_completion_tokens`). The proxy now follows the rejection chain to completion (up to four hops), renames parameters when OpenAI says to, and surfaces the real upstream error message back to the desktop app instead of a generic 502. The desktop app's error UI now shows the actual reason ("OpenAI: max_tokens parameter renamed to max_completion_tokens") instead of "jagai API error after 3 retries."
+- Every JagAI request — successful, failed, or refused for insufficient credits — is now persisted to a permanent audit table on codemeyo.com with the user's identity, prompt excerpt, response excerpt, model, tier, tokens, credits spent, and any error. **Records are append-only — they're never deleted.** Admin can view them at /admin → Billing → JagAI Requests with filters for failures-only, by user, by provider, and CSV export.
+
+### SideKick now actually engages instead of saying "Standing by for your request"
+
+- Deep Think mode includes SideKick (the Claude-CLI-backed participant) and SideKick's analysis was always the same boilerplate "I see the system reminders. Standing by for your request." The Tauri client was concatenating system + user content into one bracketed transcript-style block and handing it to the `claude` CLI, which then read its own injected system reminders + our wrapped block as system-only content with no user message. SideKick now passes the system prompt via `--append-system-prompt` and only the user content via `-p`, the way the CLI expects. SideKick now produces real analysis in Deep Think.
+
+### Apple App Store submission — screenshot capture pipeline shipped
+
+- New script `scripts/capture-screenshots.ps1` plus `apple-rejection/3/CAPTURE_GUIDE.md` walk through the 6 iPhone + 6 iPad screenshots Apple needs for the v1.10.29+ resubmission. Sims are running on mac01; the script SSHes in, takes the screenshot at each step, scp's the PNG back, and runs the letterbox pipeline at the end. ASC-ready PNGs land at `sales/appstore/iphone-6.5/` and `sales/appstore/ipad-13/`.
+- New artisan command `codemeyo:seed-apple-tester` pre-populates the reviewer test account on the backend with the Pro entitlement, a non-zero credit balance, and a clean purchase history so the screenshots show real numbers without manual setup.
+
 ## [1.10.29] - 2026-05-05
 
 ### iOS — privacy manifest accepted by Apple's stricter validator
