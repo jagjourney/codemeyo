@@ -27,6 +27,12 @@ To release:
 
 ---
 
+## [1.10.35] - 2026-05-09
+
+### macOS — App Store subscriptions, no more browser redirects
+
+- The Mac App Store version of CodeMeYo now uses StoreKit for the Pro subscription instead of opening the browser to codemeyo.com. The Subscribe to Pro button under Remote PC Code, the Manage Credits link, the Account dashboard's Open Dashboard / Manage Billing / Pair with Phone shortcuts, the Create Account footer in the sign-in modal, the Upgrade button in the pairing view, and the auto-update banner all now route through the in-app StoreKit purchase flow on macOS — same flow already shipped on iOS. The StoreKit card in Settings → Subscription & Billing shows Subscribe Monthly, Subscribe Yearly, Restore Purchases, and Manage Subscription with Terms of Use, Privacy Policy, and Apple Standard EULA links right next to the buttons. Standalone macOS DMG users get the same in-app StoreKit flow on macOS — credit packs and one-off purchases continue to work at codemeyo.com from any browser.
+
 ## [1.10.34] - 2026-05-06
 
 ### iOS — Apple's privacy manifest now actually accepted (real fix)
