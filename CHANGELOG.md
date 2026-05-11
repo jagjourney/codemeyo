@@ -27,6 +27,12 @@ To release:
 
 ---
 
+## [1.10.36] - 2026-05-11
+
+### macOS — fix crash on launch after maximize/resize (hotfix)
+
+- v1.10.35 crashed on macOS 26.4 Tahoe when the window's maximize button icon tried to keep itself in sync with the actual window state. The check fired on every resize event, and reading the maximized state on macOS internally triggered an AppKit title-bar rebuild that fired more resize events, recursing until the system layout engine ran out of memory and the app aborted. The icon now updates from the button click itself instead of polling — no more crash, same Restore-icon-when-maximized behaviour.
+
 ## [1.10.35] - 2026-05-09
 
 ### macOS — App Store subscriptions, no more browser redirects
