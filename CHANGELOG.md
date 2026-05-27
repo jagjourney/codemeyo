@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.10.39] - 2026-05-27
+
+### Remote PC Code — stable QR pairing
+
+- Fixed desktop QR pairing so the pair code stays stable instead of regenerating repeatedly.
+- Removed noisy pairing debug output from the app console.
+- Browser helper version now matches the app release version for this fix.
+
 ## [1.10.38] - 2026-05-27
 
 ### Remote PC Code — phone pairing hotfix
