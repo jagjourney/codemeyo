@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.10.38] - 2026-05-27
+
+### Remote PC Code — phone pairing hotfix
+
+- Fixed phone-to-desktop pairing from the desktop app so the secure relay channel can finish connecting after the QR code is created.
+- The desktop pairing screen now opens on the QR view first, making the phone scan flow the default path.
+- Browser helper version now matches the app hotfix release version.
+
 ## [1.10.37] - 2026-05-27
 
 ### Remote PC Code — TestFlight and internal testing release
