@@ -27,6 +27,14 @@ To release:
 
 ---
 
+## [1.10.37] - 2026-05-27
+
+### Remote PC Code — TestFlight and internal testing release
+
+- Remote PC Code is ready for TestFlight and internal testing with live phone-to-desktop pairing enabled.
+- Improved reliability for starting a remote control session from the phone app and connecting it to the signed-in desktop app.
+- Browser helper version now matches the app release version for this test cycle.
+
 ## [1.10.36] - 2026-05-11
 
 ### macOS — fix crash on launch after maximize/resize (hotfix)
