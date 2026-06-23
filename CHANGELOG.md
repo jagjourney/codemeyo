@@ -27,6 +27,13 @@ To release:
 
 ---
 
+## [1.10.44] - 2026-06-23
+
+### Android - pair links open the app reliably
+
+- Fixed Android pair links so scanning or tapping a CodeMeYo pairing link can open the installed app directly instead of staying on the website.
+- The manual pair-code fallback still remains available when the app is not installed.
+
 ## [1.10.39] - 2026-05-27
 
 ### Remote PC Code — stable QR pairing
