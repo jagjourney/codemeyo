@@ -27,6 +27,36 @@ To release:
 
 ---
 
+## [1.10.47] - 2026-08-15
+
+### Sign-in and project path
+
+- JagAI now asks you to sign in when you are signed out, instead of failing with a generic error.
+- SideKick and the activity-log Run action now use the project you have open.
+
+### Remote PC Code
+
+- Pairing still sends messages live between your phone and desktop. Diagnostic logs no longer keep the text of those messages or tool output.
+
+### Usage
+
+- Signed-in usage sharing now records app opens, how long the app stayed open, and how long each run took. It still never sends what you type.
+
+## [1.10.46] - 2026-08-15
+
+### Sign-in and project path
+
+- JagAI now asks you to sign in when you are signed out, instead of failing with a generic error.
+- SideKick and the activity-log Run action now use the project you have open.
+
+### Remote PC Code
+
+- Pairing still sends messages live between your phone and desktop. Diagnostic logs no longer keep the text of those messages or tool output.
+
+## [1.10.45] - 2026-08-15
+
+- Same user-facing changes as 1.10.46. Download 1.10.46.
+
 ## [1.10.44] - 2026-06-23
 
 ### Android - pair links open the app reliably
