@@ -29,6 +29,15 @@ To release:
 
 ## Unreleased
 
+## [1.10.50] - 2026-08-16
+
+### Current models in Settings
+
+- The model picker now lists the current Claude, OpenAI, Grok, Gemini, DeepSeek, Mistral, and Groq models as of August 16, 2026, including speeds and prices.
+- New defaults: Claude Sonnet 5, Grok 4.6, GPT-5.6 Terra, Gemini 3.7 Flash.
+- JagAI credit tiers now route those current models (Opus 5, GPT-5.6 Sol, Grok 4.6, and the matching Nova and Spark picks).
+- Groq no longer offers the Llama 3.1 / 3.3 IDs that shut down today. Use GPT-OSS or Qwen 3.6 instead.
+
 ## [1.10.49] - 2026-08-16
 
 ### Claude, Codex, and Grok without API keys
