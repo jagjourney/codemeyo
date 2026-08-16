@@ -27,6 +27,30 @@ To release:
 
 ---
 
+## Unreleased
+
+## [1.10.49] - 2026-08-16
+
+### Claude, Codex, and Grok without API keys
+
+- Sign in with the official Claude Code, Codex, or Grok CLI from Settings. Those use your existing subscriptions, so you do not need to paste vendor API keys.
+- Claude and Grok still accept a pasted key if you prefer that path.
+- On Windows, Connect starts the official Claude and Grok clients instead of failing on the npm wrapper.
+- After you authorize Grok in the browser, Settings shows signed in. It no longer stays stuck on sign-in required.
+
+## [1.10.48] - 2026-08-15
+
+### Account
+
+- You can create a CodeMeYo account or sign in from the Account tab. Signing in is optional if you use your own API keys.
+- After you sign in, this device is listed on your account so you can see it on the website.
+- The Account tab now shows JagAI credits, your plan, monthly support, and signed-in devices.
+
+### Credits and support
+
+- Buy JagAI credit packs from the Account tab on desktop. Checkout opens in your browser and credits return after you refresh.
+- Once a day, CodeMeYo can ask you to support the project on the website. Monthly support of $3 to $9,999 turns off that reminder for 30 days. It does not add JagAI credits.
+
 ## [1.10.47] - 2026-08-15
 
 ### Sign-in and project path
