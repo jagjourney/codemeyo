@@ -12,7 +12,7 @@ CodeMeYo gives you **three ways to access the world's best coding models**:
 
 - **It actually codes.** Give it a task and it reads your codebase, writes/edits files, installs deps, runs tests, fixes failures, commits, and pushes. Autonomously.
 - **One app, every top model.** Pick one, rotate between them, or run them in parallel.
-- **No API keys required (with JagAI).** Sign in to codemeyo.com, buy credits, and use Claude Opus 4.7, GPT-5.5, Grok 4.20, Gemini 3.1 Pro, DeepSeek V4, and Mistral with one balance. Three credit tiers (Spark / Nova / Apex) so cheap models cost less and flagships cost more.
+- **No API keys required (with JagAI).** Sign in to codemeyo.com, buy credits, and use Claude Opus 5, GPT-5.6, Grok 4.6, Gemini 3.7 Flash, DeepSeek V4, and Mistral with one balance. Three credit tiers (Spark / Nova / Apex) so cheap models cost less and flagships cost more.
 - **Or use what you already have.** SideKick mode pipes your Claude Pro/Max subscription straight into the agent — no extra spend.
 - **Conversation mode.** Chat with multiple AIs simultaneously in an interactive roundtable. You steer the discussion, @mention specific AIs, then hand off to execution.
 - **Deep Think mode.** Send the same hard problem to multiple AIs, watch them debate each other's proposals, and synthesize a unified plan that's stronger than any one model alone.
@@ -30,20 +30,20 @@ CodeMeYo always tracks the latest flagship from every major provider. Current li
 
 | Provider | Recent flagships | Other tiers |
 |---|---|---|
-| **Claude** (Anthropic) | Opus 4.7, Opus 4.6 | Sonnet 4.6 (balanced), Haiku 4.5 (fast) |
-| **OpenAI** (GPT) | GPT-5.5, GPT-5.4 | GPT-5.4 Mini, GPT-5.4 Nano, GPT-4.1, o3 |
-| **Grok** (xAI) | Grok 4.20, Grok 4.20 Multi-Agent | Grok 4.20 Reasoning, Grok 4.1 Fast |
-| **Gemini** (Google) | Gemini 3.1 Pro, Gemini 3 Flash | Gemini 3.1 Flash-Lite, 2.5 Pro / Flash / Flash-Lite |
-| **DeepSeek** | DeepSeek V4 Pro | V4 Flash, Chat, Reasoner |
-| **Mistral** | Mistral Large 3, Devstral 2 | Mistral Small 4, Medium 3.1, Codestral, Ministral 3B |
-| **Groq** (fast inference) | GPT-OSS 120B, Llama 4 Scout | Qwen3 32B, Llama 3.3 70B, Llama 3.1 8B |
+| **Claude** (Anthropic) | Fable 5, Opus 5 | Sonnet 5 (balanced), Haiku 4.5 (fast) |
+| **OpenAI** (GPT) | GPT-5.6 Sol, GPT-5.5 | GPT-5.6 Terra, GPT-5.6 Luna, GPT-5.4, GPT-5.3 Codex |
+| **Grok** (xAI) | Grok 4.6, Grok 4.5 | Grok 4.3, Grok Build 0.1, Grok 4.20 family |
+| **Gemini** (Google) | Gemini 3.7 Flash, Gemini 3.1 Pro | Gemini 3.6 / 3.5 Flash, 3.5 Flash-Lite, 2.5 Pro |
+| **DeepSeek** | DeepSeek V4 Pro | V4 Flash |
+| **Mistral** | Mistral Medium 3.5, Large 3 | Small 4, Devstral 2, Codestral, Ministral 3B |
+| **Groq** (fast inference) | GPT-OSS 120B (~500 tok/s) | GPT-OSS 20B (~1000 tok/s), Qwen 3.6 27B, Compound |
 | **Ollama** (local) | Auto-detects every model you've installed | Free — runs on your hardware |
 
 ### JagAI — one balance, every model
 
 Don't want to manage seven API keys? Pair CodeMeYo with **JagAI** at [codemeyo.com/dashboard/credits](https://codemeyo.com/dashboard/credits):
 
-- **One balance, every top model.** Apex tier (Claude Opus 4.7, GPT-5.5, Grok 4.20 Multi-Agent, Gemini 3.1 Pro, DeepSeek V4 Pro). Nova tier (Sonnet 4.6, GPT-5.4 Mini, Grok 4.20, Gemini 2.5 Pro). Spark tier (Haiku 4.5, GPT-5.4 Nano, Grok 4.1 Fast, Gemini 2.5 Flash-Lite, DeepSeek V4 Flash).
+- **One balance, every top model.** Apex tier (Claude Opus 5, GPT-5.6 Sol, Grok 4.6, Gemini 3.1 Pro, DeepSeek V4 Pro). Nova tier (Sonnet 5, GPT-5.6 Terra, Grok 4.5, Gemini 3.7 Flash). Spark tier (Haiku 4.5, GPT-5.6 Luna, Grok Build 0.1, Gemini 3.5 Flash-Lite, DeepSeek V4 Flash).
 - **Pay only for what you use.** 1 credit = $0.01. Spark = 5 credits / 1K tokens, Nova = 25, Apex = 100. No subscriptions.
 - **Multi-agent flows just work.** Pick JagAI in Deep Think, Consensus, or Round Robin and CodeMeYo automatically fans out to whichever upstream models are configured. No need to wire up multiple direct keys.
 - **Credits expire 360 days from purchase if unused** (oldest used first). Honest in-app expiration warnings — no surprise burn.
