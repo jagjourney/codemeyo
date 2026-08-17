@@ -29,6 +29,14 @@ To release:
 
 ## Unreleased
 
+## [1.10.54] - 2026-08-17
+
+### Official Claude, Codex, and Grok
+
+- Those three official apps need a signed-in CodeMeYo account and monthly support of $3 to $9,999. One-time gifts do not unlock them.
+- JagAI credits and pasted API keys still work if you are signed out or not a monthly supporter.
+- Turning off usage sharing does not close a paid monthly window.
+
 ## [1.10.53] - 2026-08-17
 
 ### Easier to find things
