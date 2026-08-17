@@ -160,9 +160,9 @@ Already paying Anthropic for Claude Pro or Max? **SideKick mode** uses your exis
 
 Download the latest release for your platform:
 
-- **Windows:** [.exe installer](https://github.com/jagjourney/codemeyo/releases/latest)
-- **macOS:** [.dmg](https://github.com/jagjourney/codemeyo/releases/latest)
-- **Linux:** [.deb / .AppImage / .rpm](https://github.com/jagjourney/codemeyo/releases/latest)
+- **Windows:** [codemeyo.com/download/windows](https://codemeyo.com/download/windows)
+- **macOS:** [codemeyo.com/download/macos](https://codemeyo.com/download/macos)
+- **Linux:** [codemeyo.com/download/linux](https://codemeyo.com/download/linux)
 - **iOS / Android:** Coming soon — pair your phone with your desktop today as the next-best thing.
 
 Auto-updates are built in — the app checks for new versions on launch.
