@@ -29,6 +29,13 @@ To release:
 
 ## Unreleased
 
+## [1.10.51] - 2026-08-16
+
+### Sending a message no longer closes the Windows app
+
+- Sending a Chat message could close CodeMeYo on Windows. The window now stays open.
+- If Claude or Grok is selected without an API key and without a connected official CLI, you get a Settings message instead of a blank crash.
+
 ## [1.10.50] - 2026-08-16
 
 ### Current models in Settings
