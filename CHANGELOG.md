@@ -29,6 +29,12 @@ To release:
 
 ## Unreleased
 
+## [1.10.57] - 2026-08-17
+
+### Improvements and bug fixes
+
+- Reliability and polish.
+
 ## [1.10.56] - 2026-08-17
 
 ### Updates from the CodeMeYo site
