@@ -29,6 +29,14 @@ To release:
 
 ## Unreleased
 
+## [1.10.52] - 2026-08-17
+
+### Claude, Codex, and Grok subscriptions
+
+- Settings now finds the official Claude, Codex, and Grok apps in their normal install folders, even when Windows does not put them on PATH.
+- Grok subscription chats no longer fail or stop mid-reply. SuperGrok / grok.com serves Grok 4.6 and 4.5; older Grok IDs still need an API key.
+- Longer JagAI replies no longer cut off mid-sentence.
+
 ## [1.10.51] - 2026-08-16
 
 ### Sending a message no longer closes the Windows app
