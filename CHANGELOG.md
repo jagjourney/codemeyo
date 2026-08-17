@@ -29,6 +29,18 @@ To release:
 
 ## Unreleased
 
+## [1.10.59] - 2026-08-17
+
+### Bug reports fixed and Improvements made
+
+- The in-app Changelog now loads from the CodeMeYo site.
+
+## [1.10.58] - 2026-08-17
+
+### Models
+
+- Subscription chips now say Claude Code Sub, Codex Sub, and Grok Sub, each with its own color. API chips say Claude API, Grok API, and the other vendor keys.
+
 ## [1.10.57] - 2026-08-17
 
 ### Improvements and bug fixes
