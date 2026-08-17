@@ -29,6 +29,27 @@ To release:
 
 ## Unreleased
 
+## [1.10.53] - 2026-08-17
+
+### Easier to find things
+
+- The left rail groups Work, You, and Settings. You can expand it for labels or collapse it to icons, and hide the side panel.
+- The title bar now shows the version, the active model, Chat or Code, and the strategy.
+- Settings uses tabs: Subscriptions, API keys, Agent, Privacy, Look, Help, and Changelog.
+
+### Subscriptions and API keys are separate
+
+- Subscriptions is Claude Code, Codex, Grok, and JagAI. API keys is the pasted-key path. Claude Code no longer appears twice.
+
+### Extra tools
+
+- MCP is now Extra tools. Start only what you need. Search, filter On or Off, and see a short description instead of a long command list.
+
+### Updates and activity
+
+- Changelog search sits next to Check for update. You can also check every 30 minutes from Privacy.
+- While the agent works, an Activity drawer shows live status and you can collapse it.
+
 ## [1.10.52] - 2026-08-17
 
 ### Claude, Codex, and Grok subscriptions
