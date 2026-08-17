@@ -29,6 +29,29 @@ To release:
 
 ## Unreleased
 
+## [1.10.56] - 2026-08-17
+
+### Updates from the CodeMeYo site
+
+- In-app updates come from this site. Signed-in installs check every 30 minutes and can update in place.
+- Release notes come from the public changelog on this site.
+
+### Billing and usage
+
+- Settings, You, Billing shows monthly support, gifts, and a Pay by Jag checkout for monthly or one-time gifts.
+- Usage totals are sent to your account journey when usage sharing is on.
+
+## [1.10.55] - 2026-08-17
+
+### Downloads from CodeMeYo
+
+- Installers now come from the CodeMeYo site. If you are not signed in, leave your email once so we can send product notes.
+- Signed-in accounts get in-app updates. Without an account, CodeMeYo tells you a build is out and sends you to the site to download it.
+
+### Version and build
+
+- The app now shows the marketing version and a Build number, the same way our other desktop apps do.
+
 ## [1.10.54] - 2026-08-17
 
 ### Official Claude, Codex, and Grok
