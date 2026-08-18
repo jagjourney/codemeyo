@@ -29,6 +29,17 @@ To release:
 
 ## Unreleased
 
+## [1.10.60] - 2026-08-17
+
+### Support
+
+- Official help is only available when usage sharing and crash reports are both on. If either is off, use GitHub issues.
+
+### Remote
+
+- Monthly support of $3 to $9,999 now unlocks phone-to-desktop pairing, the same as Pro. One-time gifts still do not.
+- Phone apps can scan the desktop QR, see live tasks, and join the conversation from anywhere. Android now asks for camera permission so the scanner can open.
+
 ## [1.10.59] - 2026-08-17
 
 ### Bug reports fixed and Improvements made
