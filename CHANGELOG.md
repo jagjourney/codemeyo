@@ -29,6 +29,12 @@ To release:
 
 ## Unreleased
 
+## [1.10.61] - 2026-08-18
+
+### Added
+
+- Account User's Journey shows screens, buttons, IPs, and site pages for this account. Unsigned use is stored as guest and attaches after sign-in. Passwords and prompts are never stored.
+
 ## [1.10.60] - 2026-08-17
 
 ### Support
