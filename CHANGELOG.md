@@ -29,6 +29,16 @@ To release:
 
 ## Unreleased
 
+### Fixed
+
+- On Apple, Account Plan now shows App Store subscribe buttons, prices, length, Terms of Use, and Privacy Policy. Play Store wording is gone from Apple builds.
+
+## [1.11.0] - 2026-08-19
+
+### Added
+
+- Right-hand Activity bar now has a Subagents tab. Set workers from 1 (main agent only) up to the max for the active provider. Extra workers are billed as more model usage and show live while they run.
+
 ## [1.10.61] - 2026-08-18
 
 ### Added
