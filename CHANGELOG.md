@@ -4,6 +4,13 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [1.11.2] - 2026-08-25
+
+### Improved
+
+- Signed-in users can now find Delete Account directly under Account > Privacy.
+- Account deletion now signs out every device immediately and clearly explains permanent deletion timing and App Store subscription handling.
+
 ## [1.11.1] - 2026-08-23
 
 ### Added
