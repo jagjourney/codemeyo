@@ -4,6 +4,12 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [1.11.4] - 2026-08-26
+
+### Fixed
+
+- On Apple, Settings billing no longer shows a greyed-out Use the App Store on Apple button. Subscribe Monthly and Subscribe Yearly remain the working App Store purchase buttons.
+
 ## [1.11.3] - 2026-08-26
 
 ### Added
