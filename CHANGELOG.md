@@ -4,6 +4,18 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [1.11.3] - 2026-08-26
+
+### Added
+
+- Paste, pick, or drag documents, spreadsheets, presentations, source files, archives, images, and other files into Chat or Code mode.
+- File attachments now stay with saved and forked conversations.
+
+### Improved
+
+- CodeMeYo extracts readable file content for every model and keeps original files available to tool-capable coding agents for deeper inspection.
+- Images keep their real file type when sent to vision-capable models.
+
 ## [1.11.2] - 2026-08-25
 
 ### Improved
