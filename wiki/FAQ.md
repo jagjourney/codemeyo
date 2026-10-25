@@ -8,7 +8,7 @@ Short answers. For deeper dives, follow the links.
 
 **The app is free.** Desktop and mobile. Download, install, use forever with your own LLM API keys. No paywalls on local-only features.
 
-**Pro is not free and not shipped yet.** When Pro launches (target v2.0.0), it'll be sold exclusively through Apple App Store + Google Play — no web subscription. Pro unlocks Remote PC Code + cross-device conversation sync.
+**Pro is paid.** On Apple builds, Subscribe Monthly and Subscribe Yearly are StoreKit. On the web, checkout is Pay by Jag. Android in-app Play Billing is not in the client yet. Remote PC Code is live for Pro, Team, or monthly support. Cross-device conversation sync is not built; do not expect it.
 
 **Donations are welcome** at [codemeyo.com/donate](https://codemeyo.com/donate). Not required, genuinely appreciated. See [Donations](Donations).
 
@@ -59,7 +59,7 @@ See [LLM Providers](LLM-Providers) for the per-provider walkthrough.
 - LLM requests go directly from the app to the provider over HTTPS. We are never the middleman.
 - Your code, prompts, and LLM responses never touch codemeyo.com.
 
-The only thing we see is account metadata (email, device names, plan) and — if you opt in — anonymized LLM call counts (just `{provider, model, at}`, no content).
+The only thing we see is account metadata (email, device names, plan) and - if you opt in - anonymized LLM call counts (just `{provider, model, at}`, no content).
 
 Full policy at [codemeyo.com/privacy](https://codemeyo.com/privacy).
 
@@ -83,9 +83,9 @@ See [Getting Started](Getting-Started#system-requirements) for minimums.
 
 **The app runs offline.** Full editor, file explorer, git, terminal.
 
-**Cloud LLMs need internet** — Claude, GPT, Grok, Gemini, DeepSeek, Mistral, Groq all require an internet connection to hit their APIs.
+**Cloud LLMs need internet** - Claude, GPT, Grok, Gemini, DeepSeek, Mistral, Groq all require an internet connection to hit their APIs.
 
-**Ollama is fully local** — install a model locally and you can work entirely offline with no LLM API keys. See [LLM Providers → Ollama](LLM-Providers#7-ollama-local-models).
+**Ollama is fully local** - install a model locally and you can work entirely offline with no LLM API keys. See [LLM Providers → Ollama](LLM-Providers#7-ollama-local-models).
 
 ---
 
@@ -93,27 +93,27 @@ See [Getting Started](Getting-Started#system-requirements) for minimums.
 
 A multi-LLM strategy: all your enabled providers analyze your task in parallel, critique each other, and synthesize a single answer.
 
-Great for hard problems where you want multiple perspectives. Expensive — uses 3-4× the tokens of Single. See [Deep Think](Deep-Think).
+Great for hard problems where you want multiple perspectives. Expensive - uses 3-4× the tokens of Single. See [Deep Think](Deep-Think).
 
 ---
 
 ### What is MCP?
 
-**Model Context Protocol** — an open JSON-RPC standard for connecting AI agents to external tools and data sources. CodeMeYo is a reference-quality MCP client and works with any spec-compliant server.
+**Model Context Protocol** - an open JSON-RPC standard for connecting AI agents to external tools and data sources. CodeMeYo is a reference-quality MCP client and works with any spec-compliant server.
 
-Optional — CodeMeYo works fully without any MCP servers. Useful if you want the agent to hit databases, APIs, GitHub, Slack, etc. See [MCP Servers](MCP-Servers).
+Optional - CodeMeYo works fully without any MCP servers. Useful if you want the agent to hit databases, APIs, GitHub, Slack, etc. See [MCP Servers](MCP-Servers).
 
 ---
 
 ### How is CodeMeYo different from Claude Code or Cursor?
 
-- **It acts, not advises.** The agent loop reads your codebase, writes files, runs builds, fixes errors, and commits — no suggestion-and-accept step.
+- **It acts, not advises.** The agent loop reads your codebase, writes files, runs builds, fixes errors, and commits - no suggestion-and-accept step.
 - **8 providers in one app.** Switch between Claude / GPT / Grok / Gemini / DeepSeek / Mistral / Groq / Ollama freely, or use Deep Think to have all of them debate.
 - **Native desktop + mobile app.** Not a VS Code extension. Native binaries on Windows, macOS, Linux, iOS, Android.
 - **Full MCP support.** Extend with any MCP-compatible server.
-- **BYOK.** You pay the LLM providers directly — no markup, no monthly app fee (until Pro launches and that's just for Remote PC Code).
+- **BYOK.** You pay the LLM providers directly - no markup, no monthly app fee (until Pro launches and that's just for Remote PC Code).
 
-See `docs/CODEMEYO_VS_CLAUDE_DESKTOP.md` for the full feature comparison (internal-planning doc, pulled highlights into the Browser Debug Guide and Architecture pages).
+See `docs/01-product/CODEMEYO_VS_CLAUDE_DESKTOP.md` for the full feature comparison (internal-planning doc, pulled highlights into the Browser Debug Guide and Architecture pages).
 
 ---
 
@@ -159,7 +159,7 @@ Your old data directory stays on disk (unused) until you delete it. See [Configu
 
 1. App periodically hits `GET /api/v1/updater/latest/{platform}-{arch}` with your Sanctum bearer token.
 2. If a newer version exists, prompts you with release notes.
-3. Click **Install** — downloads signed archive, verifies signature, replaces binary, restarts.
+3. Click **Install** - downloads signed archive, verifies signature, replaces binary, restarts.
 
 Signed-in only. Guests see "Sign in for updates". See [Auto-Updater](Auto-Updater).
 
@@ -185,11 +185,11 @@ For free local inference: use **Ollama** with an open-weight model.
 
 ---
 
-### Why is Remote PC Code "Coming Soon"?
+### Is Remote PC Code live?
 
-Because it's not shipped yet. The Remote tab in the sidebar shows a teaser while we finish the pairing WebSocket + UI. When it opens up, it'll be a Pro feature (Apple IAP + Google Play only).
+Yes. Sign in on desktop and phone. Desktop needs Pro, Team, or monthly support. Open Remote, scan or type the 6-digit code. One-time gifts do not unlock it.
 
-Sign in with a free account now to be in the early-access queue. See [Roadmap → Remote PC Code](Roadmap#remote-pc-code--pro-launch) and [Mobile App → Remote PC Code](Mobile-App#remote-pc-code).
+Session length, physical-device proof, and shared conversation join are still being finished. See [Roadmap](Roadmap).
 
 ---
 
@@ -201,11 +201,10 @@ No. Source is closed. We may publish specific pieces separately in the future (e
 
 ### Where do I get help?
 
-- [Troubleshooting](Troubleshooting) — common issues + fixes.
-- [GitHub Issues](https://github.com/jagjourney/codemeyo/issues) — bug reports.
-- `support@jagjourney.com` — private reports.
-- `security@jagjourney.com` — security disclosures.
-- [Donate](https://codemeyo.com/donate) — buy us coffee, we'll keep shipping.
+- [Troubleshooting](Troubleshooting) - common issues + fixes.
+- [GitHub Issues](https://github.com/jagjourney/codemeyo/issues) - bug reports.
+- [codemeyo.com/contact](https://codemeyo.com/contact) - private reports and security disclosures.
+- [Donate](https://codemeyo.com/donate) - monthly support also unlocks Remote PC Code.
 
 ---
 
