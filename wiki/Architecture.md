@@ -278,7 +278,7 @@ React → Rust via Tauri's `invoke("command_name", {args})`. Rust → React via 
 
 ### Laravel 12 + Filament v5
 
-Hosted on s1 behind Cloudflare (see `docs/PLAN_PHASE7_SAAS_PLATFORM.md`).
+Hosted on s1 behind Cloudflare (see `docs/99-archive/PLAN_PHASE7_SAAS_PLATFORM.md`).
 
 | Component | Purpose |
 |---|---|
