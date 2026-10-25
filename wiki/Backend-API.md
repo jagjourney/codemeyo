@@ -20,9 +20,9 @@ Authorization: Bearer <token>
 
 **Three ways to get a token:**
 
-1. **Device-code flow (used by the app itself)** — `POST /auth/device/code` → poll `POST /auth/device/token`. See [Account System → Device-code login](Account-System#device-code-login).
-2. **Email + password** — `POST /auth/login` with `{"email": ..., "password": ...}`. For direct clients only; the in-app UI uses device-code.
-3. **Dashboard-generated token** — sign in at [codemeyo.com/dashboard/tokens](https://codemeyo.com/dashboard/tokens), click **New token**. Long-lived, revocable. Best for scripts and CI.
+1. **Device-code flow (used by the app itself)** - `POST /auth/device/code` → poll `POST /auth/device/token`. See [Account System → Device-code login](Account-System#device-code-login).
+2. **Email + password** - `POST /auth/login` with `{"email": ..., "password": ...}`. For direct clients only; the in-app UI uses device-code.
+3. **Dashboard-generated token** - sign in at [codemeyo.com/dashboard/tokens](https://codemeyo.com/dashboard/tokens), click **New token**. Long-lived, revocable. Best for scripts and CI.
 
 Token scopes (when creating via the dashboard): `read` (default), `write`, `admin` (admin users only). Tokens without a scope act as `read`.
 
@@ -107,9 +107,9 @@ Poll for the device token. Call every `interval` seconds (respect the `slow_down
 Responses:
 
 - `200 OK` with `{ "access_token": "...", "user": {...} }` once the user has approved in the browser.
-- `428 authorization_pending` — keep polling.
-- `429 slow_down` — double your poll interval.
-- `410 expired_token` — start over.
+- `428 authorization_pending` - keep polling.
+- `429 slow_down` - double your poll interval.
+- `410 expired_token` - start over.
 
 ### Webhooks (signature-verified, no bearer token)
 
@@ -119,7 +119,7 @@ Responses:
 | `POST /iap/apple/notify` | Apple App Store Server Notifications V2 | Full ES256 JWS + Apple Root CA G3 pinning |
 | `POST /iap/google/notify` | Google Play RTDN | RS256 JWT + JWKS cache + Pub/Sub account match |
 
-Apple + Google verification was hardened in v1.9.0 — see the Security section of the [Release Notes](Release-Notes#190).
+Apple + Google verification was hardened in v1.9.0 - see the Security section of the [Release Notes](Release-Notes#190).
 
 Note: the **donation** Stripe webhook lives at `/api/webhooks/stripe` (outside `/api/v1/*` for historical reasons). Register that URL in Stripe. The `/api/v1/stripe/webhook` endpoint handles subscription events (not currently used since Pro is app-store-only).
 
@@ -154,7 +154,7 @@ Revokes the current token. Other tokens stay valid.
 
 ### `GET /entitlements`
 
-Returns the user's current entitlements — what Pro features they have, where they came from (Stripe web / Apple IAP / Google Play Billing), expiry timestamps. Used by the app to cache plan state for 24h offline.
+Returns the user's current entitlements - what Pro features they have, where they came from (Stripe web / Apple IAP / Google Play Billing), expiry timestamps. Used by the app to cache plan state for 24h offline.
 
 ```json
 {
@@ -189,7 +189,7 @@ List registered devices and revoke them. Users can also manage devices from [/da
 
 ### `POST /pair/initiate` · `POST /pair/complete`
 
-The pairing flow for Remote PC Code. Generates a short code on desktop, completes the pair on mobile. Currently gated — the `/pair/*` endpoints exist server-side but the desktop/mobile UI is behind the "Coming Soon" teaser (see [Mobile App → Remote PC Code](Mobile-App#remote-pc-code)).
+The pairing flow for Remote PC Code. Desktop mints a 6-digit code. Phone completes it. UI is live. Remaining session-TTL and device-proof work is on the operator build-out plan, not a Coming Soon teaser.
 
 ### `POST /usage/events`
 
@@ -204,7 +204,7 @@ Opt-in telemetry. Ping when the user triggers an LLM call so we can measure whic
 }
 ```
 
-**Never sends prompts, responses, tokens consumed, code, or API keys.** Just `{provider, model, at}`. Off by default — users opt in at Settings → Privacy.
+**Never sends prompts, responses, tokens consumed, code, or API keys.** Just `{provider, model, at}`. Off by default - users opt in at Settings → Privacy.
 
 ### `GET /usage/summary`
 
@@ -235,7 +235,7 @@ Returns a Tauri-compatible `latest.json` document:
 }
 ```
 
-Signed-in Free + Pro users both get this. Guests (unauthenticated) get a 401 — by design, see [Auto-Updater](Auto-Updater). Gated behind the `auto_updater` feature flag (always on in production, toggle-off-able for emergency ops).
+Signed-in Free + Pro users both get this. Guests (unauthenticated) get a 401 - by design, see [Auto-Updater](Auto-Updater). Gated behind the `auto_updater` feature flag (always on in production, toggle-off-able for emergency ops).
 
 ### `GET /announcements`
 
@@ -268,7 +268,7 @@ Common codes:
 | `feature_disabled` | 503 | Feature flag is off |
 | `rate_limited` | 429 | Throttle exceeded |
 | `not_found` | 404 | Resource doesn't exist |
-| `server_error` | 500 | Something broke on our side — retry with backoff |
+| `server_error` | 500 | Something broke on our side - retry with backoff |
 
 ---
 
@@ -293,17 +293,17 @@ oapi-codegen -package codemeyo https://codemeyo.com/api/v1/openapi.json > codeme
 
 Route definitions live in:
 
-- `website-app/routes/api.php` — all `/api/v1/*` routes
-- `website-app/app/Http/Controllers/Api/V1/*` — controller classes
-- `website-app/app/Http/Controllers/Api/V1/OpenApiController.php` — spec generator
+- `website-app/routes/api.php` - all `/api/v1/*` routes
+- `website-app/app/Http/Controllers/Api/V1/*` - controller classes
+- `website-app/app/Http/Controllers/Api/V1/OpenApiController.php` - spec generator
 
-The `/api/v1/openapi.json` response is programmatically generated from the route list + Laravel request validation rules + controller docblocks — don't hand-write the spec.
+The `/api/v1/openapi.json` response is programmatically generated from the route list + Laravel request validation rules + controller docblocks - don't hand-write the spec.
 
 ---
 
 ## Related pages
 
-- [Account System](Account-System) — registration, device-code login, 2FA.
-- [Auto-Updater](Auto-Updater) — how the desktop app consumes `/updater/latest`.
-- [Admin Panel](Admin-Panel) — the Filament UI that drives announcements, entitlements, feature flags.
-- [Donations](Donations) — Stripe webhook details.
+- [Account System](Account-System) - registration, device-code login, 2FA.
+- [Auto-Updater](Auto-Updater) - how the desktop app consumes `/updater/latest`.
+- [Admin Panel](Admin-Panel) - the Filament UI that drives announcements, entitlements, feature flags.
+- [Donations](Donations) - Stripe webhook details.
