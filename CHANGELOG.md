@@ -4,6 +4,39 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [1.11.10] - 2026-10-25
+
+- Brings every 1.11.9 improvement to Mac and Android.
+- Reliability polish for Google Play subscriptions on Android.
+
+## [1.11.9] - 2026-10-25
+
+- JagAI credit packs can be bought through the App Store on iPhone, iPad, and Mac.
+- App Store purchases finish only after your credits or Pro are on your account, so an interrupted purchase is delivered when you retry.
+- Closing or switching away from a file comparison in the code editor no longer causes an error.
+- Usage reports from installs that use your own provider API key upload again instead of retrying over and over.
+- Error reports now say what kind of problem stopped an agent task, such as sign-in, credits, network, or an unavailable model, without sending your message.
+- Agent errors are no longer reported as phone remote errors when no phone is connected.
+- Improved stability on Android when the app window closes in the background.
+
+## [1.11.8] - 2026-10-02
+
+- Improved Google Play subscription compatibility on Android.
+
+## [1.11.7] - 2026-10-02
+
+- Reliability polish for Google Play subscriptions.
+
+## [1.11.6] - 2026-10-02
+
+- A paired phone stays connected for 12 hours. The pair code itself still expires after 5 minutes.
+- Phone remote shows the desktop chat as it streams, including the current task, token counts, and file changes, and reconnects after a drop.
+- Subscribe and billing pages only offer plans that are actually for sale, and they no longer promise synced conversations or a remote that is not offered.
+
+## [1.11.5] - 2026-10-02
+
+- Reliability polish for sign-in, sessions, and error reports.
+
 ## [1.11.4] - 2026-08-26
 
 ### Fixed
