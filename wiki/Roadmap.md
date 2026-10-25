@@ -1,6 +1,6 @@
 # Roadmap
 
-What we're working on. Nothing here has a ship date — this is intent, not a commitment.
+Operator source of truth for what is still owed: `docs/05-active/build-out-plan.md`. This wiki page is historical intent and is wrong on Remote (the app tab is live; site copy and phone proof are not).
 
 For what's already shipped see [Release Notes](Release-Notes) and [Home → What's new](Home#whats-new-in-v19x).
 
@@ -8,16 +8,16 @@ For what's already shipped see [Release Notes](Release-Notes) and [Home → What
 
 ## Near-term (the next few months)
 
-### Remote PC Code — Pro launch
+### Remote PC Code - Pro launch
 
 The headline feature for mobile and the reason Pro exists. Pair your phone with your desktop, drive your coding agent from anywhere.
 
-**Current state:** "Coming Soon" teaser in the Remote tab on both desktop and mobile (since v1.9.0). The pairing endpoints (`POST /api/v1/pair/initiate`, `POST /api/v1/pair/complete`) are built on the server side. The WebSocket transport + pairing UI is what we're still polishing.
+**Current state:** Remote tab and production Reverb relay are live. Remaining work is session TTL, physical iPhone/Android proof, and Codex/Claude-style conversation join. See `docs/05-active/build-out-plan.md` Phases 1 and 2.
 
 **When we flip the gate:**
 
 - Remote PC Code will be a **Pro** feature.
-- Sold **exclusively through Apple App Store IAP + Google Play Billing** — no web purchase path.
+- Sold **exclusively through Apple App Store IAP + Google Play Billing** - no web purchase path.
 - Free accounts keep all local-only features (they always will).
 
 Status: active development.
@@ -26,11 +26,11 @@ Status: active development.
 
 The `/subscribe` page at codemeyo.com already shows Apple + Google badges in place of Stripe Checkout (since v1.9.0). The actual IAP products are submitted for review. Once approved, Pro unlocks Remote PC Code + cross-device sync.
 
-Price at launch is set in `/admin/settings` → App Stores (IAP) — current plan is $12.99/mo or $119/yr on mobile, no web price. See `docs/PLAN_PHASE7_SAAS_PLATFORM.md` for the rationale.
+Price at launch is set in `/admin/settings` → App Stores (IAP) - current plan is $12.99/mo or $119/yr on mobile, no web price. See `docs/99-archive/PLAN_PHASE7_SAAS_PLATFORM.md` for the rationale.
 
 ### Sign in with Apple (web)
 
-Required by App Store Review Guideline 4.8 once the app offers any third-party login. Routes already stubbed in (`/auth/apple`, `/auth/apple/callback`) — inert until the `APPLE_SIGNIN_CLIENT_ID` / `SECRET` / `REDIRECT_URI` settings are populated.
+Required by App Store Review Guideline 4.8 once the app offers any third-party login. Routes already stubbed in (`/auth/apple`, `/auth/apple/callback`) - inert until the `APPLE_SIGNIN_CLIENT_ID` / `SECRET` / `REDIRECT_URI` settings are populated.
 
 Status: code done, credentials pending Apple Developer account setup.
 
@@ -40,9 +40,9 @@ Your chat history follows your account between desktop, iOS, and Android. Pro fe
 
 **What it'll look like:**
 
-- Opt in per conversation (not every chat gets synced — privacy).
+- Opt in per conversation (not every chat gets synced - privacy).
 - End-to-end encrypted with a key derived from your password (we literally can't read synced conversations; losing your password means losing your encrypted backups).
-- Last-write-wins resolution — no branch merging on the server side.
+- Last-write-wins resolution - no branch merging on the server side.
 
 Status: schema sketched. Implementation pending the Remote launch.
 
@@ -58,7 +58,7 @@ Status: design done, not started. Gated by feature flag `referral_credits` (curr
 
 ### MCP marketplace
 
-A browsable, search-able directory of MCP servers — free and paid, curated + community-submitted. Install with one click, creators get paid for paid servers, Jag Journey takes a small cut.
+A browsable, search-able directory of MCP servers - free and paid, curated + community-submitted. Install with one click, creators get paid for paid servers, Jag Journey takes a small cut.
 
 **How it ties together:**
 
@@ -79,7 +79,7 @@ Status: design done. Feature flag `usage_cost_alerts` exists (currently off).
 
 ### Export conversations
 
-Export any conversation as **Markdown**, **PDF**, or **JSON**. Already supported for Markdown / JSON since v0.1.7 or so — PDF and richer formatting are the remaining gap.
+Export any conversation as **Markdown**, **PDF**, or **JSON**. Already supported for Markdown / JSON since v0.1.7 or so - PDF and richer formatting are the remaining gap.
 
 Status: Markdown export is shipped. PDF pending.
 
@@ -101,16 +101,16 @@ Status: concept. Would require splitting the Rust core into a crate.
 
 Things we've talked about, no commitment yet:
 
-- **SSO for Team tier** — Google Workspace, Microsoft Entra, SAML. Needed once Team is a real tier.
-- **Team workspaces** — shared projects and conversations scoped to a team account.
-- **Admin impersonation** — log in as a user (with consent + audit log) to debug their issue. Filament supports this natively.
-- **Blog comments** — on `/blog/{slug}` posts. Gated by account.
-- **Code search across all projects** — one query, find hits across every project you've opened.
-- **Custom agent tools via MCP** — but scaffolded for non-developers with a GUI tool builder.
-- **Voice input** — dictate your task instead of typing. OS-level Whisper / Apple Dictation integration.
-- **Screen-share pairing** — Remote PC Code's sibling, but for live debugging with a remote teammate.
-- **Scheduled agent runs** — "Every Monday at 9am, check my CI for failures and propose fixes."
-- **Local model fine-tuning for Ollama** — one-button "teach Ollama about this codebase" workflow.
+- **SSO for Team tier** - Google Workspace, Microsoft Entra, SAML. Needed once Team is a real tier.
+- **Team workspaces** - shared projects and conversations scoped to a team account.
+- **Admin impersonation** - log in as a user (with consent + audit log) to debug their issue. Filament supports this natively.
+- **Blog comments** - on `/blog/{slug}` posts. Gated by account.
+- **Code search across all projects** - one query, find hits across every project you've opened.
+- **Custom agent tools via MCP** - but scaffolded for non-developers with a GUI tool builder.
+- **Voice input** - dictate your task instead of typing. OS-level Whisper / Apple Dictation integration.
+- **Screen-share pairing** - Remote PC Code's sibling, but for live debugging with a remote teammate.
+- **Scheduled agent runs** - "Every Monday at 9am, check my CI for failures and propose fixes."
+- **Local model fine-tuning for Ollama** - one-button "teach Ollama about this codebase" workflow.
 
 ---
 
@@ -118,10 +118,10 @@ Things we've talked about, no commitment yet:
 
 Being explicit about the un-roadmap too:
 
-- **Hosting LLMs ourselves.** BYOK only. Our servers never see your prompts — that's a core promise.
+- **Hosting LLMs ourselves.** BYOK only. Our servers never see your prompts - that's a core promise.
 - **An editor we build from scratch.** Monaco (the VS Code engine) already works and we're not in the code-editor business.
 - **A web app at codemeyo.com/app.** The desktop + mobile apps are the product. The website is marketing + account + API.
-- **Stripe subscriptions for Pro.** Intentionally removed in v1.9.0 — app stores only.
+- **Stripe subscriptions for Pro.** Intentionally removed in v1.9.0 - app stores only.
 - **Plugins we don't control.** MCP covers the extensibility story. No internal JS plugin system.
 - **Publishing the desktop app's source code.** Source is closed and will stay closed. We may publish specific pieces separately in the future (e.g. a standalone MCP server SDK).
 
@@ -152,7 +152,7 @@ We don't ship things because they'd look cool in a demo. Every bullet above has 
 
 ## Related pages
 
-- [Release Notes](Release-Notes) — what's already shipped.
-- [Mobile App → Remote PC Code](Mobile-App#remote-pc-code) — the big near-term unlock.
-- [Account System](Account-System) — the foundation for everything Pro.
-- [Contributing](Contributing) — how to file bugs or feature requests.
+- [Release Notes](Release-Notes) - what's already shipped.
+- [Mobile App → Remote PC Code](Mobile-App#remote-pc-code) - the big near-term unlock.
+- [Account System](Account-System) - the foundation for everything Pro.
+- [Contributing](Contributing) - how to file bugs or feature requests.
