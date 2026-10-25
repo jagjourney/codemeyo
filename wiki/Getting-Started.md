@@ -2,7 +2,7 @@
 
 This page walks you through installing CodeMeYo, creating your free account, adding your first API key, and running your first autonomous task.
 
-As of v1.9.0, downloads are gated behind a free [codemeyo.com](https://codemeyo.com) account. The app itself remains free to use — the account exists so you can receive auto-updates, pair mobile devices, and (when it ships) unlock [Remote PC Code](Mobile-App#remote-pc-code).
+As of v1.9.0, downloads are gated behind a free [codemeyo.com](https://codemeyo.com) account. The app itself remains free to use - the account exists so you can receive auto-updates, pair mobile devices, and (when it ships) unlock [Remote PC Code](Mobile-App#remote-pc-code).
 
 ---
 
@@ -10,7 +10,7 @@ As of v1.9.0, downloads are gated behind a free [codemeyo.com](https://codemeyo.
 
 1. Go to [codemeyo.com/register](https://codemeyo.com/register).
 2. Enter an email, password, and click **Create account**.
-3. Check your inbox for the verification link. Verified email is required before Pro features unlock. You can download immediately without verification — but [Backend API](Backend-API) access and (later) Pro need it.
+3. Check your inbox for the verification link. Verified email is required before Pro features unlock. You can download immediately without verification - but [Backend API](Backend-API) access and (later) Pro need it.
 4. Optional but recommended: turn on **2FA** from [/dashboard/profile](https://codemeyo.com/dashboard/profile). See [Account System → 2FA](Account-System#2fa-setup).
 
 No credit card. Free forever for the desktop + mobile app itself. See [Account System](Account-System) for the full tour.
@@ -28,8 +28,8 @@ Go to [codemeyo.com/download](https://codemeyo.com/download) while signed in. Yo
 | Windows | Windows 10 (1803+) or Windows 11, WebView2 |
 | macOS | macOS 11 Big Sur+, Apple Silicon or Intel |
 | Linux | Ubuntu 20.04+, Fedora 38+, or any distro with WebKitGTK 4.1 |
-| iOS | iOS 15+ (TestFlight during preview — see [Mobile App](Mobile-App)) |
-| Android | Android 10+ (aarch64 / armv7 — [Mobile App](Mobile-App)) |
+| iOS | iOS 15+ (TestFlight during preview - see [Mobile App](Mobile-App)) |
+| Android | Android 10+ (aarch64 / armv7 - [Mobile App](Mobile-App)) |
 
 ### Windows
 
@@ -75,10 +75,10 @@ Open CodeMeYo. In the sidebar, click the **Account** tab (person icon).
 
 You have two sign-in paths:
 
-- **Email + password** — just type your credentials from step 1.
-- **Device-code flow** (recommended for mobile or when you don't want to type a password) — click **Sign in via browser**, CodeMeYo opens your default browser to `codemeyo.com/device`, you confirm the short code it displays, and the app picks up the session automatically. Same pattern as `gh auth login`. See [Account System → Device-code login](Account-System#device-code-login).
+- **Email + password** - just type your credentials from step 1.
+- **Device-code flow** (recommended for mobile or when you don't want to type a password) - click **Sign in via browser**, CodeMeYo opens your default browser to `codemeyo.com/device`, you confirm the short code it displays, and the app picks up the session automatically. Same pattern as `gh auth login`. See [Account System → Device-code login](Account-System#device-code-login).
 
-Once signed in, the sidebar shows your plan (Free / Pro / Team), avatar, and a link to your dashboard. The auto-updater now runs on your account — see [Auto-Updater](Auto-Updater).
+Once signed in, the sidebar shows your plan (Free / Pro / Team), avatar, and a link to your dashboard. The auto-updater now runs on your account - see [Auto-Updater](Auto-Updater).
 
 ---
 
@@ -101,7 +101,7 @@ Full provider-by-provider key acquisition steps are on the [LLM Providers](LLM-P
 | DeepSeek | [platform.deepseek.com](https://platform.deepseek.com) |
 | Mistral | [console.mistral.ai](https://console.mistral.ai) |
 | Groq | [console.groq.com](https://console.groq.com) |
-| Ollama (local) | [ollama.com](https://ollama.com) — no key, runs on `localhost:11434` |
+| Ollama (local) | [ollama.com](https://ollama.com) - no key, runs on `localhost:11434` |
 
 Keys are stored in your **operating system's native keychain** (Windows Credential Manager / macOS Keychain / Linux Secret Service). They are never written to plaintext files, the SQLite database, or any CodeMeYo server. Outbound traffic goes directly from the app to the provider's API.
 
@@ -110,7 +110,7 @@ Keys are stored in your **operating system's native keychain** (Windows Credenti
 ## 5. Open a project and run your first task
 
 1. Click the folder icon in the sidebar, or `Ctrl+O` / `Cmd+O`.
-2. Pick a project directory. CodeMeYo indexes it — no contents uploaded anywhere, just paths and metadata.
+2. Pick a project directory. CodeMeYo indexes it - no contents uploaded anywhere, just paths and metadata.
 3. Type a task in the chat input at the bottom and press Enter:
    - `"Add a dark mode toggle to the settings page."`
    - `"Fix the failing tests in the auth module."`
@@ -119,7 +119,7 @@ Keys are stored in your **operating system's native keychain** (Windows Credenti
 
 ### Code vs Chat mode
 
-Top bar has **Code** / **Chat** selector. In **Code** mode the agent runs tools (reads files, writes files, runs commands, commits). In **Chat** mode it just talks — no tools, no file edits. Useful for brainstorming before you commit to an approach.
+Top bar has **Code** / **Chat** selector. In **Code** mode the agent runs tools (reads files, writes files, runs commands, commits). In **Chat** mode it just talks - no tools, no file edits. Useful for brainstorming before you commit to an approach.
 
 ### Strategies
 
@@ -130,7 +130,7 @@ Within either mode, pick a **strategy**:
 | **Single** | One provider does the whole task |
 | **Round Robin** | Rotates between enabled providers each turn |
 | **Deep Think** | All providers analyze in parallel, debate, and synthesize a single answer. See [Deep Think](Deep-Think). |
-| **Consensus** | Like Deep Think but optimized for correctness — debate continues until providers converge |
+| **Consensus** | Like Deep Think but optimized for correctness - debate continues until providers converge |
 
 ### Permission levels
 
@@ -159,14 +159,15 @@ All enabled providers will analyze the problem in parallel, critique each other'
 
 ---
 
-## 7. Pair a phone (Coming Soon)
+## 7. Pair a phone
 
-The **Remote** tab in the sidebar currently shows a Coming Soon card. When we open the feature up:
+Sign in on desktop and on the phone with the same account. Desktop needs Pro, Team, or monthly support.
 
-1. You'll open Remote on desktop, get a short pair code.
-2. Install the iOS or Android app (see [Mobile App](Mobile-App)).
-3. Enter the code on the phone.
-4. Drive your desktop agent from anywhere.
+1. Open Remote PC Code on the desktop. It shows a 6-digit code and QR.
+2. On the phone, open Remote, scan or type the code.
+3. Send a task, watch the agent, Approve or Deny tools, Stop the run.
+
+Keep the phone app open for approvals until push notifications ship. See [Roadmap](Roadmap).
 
 Remote PC Code will be a Pro-tier feature sold through Apple App Store + Google Play only. Sign in with a free account now to be first in line.
 
@@ -174,12 +175,12 @@ Remote PC Code will be a Pro-tier feature sold through Apple App Store + Google 
 
 ## Where to go next
 
-- [LLM Providers](LLM-Providers) — detailed key setup + recommended models.
-- [MCP Servers](MCP-Servers) — extend the agent with external tools.
-- [Deep Think](Deep-Think) — multi-model debate + synthesis.
-- [Configuration](Configuration) — every setting, every config path.
-- [Troubleshooting](Troubleshooting) — fixes for common issues.
-- [FAQ](FAQ) — the short answers.
+- [LLM Providers](LLM-Providers) - detailed key setup + recommended models.
+- [MCP Servers](MCP-Servers) - extend the agent with external tools.
+- [Deep Think](Deep-Think) - multi-model debate + synthesis.
+- [Configuration](Configuration) - every setting, every config path.
+- [Troubleshooting](Troubleshooting) - fixes for common issues.
+- [FAQ](FAQ) - the short answers.
 
 ---
 
