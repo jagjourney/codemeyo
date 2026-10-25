@@ -27,7 +27,7 @@ Accounts are free. Creating one never costs money. Pro, when it launches, is sol
 | Priority support | No | Yes | Yes |
 | Shared team workspaces, SSO, admin controls | No | No | Yes |
 
-Tiers above are from `docs/PLAN_PHASE7_SAAS_PLATFORM.md`. Pricing for Pro will be set at launch — see [Roadmap](Roadmap).
+Tiers above are from `docs/99-archive/PLAN_PHASE7_SAAS_PLATFORM.md`. Pricing for Pro will be set at launch — see [Roadmap](Roadmap).
 
 ---
 
