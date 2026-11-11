@@ -2,7 +2,7 @@
 
 Solutions to common issues with CodeMeYo, grouped by what's going wrong.
 
-If your issue isn't here, search [GitHub Issues](https://github.com/jagjourney/codemeyo/issues) or file a new one. For private reports email `support@jagjourney.com`. For security disclosures use `security@jagjourney.com` (see [Contributing → Security](Contributing#security-disclosures)).
+If your issue isn't here, search [GitHub Issues](https://github.com/jagjourney/codemeyo/issues) or file a new one. For private reports and security disclosures use [codemeyo.com/contact](https://codemeyo.com/contact) (see [Contributing → Security](Contributing#3-security-disclosures)).
 
 ---
 
@@ -12,24 +12,24 @@ If your issue isn't here, search [GitHub Issues](https://github.com/jagjourney/c
 
 That's intentional. As of v1.9.0, downloads at [codemeyo.com/download](https://codemeyo.com/download) require a free account. Create one at [codemeyo.com/register](https://codemeyo.com/register), then come back to download. See [Account System](Account-System).
 
-You'll only do this once — after you sign in on the website, the download buttons work normally.
+You'll only do this once - after you sign in on the website, the download buttons work normally.
 
-### Windows — SmartScreen blocks the installer
+### Windows - SmartScreen blocks the installer
 
 SmartScreen flags unsigned Windows installers as "unrecognized". We're working toward EV code-signing; until then:
 
 1. Click **More info** on the SmartScreen dialog.
 2. Click **Run anyway**.
 
-If you don't trust that, check the SHA256 hash on the [GitHub Releases page](https://github.com/jagjourney/codemeyo/releases) against your download.
+Only run installers downloaded from [codemeyo.com/download](https://codemeyo.com/download).
 
-### macOS — "CodeMeYo can't be opened because it is from an unidentified developer"
+### macOS - "CodeMeYo can't be opened because it is from an unidentified developer"
 
 1. Right-click the app in Applications and choose **Open** (instead of double-clicking).
 2. Or go to **System Settings → Privacy & Security** and click **Open Anyway**.
 3. If the app reports as damaged: `xattr -cr /Applications/CodeMeYo.app` in Terminal.
 
-### Linux — WebKitGTK error on launch
+### Linux - WebKitGTK error on launch
 
 ```bash
 # Debian/Ubuntu
@@ -60,7 +60,7 @@ GDK_BACKEND=x11 codemeyo
 
 ### Crash on startup (was fixed)
 
-If you're on v1.0.10 or earlier, you might be hitting the rustls-tls regression that broke Windows networking. Upgrade to v1.0.11 or later. See [Release Notes → v1.0.11](Release-Notes).
+If you're on v1.0.10 or earlier, you might be hitting the rustls-tls regression that broke Windows networking. Upgrade to v1.0.11 or later. See the [changelog](https://codemeyo.com/changelog).
 
 ### I upgraded from v1.8.x and now I see two CodeMeYo icons
 
@@ -84,15 +84,15 @@ Your old app-data directory stays on disk but unused. Delete `%APPDATA%\com.code
 
 ### "Rate limited" / 429
 
-1. Wait it out — rate limits are short-window. The agent usually retries automatically.
+1. Wait it out - rate limits are short-window. The agent usually retries automatically.
 2. Switch to **Fallback** strategy so we silently route around rate-limited providers.
 3. Pick a cheaper model (higher rate limits).
 
 ### "Model not found" / "Invalid model"
 
-Model IDs drift over time. Check the provider's current docs. CodeMeYo's model registry is updated each release — upgrade if you're on older. See [Release Notes](Release-Notes) for when your provider's models were last refreshed.
+Model IDs drift over time. Check the provider's current docs. CodeMeYo's model registry is updated each release - upgrade if you're on older. See the [changelog](https://codemeyo.com/changelog) for when your provider's models were last refreshed.
 
-### Ollama — "does not support tools"
+### Ollama - "does not support tools"
 
 Some Ollama models don't implement tool calling. CodeMeYo's smart error message suggests models that do. Recommended tool-capable Ollama models:
 
@@ -136,10 +136,10 @@ By design. If a provider fails (rate limit, 5xx), Round Robin logs a yellow `[Ag
 
 Fixed across multiple versions:
 
-- v0.1.710 — CSP was blocking Tauri IPC, causing every `invoke()` to silently fail. Upgrade.
-- v0.1.855 — Conversations-not-saving for Gemini/DeepSeek/Mistral/Ollama/Groq (database only seeded 3 providers originally). Upgrade.
-- v1.5.0 — AI responses in Deep Think / synthesis / certain strategies weren't being saved. Upgrade.
-- v1.5.1 — "FOREIGN KEY constraint failed" when saving messages. Upgrade.
+- v0.1.710 - CSP was blocking Tauri IPC, causing every `invoke()` to silently fail. Upgrade.
+- v0.1.855 - Conversations-not-saving for Gemini/DeepSeek/Mistral/Ollama/Groq (database only seeded 3 providers originally). Upgrade.
+- v1.5.0 - AI responses in Deep Think / synthesis / certain strategies weren't being saved. Upgrade.
+- v1.5.1 - "FOREIGN KEY constraint failed" when saving messages. Upgrade.
 
 If on latest and still seeing this, open DevTools (F12) and check for errors in the console.
 
@@ -157,23 +157,23 @@ Fixed in v1.5.1. Upgrade.
 
 ### "Your account is banned"
 
-Reason is shown on the login screen. Email `support@jagjourney.com` if you think it's a mistake.
+Reason is shown on the login screen. Contact us at [codemeyo.com/contact](https://codemeyo.com/contact) if you think it's a mistake.
 
 ### Email verification never arrives
 
 1. Check spam.
-2. Sign in at [codemeyo.com/login](https://codemeyo.com/login) — there's a banner at the top of every page with a **Resend verification email** link.
-3. If still nothing, email `support@jagjourney.com`. The admin panel has a "send manual verification" action.
+2. Sign in at [codemeyo.com/login](https://codemeyo.com/login) - there's a banner at the top of every page with a **Resend verification email** link.
+3. If still nothing, contact us at [codemeyo.com/contact](https://codemeyo.com/contact) and we can send it again.
 
 ### 2FA code never accepted
 
 1. Device clock drift. Make sure your phone clock is auto-synced.
-2. Wrong app. The QR code is a standard TOTP URL — any authenticator works (Google, Authy, 1Password, Bitwarden, etc.).
+2. Wrong app. The QR code is a standard TOTP URL - any authenticator works (Google, Authy, 1Password, Bitwarden, etc.).
 3. Lost device. Use one of the recovery codes you saved at setup. Contact support if you didn't save them.
 
 ### "Sign in via browser" hangs forever
 
-Device-code flow. The browser might have popped up behind another window — bring it forward and complete the flow. If the code has already expired (10min window), cancel and start over in the app.
+Device-code flow. The browser might have popped up behind another window - bring it forward and complete the flow. If the code has already expired (10min window), cancel and start over in the app.
 
 ---
 
@@ -181,25 +181,14 @@ Device-code flow. The browser might have popped up behind another window — bri
 
 ### I donated but don't see it in `/dashboard/billing`
 
-Several possibilities:
-
-1. **Mode mismatch.** If you donated while the admin panel was set to **test** mode but is now in **live** mode (or vice versa), the dashboard might filter it out. Check the admin panel's Stripe mode and flip temporarily. See [Donations → Test vs live mode](Donations#test-vs-live-mode).
-2. **Webhook not delivered.** Check [/admin/donations](https://codemeyo.com/admin/donations) — if your row doesn't appear there, the Stripe webhook at `POST /api/webhooks/stripe` didn't receive the event. Re-check webhook setup: URL, signing secret, selected events. See [Donations → Stripe webhook setup](Donations#stripe-webhook-setup).
-3. **Different email.** Donation is matched by the Stripe Checkout email. If you donated with one email and signed up with another, they don't auto-link. Email `support@jagjourney.com` to link them.
-
-If nothing else works, admins can backfill — see [Donations → Backfilling missed donations](Donations#backfilling-missed-donations).
-
-### `/dashboard/billing` 500
-
-Fixed in v1.9.1. The earlier issue was a missing Stripe customer record for users who'd never done a Stripe checkout. The page is now a native Laravel page showing donation history + OS-level subscription deep-links, no Stripe customer lookup required.
-
-Upgrade / reload. If still 500ing, check `storage/logs/laravel.log` on the server side.
+1. **Different email.** A donation is matched to your account by the email you gave at checkout. If you donated with one email and signed up with another, they don't link on their own.
+2. **Still missing.** Contact us at [codemeyo.com/contact](https://codemeyo.com/contact) with the donation date and amount, and we will match it to your account.
 
 ### Pro subscription from iPhone doesn't show in desktop app
 
 The entitlement endpoint (`GET /api/v1/entitlements`) caches for 24 hours on the client. Sign out + back in to force a refresh. Or wait up to 24h.
 
-If it still doesn't show after a fresh sign-in, the Apple IAP webhook might have failed to verify (since v1.9.0 it does full ES256 JWS verification). Admin: check `/admin/subscriptions` for the user — if no row is there, the IAP server notification didn't succeed.
+If it still doesn't show after a fresh sign-in, contact us at [codemeyo.com/contact](https://codemeyo.com/contact) with the date of the purchase so we can check that the store notification reached us.
 
 ---
 
@@ -211,13 +200,13 @@ If it still doesn't show after a fresh sign-in, the Apple IAP webhook might have
    ```bash
    which npx      # or whatever your server uses
    ```
-2. Check the `args` array is correct — a missing comma is a common trap in hand-edited JSON.
+2. Check the `args` array is correct - a missing comma is a common trap in hand-edited JSON.
 3. Check env vars referenced as `${VAR}` are actually set in your system env.
 4. **MCP → Activity** tab shows stderr from the server process.
 
 ### Server connects but no tools appear
 
-1. Wait — discovery is async, takes a few seconds after connect.
+1. Wait - discovery is async, takes a few seconds after connect.
 2. Restart the server from the Servers tab.
 3. Server might expose only resources / prompts, not tools. Check the **Tools** tab → Resources / Prompts sub-tabs.
 
@@ -225,7 +214,7 @@ If it still doesn't show after a fresh sign-in, the Apple IAP webhook might have
 
 1. Verify URL with `curl -X POST <url>`.
 2. Firewall / corporate proxy blocking.
-3. Auth token expired — refresh in the OAuth tab.
+3. Auth token expired - refresh in the OAuth tab.
 
 ### stdio server fails on iOS / Android
 
@@ -241,7 +230,7 @@ Browser isn't running with `--remote-debugging-port=9222`. Click the **Launch** 
 
 ### Launch button opens browser but Connect still fails
 
-1. Wait 2-3 seconds after launch — browser needs time to boot.
+1. Wait 2-3 seconds after launch - browser needs time to boot.
 2. Another process on port 9222? Check with `netstat -ano | findstr :9222` (Windows).
 
 ### Extension shows "Disconnected"
@@ -286,11 +275,11 @@ If persistent, delete `updater_cache.json` from the app data directory (see [Con
 
 ### Updater prompts for same version repeatedly
 
-Usually a semver issue. Fixed in v1.0.5 — all tags are now strict semver. If on v1.0+, this shouldn't happen. File a bug if it does.
+Usually a semver issue. Fixed in v1.0.5 - all tags are now strict semver. If on v1.0+, this shouldn't happen. File a bug if it does.
 
 ### Signature verification failed during update
 
-Corrupt download or CDN hiccup. Retry. Don't install if the signature fails — it means the archive was tampered with or truncated in transit.
+Corrupt download or CDN hiccup. Retry. Don't install if the signature fails - it means the archive was tampered with or truncated in transit.
 
 ### Windows auto-update doesn't detect anything
 
@@ -310,7 +299,7 @@ Key files:
 
 | File | Contents |
 |---|---|
-| `codemeyo.db` | SQLite — conversations, messages, settings, history |
+| `codemeyo.db` | SQLite - conversations, messages, settings, history |
 | `mcp_servers.json` | MCP configs |
 | `entitlement_cache.json` | Cached plan / Pro status |
 | `updater_cache.json` | Latest-version metadata |
@@ -318,7 +307,7 @@ Key files:
 ### Viewing live logs
 
 - **Development builds:** logs print to the terminal where you ran `pnpm tauri dev`.
-- **Release builds:** press F12 or `Ctrl+Shift+I` / `Cmd+Option+I` to open DevTools. Rust-side tracing logs still print to stdout only — run from a terminal if you need them.
+- **Release builds:** press F12 or `Ctrl+Shift+I` / `Cmd+Option+I` to open DevTools. Rust-side tracing logs still print to stdout only - run from a terminal if you need them.
 
 ---
 
@@ -365,7 +354,7 @@ rm ~/.config/com.jagjourney.codemeyo/mcp_servers.json
 Clear each key field in Settings, or delete from the OS keychain directly:
 
 ```bash
-# Windows — open Credential Manager → Windows Credentials → find com.jagjourney.codemeyo entries → Remove
+# Windows - open Credential Manager → Windows Credentials → find com.jagjourney.codemeyo entries → Remove
 
 # macOS
 security delete-generic-password -s com.jagjourney.codemeyo
@@ -394,7 +383,7 @@ rm -rf ~/.config/com.jagjourney.codemeyo/
 ```
 
 4. Delete keychain entries (commands above).
-5. Relaunch — fresh install experience.
+5. Relaunch - fresh install experience.
 
 ---
 
@@ -407,8 +396,8 @@ rm -rf ~/.config/com.jagjourney.codemeyo/
 | "Connection refused" | LLM API unreachable | Check internet, check endpoint override in Settings. |
 | "Context length exceeded" | Message history too big | Use a bigger-context model, or start a new conversation. |
 | "Insufficient funds" | Provider account out of credits | Add credits on the provider's dashboard. |
-| "account_banned" (API) | User is banned | Email `support@jagjourney.com` with your ban reason. |
-| "feature_disabled" (API) | Feature flag is off | Admin needs to flip the flag at `/admin/feature-flags`. |
+| "account_banned" (API) | Account is suspended | Contact us at [codemeyo.com/contact](https://codemeyo.com/contact) with the reason shown. |
+| "feature_disabled" (API) | That feature is switched off on codemeyo.com | Try again later, or check the [changelog](https://codemeyo.com/changelog) for notices. |
 
 ---
 
@@ -421,16 +410,15 @@ rm -rf ~/.config/com.jagjourney.codemeyo/
    - OS + version
    - CodeMeYo version (shown in Settings → About or the title bar)
    - Relevant console errors / log lines
-3. For private reports: `support@jagjourney.com`.
-4. For security disclosures: `security@jagjourney.com`.
+3. For private reports and security disclosures: [codemeyo.com/contact](https://codemeyo.com/contact).
 
 ---
 
 ## Related pages
 
-- [Configuration](Configuration) — paths, settings, keychain details.
-- [Account System](Account-System) — sign-in, 2FA, device list.
-- [Auto-Updater](Auto-Updater) — update behavior.
-- [Release Notes](Release-Notes) — what got fixed in which version.
-- [FAQ](FAQ) — short answers to common questions.
-- [Contributing](Contributing) — how to file a bug or security report.
+- [Configuration](Configuration) - paths, settings, keychain details.
+- [Account System](Account-System) - sign-in, 2FA, device list.
+- [Auto-Updater](Auto-Updater) - update behavior.
+- [Changelog](https://codemeyo.com/changelog) - what got fixed in which version.
+- [FAQ](FAQ) - short answers to common questions.
+- [Contributing](Contributing) - how to file a bug or security report.
