@@ -10,7 +10,7 @@ As of v1.9.0, downloads are gated behind a free [codemeyo.com](https://codemeyo.
 
 1. Go to [codemeyo.com/register](https://codemeyo.com/register).
 2. Enter an email, password, and click **Create account**.
-3. Check your inbox for the verification link. Verified email is required before Pro features unlock. You can download immediately without verification - but [Backend API](Backend-API) access and (later) Pro need it.
+3. Check your inbox for the verification link. Verified email is required before Pro features unlock. You can download immediately without verification - but [API](https://codemeyo.com/api/docs) tokens and Pro need it.
 4. Optional but recommended: turn on **2FA** from [/dashboard/profile](https://codemeyo.com/dashboard/profile). See [Account System → 2FA](Account-System#2fa-setup).
 
 No credit card. Free forever for the desktop + mobile app itself. See [Account System](Account-System) for the full tour.
@@ -167,7 +167,7 @@ Sign in on desktop and on the phone with the same account. Desktop needs Pro, Te
 2. On the phone, open Remote, scan or type the code.
 3. Send a task, watch the agent, Approve or Deny tools, Stop the run.
 
-Keep the phone app open for approvals until push notifications ship. See [Roadmap](Roadmap).
+Keep the phone app open for approvals until push notifications ship.
 
 Remote PC Code will be a Pro-tier feature sold through Apple App Store + Google Play only. Sign in with a free account now to be first in line.
 
