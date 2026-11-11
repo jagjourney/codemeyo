@@ -4,6 +4,34 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.0] - 2026-11-11
+
+- A new design for the whole desktop app, in dark and light, with an option to reduce motion.
+- Replies now appear as they are written, with the models that support it.
+- Pause and resume an agent run, from the desktop or from your phone.
+- Before the agent writes or edits a file, you see what will change.
+- A run timeline shows each step of a task and the model that took it.
+- The iPhone, iPad and Android apps are now a remote for your desktop app: follow a run, send a task, approve or deny a request, pause, resume or stop, and switch models. Projects, files and the agent itself run on your Windows, Mac or Linux computer.
+- On Windows and Mac, your API keys, your sign-in and saved tool secrets are now kept in the system's secure storage instead of the app's own files.
+- Sign in to more than one Claude Code, Codex or Grok account. Give each one a name in Settings, Models, and sign in to it with the official app.
+- A run order for Claude, OpenAI and Grok: choose which account a run tries first, and whether it may move on to JagAI credits or an API key when an account is signed out or has a billing problem. Moving on when an account reaches its usage limit is a separate switch that starts off.
+- The run timeline shows when a run changes account, and why.
+- Runs through the official Claude Code, Codex and Grok apps no longer pick up an API key set elsewhere on your computer, so they use your plan as intended.
+- The Models screen now says which model families JagAI runs.
+- Long project names no longer spill out of their card, and the support reminder no longer covers the Send button.
+- Reliability polish across the agent, git, browser, tools and settings screens.
+
+## [1.11.12] - 2026-10-26
+
+- Fixes the crash on launch on iPhone and iPad with iOS 27 that 1.11.11 did not fully resolve.
+- Improved stability on iPhone and iPad when the app's window is rearranged.
+
+## [1.11.11] - 2026-10-25
+
+- Fixes a crash on launch on iPhone and iPad with iOS 27.
+- Linux installs now update themselves to new versions from inside the app.
+- Updated the app framework on every platform, including stability work on Android for returning to the app from the background.
+
 ## [1.11.10] - 2026-10-25
 
 - Brings every 1.11.9 improvement to Mac and Android.
@@ -17,7 +45,6 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 - Usage reports from installs that use your own provider API key upload again instead of retrying over and over.
 - Error reports now say what kind of problem stopped an agent task, such as sign-in, credits, network, or an unavailable model, without sending your message.
 - Agent errors are no longer reported as phone remote errors when no phone is connected.
-- Improved stability on Android when the app window closes in the background.
 
 ## [1.11.8] - 2026-10-02
 
