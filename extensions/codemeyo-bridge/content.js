@@ -1,4 +1,4 @@
-// CodeMeYo Bridge — Content Script
+// CodeMeYo Bridge - Content Script
 // Runs on every page. Observes DOM mutations, intercepts console, and
 // responds to commands from the background service worker.
 
@@ -23,7 +23,7 @@
     }
     // Using the callback form (instead of the Promise form) is deliberate.
     // chrome.runtime.sendMessage(msg) with no callback returns a Promise
-    // that rejects asynchronously when the runtime disappears mid-flight —
+    // that rejects asynchronously when the runtime disappears mid-flight -
     // and async rejections can't be caught by the sync try/catch around
     // the send itself, so they surface in the browser's "Extension errors"
     // panel as unhandled. Passing a callback suppresses the Promise and
@@ -167,7 +167,7 @@
   // ── Command Handler ────────────────────────────────────────────────
   let injectedStyleEl = null;
 
-  // Listener registration — also guarded; if the context died before the
+  // Listener registration - also guarded; if the context died before the
   // script reached this point, skip silently.
   if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.onMessage) {
   chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
@@ -177,8 +177,21 @@
 
     switch (action) {
       case "get_storage": {
-        const type = params?.storage_type === "session" ? sessionStorage : localStorage;
+        const isSession = params?.storage_type === "session";
+        const type = isSession ? sessionStorage : localStorage;
         const key = params?.key;
+        // Site storage often holds sign-in tokens, so nothing leaves this
+        // tab until the person at the keyboard says yes to this request.
+        const scope = key ? `the "${String(key).slice(0, 80)}" entry of` : "all of";
+        const allowed = window.confirm(
+          `CodeMeYo wants to read ${scope} this site's ${isSession ? "session" : "local"} storage ` +
+            `(${location.host}) and pass it to your coding agent. It can contain sign-in tokens.\n\n` +
+            "Allow this one request?",
+        );
+        if (!allowed) {
+          sendResponse({ error: "The user declined storage access for this page." });
+          return true;
+        }
         if (key) {
           sendResponse({ [key]: type.getItem(key) });
         } else {
