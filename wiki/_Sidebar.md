@@ -1,6 +1,6 @@
 ### CodeMeYo Wiki
 
-**[Home](Home)** — v1.9.1
+**[Home](Home)**
 
 ---
 
@@ -17,19 +17,10 @@
 - [Browser Debug Guide](Browser-Debug-Guide)
 - [Terminal Commands](Terminal-Commands)
 
-**Account & Cloud**
+**Account**
 - [Account System](Account-System)
-- [Backend API](Backend-API)
-- [Donations](Donations)
 
-**Admin (codemeyo.com)**
-- [Admin Panel](Admin-Panel)
-- [CMS Page Builder](CMS-Page-Builder)
-
-**Reference**
-- [Architecture](Architecture)
-- [Release Notes](Release-Notes)
-- [Roadmap](Roadmap)
+**Help**
 - [Troubleshooting](Troubleshooting)
 - [FAQ](FAQ)
 - [Contributing](Contributing)
@@ -40,6 +31,7 @@
 - [codemeyo.com](https://codemeyo.com)
 - [Download](https://codemeyo.com/download)
 - [Dashboard](https://codemeyo.com/dashboard)
-- [GitHub Releases](https://github.com/jagjourney/codemeyo/releases)
+- [Changelog](https://codemeyo.com/changelog)
 - [Report a Bug](https://github.com/jagjourney/codemeyo/issues/new)
+- [Contact](https://codemeyo.com/contact)
 - [Donate](https://codemeyo.com/donate)
