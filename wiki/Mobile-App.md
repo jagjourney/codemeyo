@@ -2,25 +2,16 @@
 
 CodeMeYo ships as **iOS** and **Android** apps in addition to the desktop app, all from the same Tauri 2 + React codebase. The mobile experience is lean-in: keep the laptop for heavy editing, use the phone for chat and Remote PC Code.
 
-Mobile builds ship in CI alongside desktop since v1.0.000. Bundle ID is `com.jagjourney.codemeyo` on both platforms.
+Mobile builds ship alongside desktop since v1.0.000. Bundle ID is `com.jagjourney.codemeyo` on both platforms.
 
 ---
 
-## Current distribution status (v1.9.1)
+## Where to get it
 
-- **iOS** - TestFlight preview. App Store submission is queued, awaiting review turnaround.
-- **Android** - Play Open Testing. Play Store public listing pending.
+- **iOS** - App Store and TestFlight, as Apple approves each build.
+- **Android** - Google Play, as Google approves each build.
 
-Install URLs (fill in after tomorrow's submissions):
-
-| Platform | Install URL |
-|---|---|
-| iOS (TestFlight) | **TK - pending App Store Connect approval** |
-| Android (Play Open Testing) | **TK - pending Play Console listing** |
-| iOS (App Store, public) | Not yet |
-| Android (Play Store, public) | Not yet |
-
-TODO: once the submissions resolve, swap the TK placeholders for the real URLs. The build-submission plan is in `docs/03-operations/APPLE_APP_STORE_SUBMISSION.md` and `docs/03-operations/GOOGLE_PLAY_SUBMISSION.md`.
+Store links appear on [codemeyo.com/download](https://codemeyo.com/download) as each listing opens.
 
 ---
 
@@ -34,7 +25,7 @@ TODO: once the submissions resolve, swap the TK placeholders for the real URLs. 
 ### Architectures
 
 - **iOS:** arm64 only (all iPhones and iPads going back to iPhone 5s are arm64).
-- **Android:** **aarch64 + armv7** only. We dropped x86_64 Android builds in v1.5.8 because the cross-compile was timing out at ~2 hours on Windows runners, and the Play Store distributes to real phones (all ARM) anyway. Emulators that need x86_64 can use [desktop CodeMeYo](Getting-Started) instead.
+- **Android:** **aarch64 + armv7** only. We dropped x86_64 Android builds in v1.5.8; the Play Store distributes to real phones (all ARM) anyway. Emulators that need x86_64 can use [desktop CodeMeYo](Getting-Started) instead.
 
 ---
 
@@ -42,14 +33,14 @@ TODO: once the submissions resolve, swap the TK placeholders for the real URLs. 
 
 ### iOS (TestFlight, preview)
 
-1. Open the TestFlight invitation link on your iPhone or iPad. (TK - link will be posted in the in-app announcement banner and the `#codemeyo` channel.)
+1. Open the TestFlight invitation link on your iPhone or iPad.
 2. Accept the invite - TestFlight installs itself if you don't have it.
 3. Install CodeMeYo via TestFlight.
 4. Launch. Sign in with your free codemeyo.com account.
 
 ### Android (Play Open Testing, preview)
 
-1. Open the Open Testing URL. (TK.)
+1. Open the Play Store link from [codemeyo.com/download](https://codemeyo.com/download).
 2. Tap **Become a tester**.
 3. Install from the Play Store.
 4. Launch. Sign in.
@@ -58,7 +49,7 @@ TODO: once the submissions resolve, swap the TK placeholders for the real URLs. 
 
 For users who want to sideload the `.apk` directly (bypassing Play Store):
 
-1. Download the signed `app-release.apk` from the [GitHub Releases page](https://github.com/jagjourney/codemeyo/releases) for the version you want.
+1. Download the signed `.apk` from [codemeyo.com/download](https://codemeyo.com/download) when it is offered for your version.
 2. Enable **Install from Unknown Sources** in Settings → Security.
 3. Open the APK and confirm.
 
@@ -110,7 +101,7 @@ Live in the app. Sign in on both devices. Desktop needs Pro, Team, or monthly su
 3. Send a task. The **desktop** agent runs it on the open project.
 4. Approve, Deny, or Stop from the phone. Keep the phone app open for approvals until push ships.
 
-Still open: session lasts more than five minutes, physical iPhone/Android proof, shared conversation join. Operator list: `docs/05-active/build-out-plan.md`.
+Still being finished: sessions longer than five minutes and joining a shared conversation.
 
 ---
 
@@ -118,17 +109,14 @@ Still open: session lasts more than five minutes, physical iPhone/Android proof,
 
 ### iOS
 
-- **App Store Review Guideline 4.8** - once the app offers third-party logins (it will, when Sign in with Apple web lands), we'll need to add Sign in with Apple as an option. Routes for it are stubbed in `website-app/routes/web.php` (`/auth/apple` / `/auth/apple/callback`), waiting on credentials.
 - **Guideline 5.1.1(v)** - the app is intentionally usable without an account. Sign-in is optional, only gates updates + Remote PC Code + optional Pro.
-- **Privacy nutrition labels** - see `docs/04-reference/APPLE_PRIVACY_NUTRITION_LABELS.md` for the declared data types. Short version: we collect email + device name + (opt-in) aggregate LLM provider usage counts. Nothing else.
+- **Privacy nutrition labels** - the App Store listing shows the declared data types. Short version: we collect email + device name + (opt-in) aggregate LLM provider usage counts. Nothing else.
 - **Keyboard handling** - the input bar sticks to the bottom above the keyboard on iOS. If it doesn't on your device, file a bug.
 
 ### Android
 
-- **Tauri Android init** was done in v0.2.130. Project scaffolding lives at `src-tauri/gen/android/`.
-- **Data Safety disclosure** - see `docs/04-reference/GOOGLE_PLAY_DATA_SAFETY.md`. Mirrors iOS privacy labels.
+- **Data Safety disclosure** - shown on the Google Play listing. Mirrors iOS privacy labels.
 - **No Play Games Services** - we don't integrate. No leaderboards, no cloud saves via Google.
-- **Proguard rules** - `proguard-tauri.pro` references `com.jagjourney.codemeyo.TauriActivity` post-bundle-ID rename. If you're modifying the Android native integration, keep that path in sync.
 
 ---
 
@@ -158,5 +146,4 @@ If you installed v1.8.x or earlier, that was under the `com.codemeyo.app` bundle
 - [Account System](Account-System)
 - [Getting Started](Getting-Started)
 - [Auto-Updater](Auto-Updater) - desktop only
-- [Roadmap → Remote PC Code](Roadmap)
-- [Release Notes](Release-Notes) - v0.2.130 and later for mobile milestones
+- [Changelog](https://codemeyo.com/changelog) - mobile changes in each release
