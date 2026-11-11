@@ -1,8 +1,8 @@
 # Configuration
 
-Every setting, every config file, every path. This page covers the desktop + mobile app only — see [Admin Panel](Admin-Panel) for the Filament `/admin/settings` backoffice.
+Every setting, every config file, every path. This page covers the desktop + mobile app.
 
-As of v1.9.0 the bundle ID changed from `com.codemeyo.app` to `com.jagjourney.codemeyo`. All app-data paths now use the new identifier. If you're upgrading from v1.8.x or earlier, your old data directory is still on disk — nothing is migrated automatically. See [Upgrading from older bundle ID](#upgrading-from-older-bundle-id) below.
+As of v1.9.0 the bundle ID changed from `com.codemeyo.app` to `com.jagjourney.codemeyo`. All app-data paths now use the new identifier. If you're upgrading from v1.8.x or earlier, your old data directory is still on disk - nothing is migrated automatically. See [Upgrading from older bundle ID](#upgrading-from-older-bundle-id) below.
 
 ---
 
@@ -20,7 +20,7 @@ Inside that directory:
 
 | File | What it holds |
 |---|---|
-| `codemeyo.db` | SQLite — conversations, messages, settings, project history |
+| `codemeyo.db` | SQLite - conversations, messages, settings, project history |
 | `mcp_servers.json` | MCP server configurations (Claude Desktop-compatible format) |
 | `entitlement_cache.json` | Signed-in user's cached plan (24h TTL) |
 | `updater_cache.json` | Latest-version info pulled from the authenticated updater endpoint |
@@ -29,8 +29,8 @@ Inside that directory:
 
 If you had v1.8.x or earlier installed, your old directory (`%APPDATA%\com.codemeyo.app\`, etc.) still exists after upgrading to v1.9.x. Nothing in it is used by the new app. Two options:
 
-- **Fresh start** — nothing to do. v1.9.x creates the new directory on first launch and you reset your settings by signing in again.
-- **Migrate manually** — copy `codemeyo.db` and `mcp_servers.json` from the old directory to the new one, close CodeMeYo first. Conversation history and MCP servers come with you. API keys do not (they live in the OS keychain under the old service name — re-enter them once).
+- **Fresh start** - nothing to do. v1.9.x creates the new directory on first launch and you reset your settings by signing in again.
+- **Migrate manually** - copy `codemeyo.db` and `mcp_servers.json` from the old directory to the new one, close CodeMeYo first. Conversation history and MCP servers come with you. API keys do not (they live in the OS keychain under the old service name - re-enter them once).
 
 After you've confirmed the new setup works, you can delete the old directory.
 
@@ -46,9 +46,9 @@ Open Settings by clicking the **gear icon** in the sidebar or pressing `Ctrl+,` 
 
 Each of the 8 LLM providers has three fields:
 
-1. **Enable toggle** — turns the provider on or off.
-2. **API key** — your secret key from the provider.
-3. **Model** — which model to use.
+1. **Enable toggle** - turns the provider on or off.
+2. **API key** - your secret key from the provider.
+3. **Model** - which model to use.
 
 Provider-by-provider setup with links and recommended models is on the [LLM Providers](LLM-Providers) page.
 
@@ -66,14 +66,14 @@ Keys are never written to plaintext files, environment variables, or the SQLite 
 
 ---
 
-## Settings panel — 8 tabs
+## Settings panel - 8 tabs
 
 ### General
 
 | Setting | Options |
 |---|---|
 | **Theme** | Dark, Light, System |
-| **Active Provider** | Any enabled provider — default for new conversations |
+| **Active Provider** | Any enabled provider - default for new conversations |
 | **Interaction Mode** | Code, Chat |
 | **Strategy** | Single, Round Robin, Deep Think, Consensus |
 | **Permission Level** | Ask Every Time, Auto-Read, Auto-All, Full Auto |
@@ -87,7 +87,7 @@ Per-provider enable / API key / model. See [LLM Providers](LLM-Providers).
 | Setting | Description |
 |---|---|
 | **Command timeout** | Default 120s, max 600s for `RunCommand` tool |
-| **Max self-correction retries** | Default 5 — how many times the agent re-runs a failing build before asking you |
+| **Max self-correction retries** | Default 5 - how many times the agent re-runs a failing build before asking you |
 | **Working directory** | Auto-tracks the active project, override here if needed |
 
 ### Privacy
@@ -124,7 +124,7 @@ Remap any shortcut. Defaults:
 
 ### About
 
-Version, build commit, bundle ID, update channel, and a link to [Release Notes](Release-Notes) and the in-app changelog.
+Version, build commit, bundle ID, update channel, and a link to the [changelog](https://codemeyo.com/changelog) and the in-app changelog.
 
 ---
 
@@ -142,7 +142,7 @@ MCP server configs are stored in a JSON file compatible with Claude Desktop's fo
 
 You can edit this file directly or manage servers in **MCP panel → Servers** tab.
 
-### Example — stdio (local) server
+### Example - stdio (local) server
 
 ```json
 {
@@ -161,7 +161,7 @@ You can edit this file directly or manage servers in **MCP panel → Servers** t
 }
 ```
 
-### Example — HTTP (remote) server
+### Example - HTTP (remote) server
 
 ```json
 {
@@ -240,8 +240,8 @@ If you want a clean slate without reinstalling: see [Troubleshooting → Reset S
 
 ## Related pages
 
-- [Getting Started](Getting-Started) — install + first launch.
-- [LLM Providers](LLM-Providers) — every provider's key setup + models.
-- [MCP Servers](MCP-Servers) — server registry + adding custom ones.
-- [Auto-Updater](Auto-Updater) — update behavior once signed in.
-- [Troubleshooting](Troubleshooting) — when something goes wrong.
+- [Getting Started](Getting-Started) - install + first launch.
+- [LLM Providers](LLM-Providers) - every provider's key setup + models.
+- [MCP Servers](MCP-Servers) - server registry + adding custom ones.
+- [Auto-Updater](Auto-Updater) - update behavior once signed in.
+- [Troubleshooting](Troubleshooting) - when something goes wrong.
