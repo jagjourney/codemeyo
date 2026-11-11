@@ -2,17 +2,17 @@
 
 **Multi-LLM Autonomous Coding Agent for Desktop and Mobile.**
 
-> Tagged product is **v1.11.4**. Remote PC Code is live in the app for signed-in Pro, Team, or monthly support. Remaining phone-to-desktop finish work is tracked in the operator build-out plan, not as a Coming Soon teaser. [See what's new](#whats-new-in-v19x).
+> Remote PC Code is live in the app for signed-in Pro, Team, or monthly support. See the [changelog](https://codemeyo.com/changelog) for the current version and what changed in each release.
 
 | | |
 |---|---|
-| **Current version** | v1.11.4 |
+| **Current version** | See the [changelog](https://codemeyo.com/changelog) |
 | **Platforms** | Windows, macOS, Linux, iOS, Android |
-| **Price** | Free with your own keys. Pro via Apple on Apple builds, Pay by Jag on the web. Android in-app Play Billing is not in the client yet. |
+| **Price** | Free with your own keys. Pro is sold in the app on Apple devices and at codemeyo.com. Android in-app billing is not available yet. |
 | **Website** | [codemeyo.com](https://codemeyo.com) |
 | **Download** | [codemeyo.com/download](https://codemeyo.com/download) (free account required) |
 | **Bundle ID** | `com.jagjourney.codemeyo` |
-| **Releases** | [github.com/jagjourney/codemeyo/releases](https://github.com/jagjourney/codemeyo/releases) |
+| **Release notes** | [codemeyo.com/changelog](https://codemeyo.com/changelog) |
 | **Issues / bug reports** | [github.com/jagjourney/codemeyo/issues](https://github.com/jagjourney/codemeyo/issues) |
 
 ---
@@ -27,28 +27,9 @@ Built with **Tauri 2** (Rust backend + React frontend). Runs natively on Windows
 
 ---
 
-## What's new in v1.9.x
+## What's new
 
-### v1.9.1 (2026-04-19) - pipeline fixes + homepage CMS wiring
-
-- Android build no longer fails on the duplicated Kotlin classes from the `com.codemeyo.app` → `com.jagjourney.codemeyo` rename.
-- `build-website` CI job now passes `--ignore-platform-req=ext-sodium` so composer install works on the AlmaLinux runner.
-- Homepage (`/`) now renders from the `cms_pages` row with slug `home` when blocks are populated. Static Blade fallback stays intact for fresh installs.
-- "Send Test Email" button added to `/admin/settings` → Mail tab.
-
-### v1.9.0 (2026-04-19) - accounts, admin panel, donations, Remote teaser
-
-- **Account system** is live. Create a free codemeyo.com account from inside the app via device-code flow. Email + password, optional 2FA, verified email required for Pro. See [Account System](Account-System).
-- **Remote PC Code** is live in the Remote tab. Pairing uses a 6-digit code and the production relay. Session length, physical phone proof, and shared-conversation join are still open. See [Roadmap](Roadmap).
-- **Auto-updater** is now authenticated. Signed-in users pull from `codemeyo.com/api/v1/updater/latest/*`. Guests see "Sign in for updates". See [Auto-Updater](Auto-Updater).
-- **Opt-in telemetry** - anonymized LLM call counts only, off by default, toggle in Settings → Privacy.
-- **Admin panel** at `codemeyo.com/admin` - 10-tab Settings, CMS page builder, donations, entitlements, blog, feature flags, audit log. See [Admin Panel](Admin-Panel).
-- **Donations** at `codemeyo.com/donate` - one-time or monthly Stripe, no account required. See [Donations](Donations).
-- **Bundle ID renamed** from `com.codemeyo.app` to `com.jagjourney.codemeyo`. App-data paths moved - see [Configuration](Configuration#application-data-location).
-- **Downloads require a free account** now that source is closed.
-- **Pricing page** at `codemeyo.com/subscribe` now shows Apple + Google badges only. Web Stripe Checkout for subscriptions was removed - Pro will be sold exclusively in the mobile app stores.
-
-For the full, grouped release history see [Release Notes](Release-Notes).
+Every release is listed in the [changelog](https://codemeyo.com/changelog), newest first. The desktop app shows the same notes in its Changelog panel.
 
 ---
 
@@ -57,38 +38,18 @@ For the full, grouped release history see [Release Notes](Release-Notes).
 | Topic | Page |
 |---|---|
 | Install + first launch | [Getting Started](Getting-Started) |
+| Settings, paths and keychain | [Configuration](Configuration) |
 | LLM provider setup (BYOK) | [LLM Providers](LLM-Providers) |
 | MCP server configuration | [MCP Servers](MCP-Servers) |
 | Free account + 2FA | [Account System](Account-System) |
-| Public REST API | [Backend API](Backend-API) |
 | Auto-updater behavior | [Auto-Updater](Auto-Updater) |
 | iOS / Android | [Mobile App](Mobile-App) |
 | Deep Think mode | [Deep Think](Deep-Think) |
-| Admin backoffice | [Admin Panel](Admin-Panel) |
-| CMS page builder | [CMS Page Builder](CMS-Page-Builder) |
-| Donations (Stripe) | [Donations](Donations) |
-| Architecture deep-dive | [Architecture](Architecture) |
+| Browser debugging | [Browser Debug Guide](Browser-Debug-Guide) |
+| Terminal commands | [Terminal Commands](Terminal-Commands) |
 | Troubleshooting | [Troubleshooting](Troubleshooting) |
-| Feature roadmap | [Roadmap](Roadmap) |
-| Every version | [Release Notes](Release-Notes) |
+| Short answers | [FAQ](FAQ) |
 | Filing bugs / suggestions | [Contributing](Contributing) |
-
----
-
-## Upcoming
-
-Nothing below has a ship date. These are the things we're actively working toward.
-
-- **Remote PC Code** - pair your phone with your desktop, drive the coding agent from anywhere. Paid feature at launch, sold through Apple IAP + Google Play Billing only.
-- **Cross-device conversation sync** - chat history follows your account between desktop, iOS, and Android.
-- **MCP marketplace** - paid, curated, and community-submitted MCP servers with one-click install.
-- **Sign in with Apple (web)** - required by App Store Review Guideline 4.8 once the app offers any third-party login. Routes already stubbed in, credentials pending.
-- **Referral credits** - give a friend a month of Pro, get one free.
-- **Usage cost alerts** - opt-in notifications when your BYOK spend crosses a threshold you set per provider.
-- **Export conversations** to Markdown and PDF.
-- **Claude Code plugin** for users who live in the terminal.
-
-See [Roadmap](Roadmap) for the full list.
 
 ---
 
@@ -100,11 +61,10 @@ See [Roadmap](Roadmap) for the full list.
 | Downloads | [codemeyo.com/download](https://codemeyo.com/download) |
 | Sign up / sign in | [codemeyo.com/register](https://codemeyo.com/register) / [codemeyo.com/login](https://codemeyo.com/login) |
 | Dashboard | [codemeyo.com/dashboard](https://codemeyo.com/dashboard) |
+| Changelog | [codemeyo.com/changelog](https://codemeyo.com/changelog) |
 | Donate | [codemeyo.com/donate](https://codemeyo.com/donate) |
-| Subscribe (App Store / Play) | [codemeyo.com/subscribe](https://codemeyo.com/subscribe) |
 | OpenAPI spec | [codemeyo.com/api/v1/openapi.json](https://codemeyo.com/api/v1/openapi.json) |
-| Swagger UI | [codemeyo.com/api/docs](https://codemeyo.com/api/docs) |
-| Support email | support@jagjourney.com |
-| Security disclosures | security@jagjourney.com |
+| API reference | [codemeyo.com/api/docs](https://codemeyo.com/api/docs) |
+| Support and security reports | [codemeyo.com/contact](https://codemeyo.com/contact) |
 
 Copyright (c) Jag Journey, LLC.
