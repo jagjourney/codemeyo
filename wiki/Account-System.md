@@ -1,19 +1,19 @@
 # Account System
 
-As of v1.9.0, CodeMeYo has a free account system backed by the Laravel 12 + Filament v5 platform at **codemeyo.com**. Accounts are optional for running the app — the agent, editor, terminal, and all 8 LLM providers work fully offline with BYOK — but they unlock four things:
+CodeMeYo has a free account system at **codemeyo.com**. Accounts are optional for running the app - the agent, editor, terminal, and all 8 LLM providers work fully offline with BYOK - but they unlock four things:
 
 1. **Auto-updates** (signed-in users only receive automatic update checks; see [Auto-Updater](Auto-Updater))
 2. **Download access** (downloads at `codemeyo.com/download` are gated behind a free account)
-3. **Pro entitlements** when the feature opens up (bought through Apple IAP / Google Play Billing)
-4. **Remote PC Code pairing** when the feature ships (see [Mobile App → Remote PC Code](Mobile-App#remote-pc-code))
+3. **Pro entitlements** (bought in the app on Apple devices or at codemeyo.com)
+4. **Remote PC Code pairing** (see [Mobile App → Remote PC Code](Mobile-App#remote-pc-code))
 
-Accounts are free. Creating one never costs money. Pro, when it launches, is sold exclusively through the **Apple App Store + Google Play** — not through the website.
+Accounts are free. Creating one never costs money.
 
 ---
 
 ## What you get with a free account
 
-| Capability | Free | Pro (Coming Soon) | Team (future) |
+| Capability | Free | Pro | Team (future) |
 |---|---|---|---|
 | Local agent with BYOK for all 8 providers | Yes | Yes | Yes |
 | Unlimited Code/Chat sessions | Yes | Yes | Yes |
@@ -27,7 +27,7 @@ Accounts are free. Creating one never costs money. Pro, when it launches, is sol
 | Priority support | No | Yes | Yes |
 | Shared team workspaces, SSO, admin controls | No | No | Yes |
 
-Tiers above are from `docs/99-archive/PLAN_PHASE7_SAAS_PLATFORM.md`. Pricing for Pro will be set at launch — see [Roadmap](Roadmap).
+Current prices are shown in the app and at [codemeyo.com](https://codemeyo.com).
 
 ---
 
@@ -76,7 +76,7 @@ Why it matters:
 
 ## 2FA setup
 
-Two-factor authentication is available for any account. We strongly recommend turning it on for admin and Pro accounts.
+Two-factor authentication is available for any account. We strongly recommend turning it on, especially for Pro and Team accounts.
 
 1. Sign in at [codemeyo.com/login](https://codemeyo.com/login).
 2. Open [/dashboard/profile](https://codemeyo.com/dashboard/profile).
@@ -97,7 +97,7 @@ Email verification is required before:
 - API tokens can be generated at [/dashboard/tokens](https://codemeyo.com/dashboard/tokens)
 - You can receive announcement emails
 
-You can still download and run the app before verifying — verification only gates cloud-backed features.
+You can still download and run the app before verifying - verification only gates cloud-backed features.
 
 If the verification email got lost, sign in and you'll see a banner at the top of every page with a **Resend verification** link.
 
@@ -109,10 +109,10 @@ If you want to hit the public API from your own scripts, you can generate long-l
 
 1. Go to [/dashboard/tokens](https://codemeyo.com/dashboard/tokens).
 2. Click **New token**, name it (e.g. `ci-updater-check`), optional scopes.
-3. Copy the token — this is the only time you see it.
+3. Copy the token - this is the only time you see it.
 4. Use as `Authorization: Bearer <token>` against any `/api/v1/*` endpoint.
 
-See [Backend API](Backend-API) for endpoints, scopes, and rate limits.
+See the [API reference](https://codemeyo.com/api/docs) for endpoints, scopes, and rate limits.
 
 ---
 
@@ -127,7 +127,7 @@ Each device shows:
 - Last seen timestamp
 - Revoke button
 
-Revoke a device to force it to re-authenticate. Useful if you lose a laptop. Revoke is immediate — the app's Sanctum token is invalidated server-side.
+Revoke a device to force it to re-authenticate. Useful if you lose a laptop. Revoke is immediate - the app's Sanctum token is invalidated server-side.
 
 ---
 
@@ -135,23 +135,23 @@ Revoke a device to force it to re-authenticate. Useful if you lose a laptop. Rev
 
 The in-app Account panel shows your current plan (Free / Pro / Team) with a **Manage billing** link. That link opens:
 
-- **Donors** → `/dashboard/billing` with donation history + Stripe receipt email.
+- **Donors** → `/dashboard/billing` with donation history and receipts.
 - **Pro on iOS** → deep link to `apps.apple.com/account/subscriptions`.
 - **Pro on Android** → deep link to Google Play subscriptions.
 
-There is no **web** checkout for subscriptions — that UI was intentionally removed in v1.9.0. See [Donations](Donations) if you want to give us money without subscribing.
+To support CodeMeYo without subscribing, see [codemeyo.com/donate](https://codemeyo.com/donate).
 
 ---
 
 ## Ban / account suspension
 
-Admins can ban users via the Filament admin panel (audit-logged, reason required). A banned user:
+Accounts that break the terms can be suspended, always with a recorded reason. A suspended account:
 
 - Cannot sign into web (`/login` returns a clear "banned" message with the ban reason).
 - Cannot sign into the app (`POST /api/v1/auth/login` returns `403 account_banned`).
-- Still owns their data — nothing is deleted.
+- Still owns its data - nothing is deleted.
 
-Bans can be lifted by admins. See [Admin Panel → User ban flow](Admin-Panel#user-ban-flow).
+If you think a suspension is a mistake, contact us at [codemeyo.com/contact](https://codemeyo.com/contact).
 
 ---
 
@@ -166,10 +166,10 @@ You own your data. You can delete your account at any time:
 Effect:
 
 - Your user row, devices, API tokens, subscriptions, donations (rows kept for accounting but anonymized), usage events, and announcements-read records are purged within 30 days.
-- In-flight Stripe refunds are honored if applicable.
-- Your locally stored conversations on the desktop / mobile app are **not** deleted — those live on your own hard drive and we never had them. Delete them manually if you want by resetting the local SQLite database (see [Troubleshooting → Reset Settings](Troubleshooting#reset-all-settings)).
+- Refunds already in progress are honored if applicable.
+- Your locally stored conversations on the desktop / mobile app are **not** deleted - those live on your own hard drive and we never had them. Delete them manually if you want by resetting the local SQLite database (see [Troubleshooting → Reset Settings](Troubleshooting#reset-all-settings)).
 
-Email `support@jagjourney.com` if you need help.
+If you need help, contact us at [codemeyo.com/contact](https://codemeyo.com/contact).
 
 ---
 
@@ -180,15 +180,14 @@ See [codemeyo.com/privacy](https://codemeyo.com/privacy) for the full policy. Sh
 - **We never see your prompts or LLM responses.** Those go straight from the app to the provider.
 - **We never see your API keys.** Stored in your OS keychain only.
 - **We never see your code.** The agent reads your project files locally.
-- **We only see account metadata** — email, plan, device names, and (if you opt in) anonymized LLM call counts.
+- **We only see account metadata** - email, plan, device names, and (if you opt in) anonymized LLM call counts.
 - **No selling, sharing, or renting** of personal data. Ever.
 
 ---
 
 ## Related pages
 
-- [Backend API](Backend-API) — the REST API that the app and dashboard use.
-- [Auto-Updater](Auto-Updater) — how updates work once signed in.
-- [Mobile App](Mobile-App) — iOS + Android account parity.
-- [Donations](Donations) — optional financial support.
-- [Admin Panel](Admin-Panel) — if you're on the Jag Journey team.
+- [API reference](https://codemeyo.com/api/docs) - the REST API that the app and dashboard use.
+- [Auto-Updater](Auto-Updater) - how updates work once signed in.
+- [Mobile App](Mobile-App) - iOS + Android account parity.
+- [Donate](https://codemeyo.com/donate) - optional financial support.
