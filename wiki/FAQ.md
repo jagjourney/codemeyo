@@ -8,15 +8,15 @@ Short answers. For deeper dives, follow the links.
 
 **The app is free.** Desktop and mobile. Download, install, use forever with your own LLM API keys. No paywalls on local-only features.
 
-**Pro is paid.** On Apple builds, Subscribe Monthly and Subscribe Yearly are StoreKit. On the web, checkout is Pay by Jag. Android in-app Play Billing is not in the client yet. Remote PC Code is live for Pro, Team, or monthly support. Cross-device conversation sync is not built; do not expect it.
+**Pro is paid.** On Apple builds, Subscribe Monthly and Subscribe Yearly are StoreKit. On the web, checkout is at codemeyo.com. Android in-app Play Billing is not in the client yet. Remote PC Code is live for Pro, Team, or monthly support. Cross-device conversation sync is not built; do not expect it.
 
-**Donations are welcome** at [codemeyo.com/donate](https://codemeyo.com/donate). Not required, genuinely appreciated. See [Donations](Donations).
+**Donations are welcome** at [codemeyo.com/donate](https://codemeyo.com/donate). Not required, genuinely appreciated.
 
 ---
 
 ### Is the source code available?
 
-No. Source is closed. We don't accept pull requests and the GitLab repo is private. Binaries are published to GitHub Releases only.
+No. Source is closed. We don't accept pull requests and the source repository is private. Installers are published at [codemeyo.com/download](https://codemeyo.com/download).
 
 See [Contributing](Contributing) for how to file bugs and suggestions.
 
@@ -28,7 +28,7 @@ See [Contributing](Contributing) for how to file bugs and suggestions.
 
 **To run the app:** no. Once installed, the app works fully without signing in. You just won't get auto-updates and (later) Remote PC Code.
 
-**To receive auto-updates:** yes. Signed-in users get updates via the authenticated updater endpoint. Guests stay on their installed version until they sign in or manually download. See [Auto-Updater](Auto-Updater).
+**To receive auto-updates:** yes. Signed-in users get update checks in the app. Guests stay on their installed version until they sign in or manually download. See [Auto-Updater](Auto-Updater).
 
 ---
 
@@ -113,16 +113,13 @@ Optional - CodeMeYo works fully without any MCP servers. Useful if you want the 
 - **Full MCP support.** Extend with any MCP-compatible server.
 - **BYOK.** You pay the LLM providers directly - no markup, no monthly app fee (until Pro launches and that's just for Remote PC Code).
 
-See `docs/01-product/CODEMEYO_VS_CLAUDE_DESKTOP.md` for the full feature comparison (internal-planning doc, pulled highlights into the Browser Debug Guide and Architecture pages).
-
 ---
 
 ### How do I report a bug?
 
 1. Search [existing issues](https://github.com/jagjourney/codemeyo/issues) first.
 2. If new, [open a GitHub issue](https://github.com/jagjourney/codemeyo/issues/new) with steps to reproduce, expected vs actual, OS + version, CodeMeYo version, log excerpts.
-3. For private reports: `support@jagjourney.com`.
-4. For security: `security@jagjourney.com`.
+3. For private reports and security disclosures: [codemeyo.com/contact](https://codemeyo.com/contact).
 
 See [Contributing](Contributing).
 
@@ -132,7 +129,7 @@ See [Contributing](Contributing).
 
 **Code:** you can't. Source is closed, no PRs accepted.
 
-**Feedback:** file issues, email suggestions, donate. All actively read and acted on.
+**Feedback:** file issues, send suggestions through [codemeyo.com/contact](https://codemeyo.com/contact), donate. All actively read and acted on.
 
 ---
 
@@ -157,7 +154,7 @@ Your old data directory stays on disk (unused) until you delete it. See [Configu
 
 ### How does auto-update work?
 
-1. App periodically hits `GET /api/v1/updater/latest/{platform}-{arch}` with your Sanctum bearer token.
+1. While you are signed in, the app periodically checks `GET /api/v1/updater/latest/{platform}-{arch}` on codemeyo.com.
 2. If a newer version exists, prompts you with release notes.
 3. Click **Install** - downloads signed archive, verifies signature, replaces binary, restarts.
 
@@ -189,7 +186,7 @@ For free local inference: use **Ollama** with an open-weight model.
 
 Yes. Sign in on desktop and phone. Desktop needs Pro, Team, or monthly support. Open Remote, scan or type the 6-digit code. One-time gifts do not unlock it.
 
-Session length, physical-device proof, and shared conversation join are still being finished. See [Roadmap](Roadmap).
+Session length, physical-device proof, and shared conversation join are still being finished.
 
 ---
 
