@@ -4,6 +4,11 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.1] - 2026-11-11
+
+- Fixes a crash when opening the app on iPhone and iPad.
+- Reliability polish for starting an agent run on every platform.
+
 ## [2.0.0] - 2026-11-11
 
 - A new design for the whole desktop app, in dark and light, with an option to reduce motion.
