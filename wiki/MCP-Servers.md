@@ -1,8 +1,8 @@
 # MCP Servers
 
-CodeMeYo implements the **Model Context Protocol** (MCP) — an open JSON-RPC 2.0 standard for connecting AI agents to external tools and data sources. Every MCP-compatible server in the ecosystem works with CodeMeYo out of the box.
+CodeMeYo implements the **Model Context Protocol** (MCP) - an open JSON-RPC 2.0 standard for connecting AI agents to external tools and data sources. Every MCP-compatible server in the ecosystem works with CodeMeYo out of the box.
 
-Config format is **Claude Desktop-compatible** — drop your existing `claude_desktop_config.json` MCP section into CodeMeYo's `mcp_servers.json` and everything just works.
+Config format is **Claude Desktop-compatible** - drop your existing `claude_desktop_config.json` MCP section into CodeMeYo's `mcp_servers.json` and everything just works.
 
 ---
 
@@ -16,12 +16,12 @@ Config format is **Claude Desktop-compatible** — drop your existing `claude_de
 
 Under the hood CodeMeYo uses the `rmcp` Rust crate (MCP 1.2 client) with two transport options:
 
-- **stdio** — local process over stdin/stdout (the common case).
-- **Streamable HTTP** — remote server over HTTP POST with JSON-RPC frames.
+- **stdio** - local process over stdin/stdout (the common case).
+- **Streamable HTTP** - remote server over HTTP POST with JSON-RPC frames.
 
 ---
 
-## MCP panel — 6 tabs
+## MCP panel - 6 tabs
 
 Click the MCP icon in the sidebar to open the panel:
 
@@ -73,7 +73,7 @@ Sentry
 **Communication**
 Discord, Microsoft Teams, Slack
 
-The Registry list is maintained in `src/components/mcp/RegistryBrowser.tsx`. New servers are added each release — see [Release Notes](Release-Notes). v1.5.7 alone added 25+ new servers (Unreal Engine, Unity, Blender, Meshy, Leonardo, Canva, Figma, Adobe Express, Stability AI, ElevenLabs, Runway, cPanel / WHM, Cloudflare, Vercel, Netlify, Railway, DigitalOcean, Supabase, Firebase, Notion, Linear, Jira, Asana, Google Calendar, Gmail, DALL·E, Perplexity, Stripe, Shopify, WordPress).
+The Registry list ships with the app. New servers are added each release - see the [changelog](https://codemeyo.com/changelog). v1.5.7 alone added 25+ new servers (Unreal Engine, Unity, Blender, Meshy, Leonardo, Canva, Figma, Adobe Express, Stability AI, ElevenLabs, Runway, cPanel / WHM, Cloudflare, Vercel, Netlify, Railway, DigitalOcean, Supabase, Firebase, Notion, Linear, Jira, Asana, Google Calendar, Gmail, DALL·E, Perplexity, Stripe, Shopify, WordPress).
 
 ---
 
@@ -95,12 +95,12 @@ The Registry list is maintained in `src/components/mcp/RegistryBrowser.tsx`. New
 
 | Field | Description |
 |---|---|
-| Name | Friendly name — used to namespace tools |
+| Name | Friendly name - used to namespace tools |
 | Command | Executable (e.g. `npx`, `uvx`, `docker`, `python`) |
 | Args | Command-line arguments (array) |
 | Env | Key/value environment variables, supports `${VAR}` and `${VAR:-default}` |
 | Auto-start | Start when CodeMeYo launches |
-| Risk level | Low / Medium / High — see [Risk levels](#risk-levels) |
+| Risk level | Low / Medium / High - see [Risk levels](#risk-levels) |
 
 Example JSON equivalent:
 
@@ -150,7 +150,7 @@ Example JSON equivalent:
 
 ### OAuth 2.1 servers
 
-Some servers require OAuth. CodeMeYo implements the **OAuth 2.1 PKCE** flow — full browser-based auth with no client secret in the desktop app.
+Some servers require OAuth. CodeMeYo implements the **OAuth 2.1 PKCE** flow - full browser-based auth with no client secret in the desktop app.
 
 1. When connecting, CodeMeYo opens your default browser to the server's authorize URL.
 2. You sign in and grant access.
@@ -211,10 +211,10 @@ MCP server configs support env var references:
 }
 ```
 
-- `${VAR}` — resolves to the system env var, or errors if unset.
-- `${VAR:-default}` — resolves to the system env var, or uses the default.
+- `${VAR}` - resolves to the system env var, or errors if unset.
+- `${VAR:-default}` - resolves to the system env var, or uses the default.
 
-Secrets are best kept in the OS keychain instead of env vars — use the **Auth token / API key** field in the Servers tab, which stores the value in `keyring` rather than the JSON file.
+Secrets are best kept in the OS keychain instead of env vars - use the **Auth token / API key** field in the Servers tab, which stores the value in `keyring` rather than the JSON file.
 
 ---
 
@@ -222,9 +222,9 @@ Secrets are best kept in the OS keychain instead of env vars — use the **Auth 
 
 MCP defines three primitive types. CodeMeYo supports all three:
 
-- **Tools** — functions the LLM can call. The most common type.
-- **Resources** — read-only data the LLM can consume (e.g. "list all files in this Postgres table"). Browse these in MCP panel → **Tools** → **Resources** sub-tab.
-- **Prompts** — templated prompts the server provides. Browse + render these in MCP panel → **Tools** → **Prompts** sub-tab.
+- **Tools** - functions the LLM can call. The most common type.
+- **Resources** - read-only data the LLM can consume (e.g. "list all files in this Postgres table"). Browse these in MCP panel → **Tools** → **Resources** sub-tab.
+- **Prompts** - templated prompts the server provides. Browse + render these in MCP panel → **Tools** → **Prompts** sub-tab.
 
 ---
 
@@ -233,10 +233,10 @@ MCP defines three primitive types. CodeMeYo supports all three:
 | Problem | Fix |
 |---|---|
 | Server won't start | Check **Activity** tab for the stderr output. Usually missing `npx` / wrong Python version / bad env var. |
-| Tools don't appear after connect | Wait a few seconds — discovery is async. Restart the server if it's been 10+ seconds. |
+| Tools don't appear after connect | Wait a few seconds - discovery is async. Restart the server if it's been 10+ seconds. |
 | HTTP transport connection failures | Verify the URL (try `curl -X POST <url>` with your auth header). Check your firewall. |
-| OAuth redirect hangs | Make sure no other process is on the OAuth redirect port. CodeMeYo picks a free one per attempt — but corporate firewalls sometimes block `localhost` redirects. |
-| Server keeps crashing | Check the server's own logs (e.g. `~/.cache/mcp-server-name/` depending on implementation). Raise the issue with the MCP server maintainer, not us — we're just the client. |
+| OAuth redirect hangs | Make sure no other process is on the OAuth redirect port. CodeMeYo picks a free one per attempt - but corporate firewalls sometimes block `localhost` redirects. |
+| Server keeps crashing | Check the server's own logs (e.g. `~/.cache/mcp-server-name/` depending on implementation). Raise the issue with the MCP server maintainer, not us - we're just the client. |
 
 See [Troubleshooting → MCP Server Issues](Troubleshooting#mcp-server-issues) for more.
 
@@ -251,5 +251,4 @@ See the official MCP docs at [modelcontextprotocol.io](https://modelcontextproto
 ## Related pages
 
 - [Configuration](Configuration#mcp-server-configuration)
-- [Architecture → MCP Client Integration](Architecture#mcp-client-integration)
 - [Troubleshooting](Troubleshooting#mcp-server-issues)
