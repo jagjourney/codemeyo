@@ -4,6 +4,15 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.3] - 2026-11-12
+
+- The phone remote now tells you when your desktop is not answering instead of sending a task into thin air, and your photos only go out once the desktop is ready for them.
+- Your desktop reconnects to your paired phone on its own after a restart or an update, and pairing no longer adds extra copies of your devices to your device list.
+- Ending a remote session on the desktop now ends it for the phone too, even if the phone was closed at the time.
+- The phone app now stays inside the screen in portrait and landscape: it no longer zooms in when you tap a field, and the send button stays visible above the keyboard.
+- Signing in from the desktop app by approving in your browser now completes.
+- The "Powered by Jag Journey, LLC" link at the bottom of the app now opens the right page.
+
 ## [2.0.2] - 2026-11-11
 
 - The Models screen now shows providers as a grid of compact cards, three or four across on a wide window, so there is far less scrolling.
