@@ -4,6 +4,15 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.2] - 2026-11-11
+
+- The Models screen now shows providers as a grid of compact cards, three or four across on a wide window, so there is far less scrolling.
+- From the phone app, choose which of your desktop's projects your next task goes to.
+- Attach up to four photos from your library or camera to a task sent from your phone. They are resized on the phone and reach your desktop like any other attachment.
+- Your phone now appears once in your device list, named iPhone, iPad or your Android model, instead of adding a new "unknown" entry each time you sign in.
+- Signing up on the website with an email that already has an account, or one scheduled for deletion, now shows a clear message instead of an error page.
+- Reliability polish: closing the app or installing an update is no longer counted as a crash.
+
 ## [2.0.1] - 2026-11-11
 
 - Fixes a crash when opening the app on iPhone and iPad.
