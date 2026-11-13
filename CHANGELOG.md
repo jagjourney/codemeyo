@@ -4,6 +4,12 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.4] - 2026-11-13
+
+- The model lists in the app now keep themselves up to date. A newly released model can appear in your list without waiting for an app update.
+- Each API key card in Settings, Models has a custom model id field, so you can run a model on your own key before it is in the list.
+- Reliability polish for JagAI requests from the desktop app.
+
 ## [2.0.3] - 2026-11-12
 
 - The phone remote now tells you when your desktop is not answering instead of sending a task into thin air, and your photos only go out once the desktop is ready for them.
