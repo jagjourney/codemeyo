@@ -24,7 +24,7 @@ This is the main channel. Every issue is read. Most bug reports get a fix within
 - **Expected vs actual.** What you expected to happen vs what actually happened.
 - **CodeMeYo version.** Settings → About, or the title bar.
 - **OS + version.** `Windows 11 26200`, `macOS 26.4.1 arm64`, etc.
-- **Error messages or screenshots.** Copy-paste console errors. F12 to open DevTools for frontend errors.
+- **Error messages or screenshots.** Copy the exact error text the app shows, or attach a screenshot.
 - **Log excerpts** if relevant - see [Troubleshooting → Log file locations](Troubleshooting#log-file-locations).
 
 ### A good feature request includes
