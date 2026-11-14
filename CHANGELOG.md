@@ -4,6 +4,45 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.5] - 2026-11-14
+
+- Tablets get their own layout: the run feed sits beside the controls, Pair and Settings use the width, and the app says tablet or iPad instead of phone.
+- On Android, screens no longer run under the status bar or the navigation bar, and the prompt box, the send button and the Delete account buttons stay above the keyboard.
+- The phone's run feed stays on the newest step, shows model and tool names in plain words, and formats the agent's replies with headings, lists and code.
+- Approval requests on the phone and the desktop say what the agent wants to do in plain words. A screenshot request says it sees your screen, and denying one request no longer shows an error.
+- Opening a CodeMeYo pairing link now opens the pairing prompt, including when the app was closed.
+- Signing out on the phone now asks first.
+- Picking several photos at once on Android adds them all.
+- Screen readers can read and use the phone's approval, project and model sheets.
+- The phone's status bar stays readable in the light and dark system themes, and the tab bar and sheets fit on screens with a side status strip.
+- On Android, signing in with a code opens the approval page for you and keeps waiting if the connection drops while you approve. The approval page names the phone or tablet that is asking.
+- Create account now says what to fix, such as a password that is too short, and reminds you to confirm your email before signing in.
+- The phone and tablet sign-in screen no longer shows desktop-only options and has a Forgot password link. On iPhone, iPad and Mac it explains how to set a password for an account made on the website with Apple or another sign-in.
+- When JagAI is busy, the app says so and asks you to try again in a moment. Nothing is charged.
+- A JagAI run no longer stops with a security message after the agent takes a screenshot.
+- Photos you attach, or send from the phone, are seen by Claude Code, Codex and Grok, and no longer fill the prompt with unreadable text.
+- Runs on Claude Code now list each step it takes and show in Usage.
+- Chat with one model asks only that model, and it knows the open project.
+- Files the agent creates show up in the file list right away, and each project lists only its own conversations.
+- The agent no longer asks to repeat an edit it already made, or to run checks a small task does not need.
+- A paired phone no longer drops by itself, and is shown by its own name.
+- The JagAI credit count updates during and after a run.
+- A new install starts on JagAI instead of a model that needs a key.
+- The code editor no longer marks every import as an error, Git says when a folder is not a repository, and a project folder that cannot be opened says so and lets you choose it again.
+- Web fetch and Brave Search are marked read only.
+- Right-clicking no longer shows browser or developer menu items, and F5, Ctrl+R and Ctrl+P no longer reload the screen or open a print dialog, so a running chat or task stays on screen.
+- Signing in to another Claude, Codex or Grok account tells you where to finish and updates by itself when you come back.
+- On Mac, your project folders stay open after you quit and reopen CodeMeYo. A project added before this update needs its folder chosen once more.
+- On Mac, closing the window no longer quits CodeMeYo: a running task keeps going and the Dock icon brings the window back. Quitting during a task asks first.
+- On Mac, View, Enter Full Screen and the green window button now go full screen.
+- On the Models screen, the way-in cards always bring you to their provider, and typing your own model id no longer shows the previous model's details over the box.
+- New models arrive in the list with a proper name, beside the other current models, and the Claude and OpenAI cards start on a current model instead of a legacy one.
+- If codemeyo.com is briefly unavailable, the app waits a moment and checks again instead of showing an error.
+- Your computers and phones show by name and app version in your device list after an update, and a new pairing code ends the earlier pairing.
+- A device you remove from your device list no longer comes back by itself when that app is opened.
+- Clearer wording on the Plan tab for subscribers.
+- Reliability polish for the website during updates and short outages.
+
 ## [2.0.4] - 2026-11-13
 
 - The model lists in the app now keep themselves up to date. A newly released model can appear in your list without waiting for an app update.
@@ -318,14 +357,14 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## [1.10.39] - 2026-05-27
 
-### Remote PC Code — stable QR pairing
+### Remote PC Code - stable QR pairing
 
 - Fixed desktop QR pairing so the pair code stays stable instead of regenerating repeatedly.
 - Removed unnecessary pairing messages.
 
 ## [1.10.38] - 2026-05-27
 
-### Remote PC Code — phone pairing hotfix
+### Remote PC Code - phone pairing hotfix
 
 - Fixed phone-to-desktop pairing so the secure connection can finish after the QR code is created.
 - The desktop pairing screen now opens on the QR view first, making the phone scan flow the default path.
@@ -458,17 +497,17 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## [1.10.19] - 2026-05-04
 
-### JagAI — fixes for users running JagAI on its own
+### JagAI - fixes for users running JagAI on its own
 
 - **The Enabled checkbox for JagAI (All-in-One) now persists when you relaunch the app.** Previously it would silently revert to off after every restart. Toggle once and it stays.
-- **JagAI now works standalone** — you no longer need a Claude / GPT / Grok / Gemini / DeepSeek API key configured underneath for JagAI to fire. Toggle JagAI on, leave everything else off, pick a JagAI model, and chat.
+- **JagAI now works standalone** - you no longer need a Claude / GPT / Grok / Gemini / DeepSeek API key configured underneath for JagAI to fire. Toggle JagAI on, leave everything else off, pick a JagAI model, and chat.
 - **JagAI is now a button in the chat top bar.** Up through v1.10.18 the chat header listed every other provider but JagAI itself was missing, so users with JagAI enabled and every other provider disabled had no way to actually select JagAI in the chat. Now there's a JagAI button there whenever JagAI is enabled.
-- **SideKick is now a chat top-bar button too**, for the same reason — it was previously enabled in Settings but invisible in the chat selector.
+- **SideKick is now a chat top-bar button too**, for the same reason - it was previously enabled in Settings but invisible in the chat selector.
 - **Distinct JagAI + SideKick brand colors** so the new buttons read at a glance against Claude, Grok, GPT, etc.
 
 ### iPhone + iPad sign-in is one tap from anywhere
 
-- **New Account tab on the bottom nav.** v1.10.18 added the in-app sign-in form Apple required, but the form was only reachable via the Remote → "Sign in" prompt — testers landing on Chat or Settings looked for a sign-in CTA, found none, and concluded the app couldn't be signed into. The bottom nav now surfaces an Account tab so the email + password form is one tap from anywhere on iPhone and iPad. Help → moved into Settings, where it already lives on desktop.
+- **New Account tab on the bottom nav.** v1.10.18 added the in-app sign-in form Apple required, but the form was only reachable via the Remote → "Sign in" prompt - testers landing on Chat or Settings looked for a sign-in CTA, found none, and concluded the app couldn't be signed into. The bottom nav now surfaces an Account tab so the email + password form is one tap from anywhere on iPhone and iPad. Help → moved into Settings, where it already lives on desktop.
 
 ## [1.10.18] - 2026-05-01
 
@@ -490,14 +529,14 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## [1.10.16] - 2026-05-01
 
-### Pair Device — Regenerate works, retries don't get stuck on "already used"
+### Pair Device - Regenerate works, retries don't get stuck on "already used"
 - **Fixed: Regenerate button on the desktop pair tile didn't fire.** Up through v1.10.15 the button was permanently disabled after the first pair code was generated because the connection-status flag never transitioned out of "pairing". Click now correctly mints a fresh code.
 - **Fixed: "Pair code has already been used" lockout after a phone connection failed.** The same device can retry briefly without regenerating its code.
 - **Better network errors.** Connection failures now suggest practical steps such as switching between Wi-Fi and cellular.
 
 ## [1.10.15] - 2026-05-01
 
-### Pair Device — fixed "device id field is required" QR-scan error
+### Pair Device - fixed "device id field is required" QR-scan error
 - **Pairing now works on a brand-new phone install.** Scan the QR code or enter the pair code without registering the phone first.
 
 ### Android compatibility
@@ -505,16 +544,16 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## [1.10.14] - 2026-05-01
 
-### Pair Device — back to 6-digit numeric codes
+### Pair Device - back to 6-digit numeric codes
 - **Pair codes are now 6 numeric digits, like SMS / 2FA / Apple ID / Google verifiers.** v1.10.13 briefly tried 8-character alphanumeric to maximise entropy, but every Apple TestFlight reviewer hit the alphanumeric keyboard mismatch on phone (the iOS numeric keyboard is one-handed and finger-friendly; the alphanumeric one is not). Switching to 6 numeric digits matches the universal SMS-code pattern users already know.
-- **All input boxes are numeric on every device** — phone, tablet, desktop browser, web dashboard. The desktop simply renders the same numeric component; non-digits are silently dropped.
+- **All input boxes are numeric on every device** - phone, tablet, desktop browser, web dashboard. The desktop simply renders the same numeric component; non-digits are silently dropped.
 - **Safer pair codes** with limited attempts, a short lifetime, and single-use protection.
 - **Website pairing** now accepts the same 6-digit format as the apps.
-- **iOS auto-fill works again** — `autoComplete="one-time-code"` lets iOS surface the SMS-style suggestion bar above the keyboard if the OS captured a code from a connected message.
+- **iOS auto-fill works again** - `autoComplete="one-time-code"` lets iOS surface the SMS-style suggestion bar above the keyboard if the OS captured a code from a connected message.
 
 ## [1.10.13] - 2026-05-01
 
-### Pair Device — phone QR scan & code entry now work
+### Pair Device - phone QR scan & code entry now work
 - **Fixed: phone could not type the desktop's pair code.** Phone entry now matches the code shown on desktop and clearly explains which characters to use.
 - **Fixed: QR scan never matched.** QR scanning now recognizes pair codes from supported camera and scanner apps.
 - All "enter the 6-digit code" copy across the desktop Settings panel, the in-app Remote pane, the website dashboard's "Pair with my phone" page, and the empty-input error message now correctly say "8-character code".
@@ -524,7 +563,7 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 ### Credits & billing
 - **Duplicate credit prevention.** Recovered payments no longer risk granting the same credits twice.
 - **Clear purchase status.** Transaction history distinguishes real purchases from test purchases.
-- **Cleaner Buy Credits cards.** The per-card "$X + $Y Processing Fee" math has been removed — just the final total is shown. The "Includes Processing Fee." hint above the grid covers the explainer.
+- **Cleaner Buy Credits cards.** The per-card "$X + $Y Processing Fee" math has been removed - just the final total is shown. The "Includes Processing Fee." hint above the grid covers the explainer.
 
 ### Connected-tool bundles
 - **Safer bundle installs.** CodeMeYo verifies supported bundles before installation and refuses modified files with a clear error.
@@ -543,21 +582,21 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ### JagAI multi-agent reliability
 - **Deep Think, Consensus, and Round Robin now only fan out to JagAI providers you actually have keys for.** Previously, picking JagAI in multi-agent modes always tried Claude + GPT + Grok regardless of which keys were configured, so requests for unconfigured providers failed. Now the desktop client checks which JagAI providers are available and only routes to those.
-- **Smarter failure messages.** If a multi-agent run can't get enough working providers to debate, the error now tells you exactly which providers failed and why — instead of a generic "need at least 2 providers."
+- **Smarter failure messages.** If a multi-agent run can't get enough working providers to debate, the error now tells you exactly which providers failed and why - instead of a generic "need at least 2 providers."
 - **Boilerplate filter.** Agents that respond with refusals, "I'm just an AI" disclaimers, or get stuck emitting fake tool-call text are now treated as failed analyses instead of feeding into the debate.
 
 ### Deep Think / Consensus UI polish
 - **Mode-aware section labels.** The view now properly distinguishes Deep Think (adversarial debate) from Consensus (reconciliation). Phase pill, section headings, and per-agent labels all swap to match the mode you picked.
-- **Failed agents are now visible.** When an agent's analysis fails, a red placeholder card appears in the analysis grid showing which agent dropped out — no more silently rendering two boxes when you had three agents.
+- **Failed agents are now visible.** When an agent's analysis fails, a red placeholder card appears in the analysis grid showing which agent dropped out - no more silently rendering two boxes when you had three agents.
 - **Synthesis failures stop the spinner.** If the final synthesis step itself fails, the spinner now clears and a failure banner explains what happened, instead of spinning forever.
-- **Cleaner section headers.** Section names no longer repeat the phase name (the pill strip already shows that) — just "Critiques" or "Reconciled Positions" instead of "Debate — Critiques" / "Reconcile — Reconciled Positions".
+- **Cleaner section headers.** Section names no longer repeat the phase name (the pill strip already shows that) - just "Critiques" or "Reconciled Positions" instead of "Debate - Critiques" / "Reconcile - Reconciled Positions".
 
 ### Credits dashboard polish
 - **Cleaner transaction history.** Temporary credit holds no longer clutter the list. You only see purchases, deductions, refunds, complimentary credits, and expirations.
 
 ## [1.10.5] - 2026-04-30
 
-### Mobile remote control — bidirectional mirror live
+### Mobile remote control - bidirectional mirror live
 - **"Pair with mobile device" button now switches to the correct tab.**
 - **Phone shows your PC's chat live.** When paired, desktop messages appear on your phone in real time.
 - Phone activity feed now mirrors message updates (streaming → done) so the phone sees the same conversation flow as the PC.
@@ -570,14 +609,14 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 ### What changed since v1.10.2
 This release includes the intended mobile fixes and credit-policy improvements from the previous update.
 
-### Mobile fixes — TestFlight feedback v1.9.86
+### Mobile fixes - TestFlight feedback v1.9.86
 - **Bottom navigation no longer clips on the iPhone home indicator.** Tabs render fully above the gesture bar.
-- **"Connect to your PC" flow on phone** — settings + remote tab now show the right copy when you're on a phone (you scan the PC's code, you don't host one). The pair button on mobile is now labeled "Scan PC's code" so testers know what they're doing.
-- **No more useless phone-side pair codes** — the remote tab no longer auto-mints a pair session on mobile devices. Mobile users land directly on the QR scanner.
-- **iOS camera permission** — added the camera, microphone, and photo-library usage descriptions so iOS actually shows the permission prompt when the QR scanner starts.
-- **Cleaner Remote tab icon** — switched from a phone icon (testers misread as a camera) to a cable icon that better signals "your phone is connected to your PC".
+- **"Connect to your PC" flow on phone** - settings + remote tab now show the right copy when you're on a phone (you scan the PC's code, you don't host one). The pair button on mobile is now labeled "Scan PC's code" so testers know what they're doing.
+- **No more useless phone-side pair codes** - the remote tab no longer auto-mints a pair session on mobile devices. Mobile users land directly on the QR scanner.
+- **iOS camera permission** - added the camera, microphone, and photo-library usage descriptions so iOS actually shows the permission prompt when the QR scanner starts.
+- **Cleaner Remote tab icon** - switched from a phone icon (testers misread as a camera) to a cable icon that better signals "your phone is connected to your PC".
 
-### Credits — important policy fix
+### Credits - important policy fix
 - **Credits expire 360 days from purchase if unused.** The Credits page now clearly states this policy, and older credits are used first.
 - Account dashboard now shows the **next expiration date + remaining credits in that batch** inline, so you always know which credits time out next.
 
@@ -588,11 +627,11 @@ This release includes the intended mobile fixes and credit-policy improvements f
 
 ## [1.10.1] - 2026-04-30
 
-### Added — JagAI in the desktop app
-- **JagAI is now selectable in the provider list** — pick "JagAI (All-in-One)" and choose any of 12 models across the apex / nova / spark tiers (Claude Opus 4.7, GPT-5.5, Grok 4.20 Multi-Agent, Claude Sonnet 4.6, Grok 4.20, GPT-5.4 Mini, Gemini 2.5 Pro, Claude Haiku 4.5, GPT-5.4 Nano, Grok 4.1 Fast, Gemini 2.5 Flash-Lite, DeepSeek V4 Flash).
-- **Manage Credits button** — opens your default browser pre-authenticated to your account dashboard so you can buy credits without typing a password again.
-- **Live balance** in the JagAI settings card — see your credits and dollar equivalent at a glance, refresh on demand.
-- No API keys to manage — your CodeMeYo sign-in is the only auth needed.
+### Added - JagAI in the desktop app
+- **JagAI is now selectable in the provider list** - pick "JagAI (All-in-One)" and choose any of 12 models across the apex / nova / spark tiers (Claude Opus 4.7, GPT-5.5, Grok 4.20 Multi-Agent, Claude Sonnet 4.6, Grok 4.20, GPT-5.4 Mini, Gemini 2.5 Pro, Claude Haiku 4.5, GPT-5.4 Nano, Grok 4.1 Fast, Gemini 2.5 Flash-Lite, DeepSeek V4 Flash).
+- **Manage Credits button** - opens your default browser pre-authenticated to your account dashboard so you can buy credits without typing a password again.
+- **Live balance** in the JagAI settings card - see your credits and dollar equivalent at a glance, refresh on demand.
+- No API keys to manage - your CodeMeYo sign-in is the only auth needed.
 
 ## [1.10.0] - 2026-04-30
 
@@ -625,13 +664,13 @@ The Refresh account status and Restore Purchases flows now also pull the correct
 
 The refreshed model lineup is now available across supported platforms.
 
-The new models from v1.9.83 — Claude Opus 4.7, GPT-5.5, DeepSeek V4 Pro/Flash, Gemini 3.x previews, Qwen3 32B on Groq — now ship.
+The new models from v1.9.83 - Claude Opus 4.7, GPT-5.5, DeepSeek V4 Pro/Flash, Gemini 3.x previews, Qwen3 32B on Groq - now ship.
 
 ---
 
 ## [1.9.83] - 2026-04-26
 
-Refreshed model lineup — Claude Opus 4.7 (Anthropic's newest flagship, with a step-change improvement in agentic coding), GPT-5.5 (OpenAI's newest frontier model), DeepSeek V4 Pro and V4 Flash, and the Gemini 3.x preview series are now available in the model picker. Groq's lineup adds Qwen3 32B for high-speed reasoning. Mistral Small 4 description updated to reflect its merged reasoning, vision, and code capabilities.
+Refreshed model lineup - Claude Opus 4.7 (Anthropic's newest flagship, with a step-change improvement in agentic coding), GPT-5.5 (OpenAI's newest frontier model), DeepSeek V4 Pro and V4 Flash, and the Gemini 3.x preview series are now available in the model picker. Groq's lineup adds Qwen3 32B for high-speed reasoning. Mistral Small 4 description updated to reflect its merged reasoning, vision, and code capabilities.
 
 Models that the providers themselves have retired or deprecated are now clearly labeled so you can migrate before they're shut down.
 
@@ -641,7 +680,7 @@ Bug fix: Grok 4.20 Multi-Agent can now be selected successfully. Other Grok mode
 
 ## [1.9.82] - 2026-04-22
 
-Android release polish — drops 32-bit ARM build to comply with Google Play's 64-bit requirement. All modern Android devices (2019+) support arm64, no user-visible change.
+Android release polish - drops 32-bit ARM build to comply with Google Play's 64-bit requirement. All modern Android devices (2019+) support arm64, no user-visible change.
 
 ---
 
@@ -693,7 +732,7 @@ Reliability follow-up for profile refresh, device pairing, persistent Windows si
 ## [1.9.73] - 2026-04-21
 
 ### Fixed
-- **Account tier auto-refreshes at launch.** If your Pro status changed on the server since the last time you opened the app — a new comp, a renewal, an expired subscription — CodeMeYo now re-syncs silently a moment after startup instead of waiting for you to hit the manual Refresh button.
+- **Account tier auto-refreshes at launch.** If your Pro status changed on the server since the last time you opened the app - a new comp, a renewal, an expired subscription - CodeMeYo now re-syncs silently a moment after startup instead of waiting for you to hit the manual Refresh button.
 - **Pair Device actually pairs.** Device pairing could fail with an "Unauthenticated" error even for signed-in Pro users, which also left the QR code stuck on "Generating QR…" forever. The pairing panel now uses your signed-in session correctly on the first try.
 - **Windows sign-in now persists securely.** Quitting and relaunching keeps you signed in without re-entering your password.
 - **QR panel shows a clear error instead of hanging.** When a pair code can't be generated (e.g. you're signed out, or on Free tier), the QR tile now shows an error state pointing at the detail below it, rather than the indefinite "Generating QR…" spinner.
@@ -707,7 +746,7 @@ Reliability follow-up for profile refresh, device pairing, persistent Windows si
 
 ### Fixed
 - **iPhone portrait and landscape layouts.** The bottom menu no longer gets clipped by the home indicator in portrait, and the left rail no longer disappears behind the Dynamic Island in landscape. Also polished the chat input and the title bar to respect every safe area.
-- **Friendlier sign-in and billing error messages.** Raw server responses have been replaced with clear copy — "Sign-in failed. Check your email and password.", "Your Pro subscription has ended.", "Can't reach the server.", etc. — across the Sign-in and Upgrade screens.
+- **Friendlier sign-in and billing error messages.** Raw server responses have been replaced with clear copy - "Sign-in failed. Check your email and password.", "Your Pro subscription has ended.", "Can't reach the server.", etc. - across the Sign-in and Upgrade screens.
 
 ### Added
 - **Refresh account status.** Settings → Billing has a new "Refresh account status" button that re-syncs your Pro entitlement with your account on the fly, so you never have to reinstall to pick up a fresh subscription.
@@ -717,15 +756,15 @@ Reliability follow-up for profile refresh, device pairing, persistent Windows si
 ## [1.9.61] - 2026-04-21
 
 ### Added
-- **In-app Pro subscription on iPhone + iPad.** Subscribe to CodeMeYo Pro directly inside the app using Apple's In-App Purchase — monthly or yearly. Pricing, auto-renewal terms, Terms of Use, Privacy Policy and Apple's EULA are all visible next to the subscribe button.
-- **Restore Purchases.** Tap Settings → Billing → Restore Purchases to bring back an existing Pro subscription you already bought on another platform — no need to pay twice.
+- **In-app Pro subscription on iPhone + iPad.** Subscribe to CodeMeYo Pro directly inside the app using Apple's In-App Purchase - monthly or yearly. Pricing, auto-renewal terms, Terms of Use, Privacy Policy and Apple's EULA are all visible next to the subscribe button.
+- **Restore Purchases.** Tap Settings → Billing → Restore Purchases to bring back an existing Pro subscription you already bought on another platform - no need to pay twice.
 - **Manage Subscription.** A new link takes you straight to Apple's subscription settings so cancelling or changing plans is one tap away.
 - **Delete your account from anywhere.** Settings → Account → Delete Account fully removes your CodeMeYo account, any active subscriptions, and all associated data after a password confirmation.
-- **In-app sign-in.** Signing in now happens right inside the app — no more popping out to a browser. Enter your email and password and you're in.
+- **In-app sign-in.** Signing in now happens right inside the app - no more popping out to a browser. Enter your email and password and you're in.
 
 ### Changed
 - CodeMeYo is no longer available on the App Store in China mainland. (Your existing installation continues to work.)
-- The Settings → Billing area now shows "You're subscribed — next renewal: [date]" when Pro is active, so you can always see your status at a glance.
+- The Settings → Billing area now shows "You're subscribed - next renewal: [date]" when Pro is active, so you can always see your status at a glance.
 
 ---
 
@@ -779,12 +818,12 @@ Reliability follow-up for profile refresh, device pairing, persistent Windows si
 ## [1.9.50] - 2026-04-20
 
 ### Added
-- **Pro — Remote PC Code.** Pair your phone with your desktop once, then drive your coding agent from anywhere. Send a new task, approve a risky tool call, or check progress from your phone even when you're away from your desk.
-- The phone app also works standalone — write code and chat with LLMs on your phone without a desktop.
+- **Pro - Remote PC Code.** Pair your phone with your desktop once, then drive your coding agent from anywhere. Send a new task, approve a risky tool call, or check progress from your phone even when you're away from your desk.
+- The phone app also works standalone - write code and chat with LLMs on your phone without a desktop.
 - **codemeyo.com Pair Device page** now lists your active pair codes and paired devices, with a one-click **Unpair** button for each.
 
 ### Fixed
-- Mobile viewport rendering on iOS and Android — the UI now fills the full screen, including notched iPhones (no more cut-off bottom nav).
+- Mobile viewport rendering on iOS and Android - the UI now fills the full screen, including notched iPhones (no more cut-off bottom nav).
 - Browser helper no longer reports an unnecessary warning on some payment pages.
 
 ---
@@ -792,8 +831,8 @@ Reliability follow-up for profile refresh, device pairing, persistent Windows si
 ## [1.9.13] - 2026-04-20
 
 ### Fixed
-- Your **codemeyo.com** account dashboard now loads with proper styling — no more unstyled Pair Device page.
-- **Start pairing** on the web dashboard now works — you can generate a code from the browser without needing a device registered first.
+- Your **codemeyo.com** account dashboard now loads with proper styling - no more unstyled Pair Device page.
+- **Start pairing** on the web dashboard now works - you can generate a code from the browser without needing a device registered first.
 
 ---
 
@@ -832,7 +871,7 @@ App Improvements for the better good of seamless updates.
 ## [1.9.7] - 2026-04-19
 
 ### Fixed
-- Signed-in users now see their profile immediately on app start — no more "Loading your profile from codemeyo.com…" spinner while the server round-trip runs. The last-known profile renders instantly; the background refresh updates it silently.
+- Signed-in users now see their profile immediately on app start - no more "Loading your profile from codemeyo.com…" spinner while the server round-trip runs. The last-known profile renders instantly; the background refresh updates it silently.
 - Shorter network timeout so any real connection issue surfaces as an error quickly instead of looking like an indefinite hang.
 
 ---
@@ -844,7 +883,7 @@ App Improvements for the better good of seamless updates.
 - Homepage download buttons can be wired to direct download URLs per platform.
 
 ### Fixed
-- Sign-in now truly persists across app restarts on all platforms — survives any OS keychain quirks.
+- Sign-in now truly persists across app restarts on all platforms - survives any OS keychain quirks.
 - Homepage console errors cleaned up.
 - The "Sign in for automatic updates" banner disappears immediately once you sign in.
 
@@ -853,14 +892,14 @@ App Improvements for the better good of seamless updates.
 ## [1.9.4] - 2026-04-19
 
 ### Fixed
-- Release pages are tidier — no stale installers from old versions showing up next to the current one.
+- Release pages are tidier - no stale installers from old versions showing up next to the current one.
 
 ---
 
 ## [1.9.3] - 2026-04-19
 
 ### Fixed
-- Clean installer assets on release pages — no more leftover files from older versions showing up next to the current one.
+- Clean installer assets on release pages - no more leftover files from older versions showing up next to the current one.
 - Sign-in nudge now disappears automatically once you sign in; the update check re-runs without needing an app restart.
 
 ---
@@ -868,7 +907,7 @@ App Improvements for the better good of seamless updates.
 ## [1.9.2] - 2026-04-19
 
 ### Fixed
-- **Sign-in now persists across app restarts.** If you signed in on 1.9.0 and had to re-enter your credentials every launch, that's fixed — your session is remembered.
+- **Sign-in now persists across app restarts.** If you signed in on 1.9.0 and had to re-enter your credentials every launch, that's fixed - your session is remembered.
 - **Automatic data migration** for users updating from 1.5.x. If your API keys, conversations, or usage history appeared to be missing after the update, they're restored on the next launch.
 
 ---
@@ -887,8 +926,8 @@ Small polish release on top of 1.9.0.
 Free accounts, a refreshed website, and a preview of what's coming next.
 
 ### Added
-- **Free CodeMeYo accounts.** Sign in from the Account tab to get automatic updates and early access to new features. Your own API keys still stay on your device — nothing changes there.
-- **Remote PC Code — Coming Soon.** A new tab in the app previews an upcoming feature that'll let you drive the desktop agent from your phone. Not live yet; sign in now to be among the first to try it.
+- **Free CodeMeYo accounts.** Sign in from the Account tab to get automatic updates and early access to new features. Your own API keys still stay on your device - nothing changes there.
+- **Remote PC Code - Coming Soon.** A new tab in the app previews an upcoming feature that'll let you drive the desktop agent from your phone. Not live yet; sign in now to be among the first to try it.
 - **Privacy-respecting telemetry (opt-in).** If you'd like to help us understand which providers and models get the most use, toggle it on in Settings → Privacy. Off by default. We never see prompts or code.
 - **Refreshed donations page.** One-time or monthly options at codemeyo.com/donate.
 
@@ -905,8 +944,8 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 ## [1.5.9] - 2026-04-18
 
 ### Added
-- **In-app Changelog viewer** — A new "Changelog" tab under Help shows release notes for every version, fetched live from our public CHANGELOG. Current version is highlighted, older versions are collapsible, and you can search the whole history.
-- **Release notes in the update prompt** — When the auto-updater detects a new version, you'll see what's actually changing before you click "Install".
+- **In-app Changelog viewer** - A new "Changelog" tab under Help shows release notes for every version, fetched live from our public CHANGELOG. Current version is highlighted, older versions are collapsible, and you can search the whole history.
+- **Release notes in the update prompt** - When the auto-updater detects a new version, you'll see what's actually changing before you click "Install".
 
 ### Improved
 - Release notes now cover every version from v1.0.5 onward, both in the app and on the public release page.
@@ -923,28 +962,28 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 ## [1.5.7] - 2026-04-18
 
 ### Added
-- **Full Git client** — Branch picker with search (switch / create / delete branches, protected-branch guard on main/master), commit composer with optional "amend last commit", Fetch / Pull / Push toolbar, and inline per-file stage, unstage, and discard buttons on every changed file. Stage-all and Unstage-all toggles included.
-- **Robust terminal CLI** — Slash commands that mirror the whole GUI: `/project list|add|rm|switch`, `/git status|checkout|commit|push|pull|fetch|...`, `/chat new|list|switch|rename|delete`, `/mode code|chat`, `/strategy single|roundrobin|deepthink|consensus`, `/provider <name>`, `/status`, `/open <file>`, `/version`, `/help`, `/clear`. Accepts both `/cmd` and `cmy cmd`. Type `/help` in the terminal to see everything.
+- **Full Git client** - Branch picker with search (switch / create / delete branches, protected-branch guard on main/master), commit composer with optional "amend last commit", Fetch / Pull / Push toolbar, and inline per-file stage, unstage, and discard buttons on every changed file. Stage-all and Unstage-all toggles included.
+- **Robust terminal CLI** - Slash commands that mirror the whole GUI: `/project list|add|rm|switch`, `/git status|checkout|commit|push|pull|fetch|...`, `/chat new|list|switch|rename|delete`, `/mode code|chat`, `/strategy single|roundrobin|deepthink|consensus`, `/provider <name>`, `/status`, `/open <file>`, `/version`, `/help`, `/clear`. Accepts both `/cmd` and `cmy cmd`. Type `/help` in the terminal to see everything.
 - **25 new connected tools** across design, coding, cloud, data, productivity, and commerce.
-- **Help search** — Ctrl/Cmd+F in the Help tab searches across every feature description with term highlighting.
-- **Remove projects** — Inline trash icon on each project in the dropdown. Keeps files on disk; just removes the entry from CodeMeYo.
+- **Help search** - Ctrl/Cmd+F in the Help tab searches across every feature description with term highlighting.
+- **Remove projects** - Inline trash icon on each project in the dropdown. Keeps files on disk; just removes the entry from CodeMeYo.
 
 ### Improved
-- Project list is now sorted alphabetically everywhere it appears — dropdown, CLI, title bar.
+- Project list is now sorted alphabetically everywhere it appears - dropdown, CLI, title bar.
 - Terminal now runs shell commands in your active project's directory automatically (no more hardcoded paths).
-- Terminal keeps command history — Up/Down arrows navigate through the last 200 commands. Ctrl+L clears the screen.
+- Terminal keeps command history - Up/Down arrows navigate through the last 200 commands. Ctrl+L clears the screen.
 - Terminal reacts live when you switch the active project.
-- Theme stays consistent — all the new Git controls respect your light/dark theme automatically.
+- Theme stays consistent - all the new Git controls respect your light/dark theme automatically.
 
 ---
 
 ## [1.5.6] - 2026-04-18
 
 ### Added
-- **GitHub-style Git diff viewer** — Click any file in the Git tab and see its changes with line numbers, color-coded additions and removals, unchanged-line context, and collapsible per-file cards. Monospace rendering preserves whitespace exactly.
+- **GitHub-style Git diff viewer** - Click any file in the Git tab and see its changes with line numbers, color-coded additions and removals, unchanged-line context, and collapsible per-file cards. Monospace rendering preserves whitespace exactly.
 
 ### Improved
-- Git panel reorganized into a split layout — file list on the left, live diff viewer on the right.
+- Git panel reorganized into a split layout - file list on the left, live diff viewer on the right.
 
 ---
 
@@ -958,8 +997,8 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 ## [1.5.4] - 2026-04-18
 
 ### Added
-- **Deep Think visual state persists across app restarts.** When you reopen a Deep Think conversation, all four proposal cards, every critique, the final synthesis, and the phase-progress indicator are fully restored — not just the text response.
-- Homepage at codemeyo.com fully refreshed — all 8 LLM providers highlighted, 22+ MCP servers listed by category, Deep Think and Conversation Mode featured, iOS/Android availability called out, privacy and terms pages linked.
+- **Deep Think visual state persists across app restarts.** When you reopen a Deep Think conversation, all four proposal cards, every critique, the final synthesis, and the phase-progress indicator are fully restored - not just the text response.
+- Homepage at codemeyo.com fully refreshed - all 8 LLM providers highlighted, 22+ MCP servers listed by category, Deep Think and Conversation Mode featured, iOS/Android availability called out, privacy and terms pages linked.
 
 ---
 
@@ -981,10 +1020,10 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 ## [1.5.1] - 2026-04-18
 
 ### Fixed
-- **Folders now render as folders** in the file tree — they were previously showing as generic files.
-- **File editor loads file contents** when you click a file — was showing blank.
+- **Folders now render as folders** in the file tree - they were previously showing as generic files.
+- **File editor loads file contents** when you click a file - was showing blank.
 - **Conversations no longer crash** when saving messages.
-- **New conversations from the sidebar "+" button persist immediately** — previously they'd disappear on restart unless you sent a message first.
+- **New conversations from the sidebar "+" button persist immediately** - previously they'd disappear on restart unless you sent a message first.
 
 ### Improved
 - Windows updates are prepared more quickly.
@@ -994,19 +1033,19 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 ## [1.5.0] - 2026-04-17
 
 ### Added
-- **Writable code editor** — Edit any file directly in the app. Auto-saves 1.5 seconds after you stop typing, or Ctrl+S to save immediately. Supports 40+ languages with bracket colorization, minimap, find/replace, and format-on-paste.
-- **Conversation rename** — Hover any conversation in the sidebar, click the pencil, rename inline.
-- **Real folder icons in the file tree** — Closed and open folders look different, with color-coded files by language and type.
+- **Writable code editor** - Edit any file directly in the app. Auto-saves 1.5 seconds after you stop typing, or Ctrl+S to save immediately. Supports 40+ languages with bracket colorization, minimap, find/replace, and format-on-paste.
+- **Conversation rename** - Hover any conversation in the sidebar, click the pencil, rename inline.
+- **Real folder icons in the file tree** - Closed and open folders look different, with color-coded files by language and type.
 
 ### Fixed
-- **All AI responses now persist across app restarts** — Deep Think conversations with Claude, Grok, OpenAI, and Gemini no longer vanish when you close the app.
+- **All AI responses now persist across app restarts** - Deep Think conversations with Claude, Grok, OpenAI, and Gemini no longer vanish when you close the app.
 
 ### Improved
 - Linux updates are prepared more quickly.
 
 ---
 
-## [1.0.11 — 1.0.12] - 2026-04-17
+## [1.0.11 - 1.0.12] - 2026-04-17
 
 ### Fixed
 - **Windows desktop app no longer crashes on startup.** Networking now works correctly on every platform.
@@ -1051,7 +1090,7 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 ## [0.2.910] - 2026-04-13
 
 ### Fixed
-- **Chat + Deep Think no longer scans your codebase.** Chat mode is completely tool-free across all strategies — it's pure conversation, no file access.
+- **Chat + Deep Think no longer scans your codebase.** Chat mode is completely tool-free across all strategies - it's pure conversation, no file access.
 
 ---
 
@@ -1060,7 +1099,7 @@ Free accounts, a refreshed website, and a preview of what's coming next.
 ### Added
 - **iOS build support.**
 - **Android build support.**
-- **Desktop and mobile feature gating** — mobile builds skip desktop-only capabilities (like screen capture and browser integration) gracefully.
+- **Desktop and mobile feature gating** - mobile builds skip desktop-only capabilities (like screen capture and browser integration) gracefully.
 
 ### Fixed
 - **Chat mode** no longer injects project context when it shouldn't.
