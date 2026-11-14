@@ -4,6 +4,52 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.6] - 2026-11-14
+
+- Signing in with your email and password now asks for a 7 digit code sent to your email. The code box takes a paste and fills from your phone's one-time-code suggestion.
+- Choose the model each Claude, Codex and Grok subscription account runs, or keep its plan's default. Those subscriptions now list their models, and you can type a model id on their cards too.
+- Several models of one subscription can take part in the same Round Robin, Deep Think or Consensus run.
+- From your phone or tablet you can now pick which of your desktop's projects to work on, right after pairing and at any time from the run screen.
+- A paired phone now stays paired for up to 30 days, and the Remote screen, the phone's Settings and your account's Pair page show until when.
+- Unpairing on the phone, signing out, removing a device or the end of your plan now ends the pairing on both sides at once. You can also end a pairing from the Pair page of your account on codemeyo.com.
+- Removing a device from your account now signs it out and ends its pairing.
+- Every password box and API key box now has a Show button, so you can check what you typed.
+- One tap on Send now sends your prompt while the phone keyboard is open.
+- After a restart the desktop opens the project you were working in, so the desktop and a paired phone stay on the same project.
+- The phone's Back button now closes an open panel instead of leaving the app.
+- Typing a pair code in landscape now keeps the code boxes in view above the keyboard.
+- The Delete account panel no longer opens the keyboard or lets a password manager fill in your password.
+- Scrollbars no longer show on the phone and tablet screens.
+- The run feed, Usage and the status bar now name the model that ran, and Grok subscription use no longer shows Grok API prices.
+- The subscription cards on the Models screen show their full description again, and a card set to an older model offers to switch to the current one.
+- When you add a tool server, its secret values and token can be shown to check them.
+- On Mac, a HEIC photo you attach is now seen by the model.
+- A follow-up in a chat now remembers that chat's earlier messages, in Code and Chat and with every model.
+- A run that ended because its model failed now says Failed, on the desktop and on a paired phone, instead of Finished.
+- Usage now counts the tokens of every model in a multi-model run and prices each call by the model that ran.
+- The agent no longer asks you to approve a write or edit that would leave a file exactly as it is.
+- Sign out is now one tap away on the phone and tablet, from the Pair screen and the run screen.
+- New: Sign out and clear, on the phone, tablet and desktop, removes your sign-in and pairing from the device after asking first.
+- Signing out now ends that sign-in on codemeyo.com and tells the paired device right away.
+- An open app now notices within minutes when its sign-in ends, and says why.
+- The Plan screen now tells a Pro you were given apart from an App Store or Google Play subscription.
+- The chat stays readable on small windows: the editor narrows and the Activity panel opens over the chat when space runs short.
+- The code editor fits narrow spaces better: the minimap hides, the file list opens over the code, and the status line trims itself.
+- Switching projects now closes the files of the project you left, saving any unsaved edits first.
+- The Remote screen says a phone is paired rather than connected, shows when it last sent a command, and the remote control banner shows the date the pairing ends.
+- The Git screen explains a folder that is not a repository in plain words.
+- The Models screen marks the active model card instead of showing a button that does nothing.
+- The Subagents panel says plainly how many workers run beside the main agent.
+- On Mac, the window fits the screen above the Dock and comes back to its size after full screen.
+- On Mac, the direct download no longer asks for your login keychain password when the App Store version is signed in on the same Mac.
+- A sign-in that has not been used for 90 days now ends, and that device asks you to sign in again.
+- The Devices page of your account shows a device as paired only while its pairing is live.
+- Signing out on the desktop now asks first.
+- A follow-up also knows which files and commands the earlier turns used, and in a multi-model chat which model said what.
+- A failed run now shows one error on a paired phone, not the same error several times.
+- Reopening a file you closed shows what is on disk now.
+- The API Tokens page of your account says that a token unused for 90 days stops working.
+
 ## [2.0.5] - 2026-11-14
 
 - Tablets get their own layout: the run feed sits beside the controls, Pair and Settings use the width, and the app says tablet or iPad instead of phone.
