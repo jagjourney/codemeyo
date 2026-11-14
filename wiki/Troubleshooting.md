@@ -141,7 +141,7 @@ Fixed across multiple versions:
 - v1.5.0 - AI responses in Deep Think / synthesis / certain strategies weren't being saved. Upgrade.
 - v1.5.1 - "FOREIGN KEY constraint failed" when saving messages. Upgrade.
 
-If on latest and still seeing this, open DevTools (F12) and check for errors in the console.
+If on latest and still seeing this, report it with the steps that lead to it and the app's log file (see Log file locations).
 
 ### Deleted conversations come back
 
@@ -307,7 +307,7 @@ Key files:
 ### Viewing live logs
 
 - **Development builds:** logs print to the terminal where you ran `pnpm tauri dev`.
-- **Release builds:** press F12 or `Ctrl+Shift+I` / `Cmd+Option+I` to open DevTools. Rust-side tracing logs still print to stdout only - run from a terminal if you need them.
+- **Release builds:** read the log files listed under Log file locations. Developer tools open in development builds only. Rust-side tracing logs still print to stdout only - run from a terminal if you need them.
 
 ---
 
