@@ -116,7 +116,6 @@ Already paying Anthropic for Claude Pro or Max? **SideKick mode** uses your exis
 - Conversation search and export (Markdown / JSON)
 - Conversation branching (fork to explore different approaches)
 - Token usage and cost tracking per provider
-- F12 DevTools support in release builds
 
 ### MCP (Model Context Protocol)
 
