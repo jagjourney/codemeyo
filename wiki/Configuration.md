@@ -119,8 +119,7 @@ Remap any shortcut. Defaults:
 | `Ctrl+O` / `Cmd+O` | Open project |
 | `Ctrl+E` / `Cmd+E` | Toggle editor |
 | `Ctrl+S` / `Cmd+S` | Save current file |
-| `Ctrl+Shift+I` / `Cmd+Option+I` | Toggle DevTools |
-| `F12` | Toggle DevTools (release builds too, since v0.1.710) |
+| `Ctrl+Shift+I` / `Cmd+Option+I` | Toggle DevTools (development builds only) |
 
 ### About
 
