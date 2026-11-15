@@ -4,6 +4,10 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.1.0] - 2026-11-15
+
+- Fixed: version 2.0.8 closed as soon as the agent started working, in Chat and in Code, on every model. Runs start again.
+
 ## [2.0.8] - 2026-11-14
 
 - JagAI models can now write far longer replies in one step, up to four times as much as before on Claude and GPT models. Writing or rewriting a large file no longer stops the run.
