@@ -4,6 +4,17 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.7] - 2026-11-14
+
+- On Windows, a command the agent runs with a path in double quotes now works. Before, every such command failed, and the agent spent steps and credits trying other ways to write it.
+- The agent now knows from its first step which system it is on and which shell its commands run in.
+- JagAI now prices each model by its own input and output rate, and the Models screen shows that price on the JagAI card. Credits go much further than before.
+- Choose how much of a run the conversation shows, from the View menu beside Strategy. Normal keeps the changes to your files and folds every other tool call into one line you can open. Tool calls gives each call a row. Verbose opens every call on its input and output.
+- A file the agent only reads no longer opens in the editor. The editor shows the files the agent changed and the files you open.
+- The editor beside the chat has a close button, and it stays closed, also while the agent works and after a restart, until you open it again from the bar at the edge or open a file yourself.
+- The file list in the editor and the Activity drawer remember that you closed them. The Activity drawer no longer opens itself on every run once you have collapsed it.
+- The JagAI credit counter is right within seconds of stopping a run, instead of staying short by the amount held for the last request.
+
 ## [2.0.6] - 2026-11-14
 
 - Signing in with your email and password now asks for a 7 digit code sent to your email. The code box takes a paste and fills from your phone's one-time-code suggestion.
