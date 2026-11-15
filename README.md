@@ -43,10 +43,10 @@ CodeMeYo always tracks the latest flagship from every major provider. Current li
 
 Don't want to manage seven API keys? Pair CodeMeYo with **JagAI** at [codemeyo.com/dashboard/credits](https://codemeyo.com/dashboard/credits):
 
-- **One balance, every top model.** Apex tier (Claude Opus 5, GPT-5.6 Sol, Grok 4.6, Gemini 3.1 Pro, DeepSeek V4 Pro). Nova tier (Sonnet 5, GPT-5.6 Terra, Grok 4.5, Gemini 3.7 Flash). Spark tier (Haiku 4.5, GPT-5.6 Luna, Grok Build 0.1, Gemini 3.5 Flash-Lite, DeepSeek V4 Flash).
-- **Pay only for what you use.** 1 credit = $0.01. Spark = 5 credits / 1K tokens, Nova = 25, Apex = 100. No subscriptions.
+- **One balance, every top model.** Claude, GPT and Grok models, from the flagships to the fastest, all paid from one balance. The Models screen in the app lists every model on offer.
+- **Pay only for what you use.** 1 credit = $0.01. Each model has its own rate for input and output, shown per model in the app and at codemeyo.com. No subscriptions.
 - **Multi-agent flows just work.** Pick JagAI in Deep Think, Consensus, or Round Robin and CodeMeYo automatically fans out to whichever upstream models are configured. No need to wire up multiple direct keys.
-- **Credits expire 360 days from purchase if unused** (oldest used first). Honest in-app expiration warnings — no surprise burn.
+- **Credits expire 365 days from purchase if unused** (oldest used first). Honest in-app expiration warnings — no surprise burn.
 
 ### SideKick — use your Claude subscription
 
@@ -222,4 +222,4 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
-Built by [Jag Journey, LLC](https://jagjourney.ai)
+Built by [Jag Journey, LLC](https://jagjourney.com)
