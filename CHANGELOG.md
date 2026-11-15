@@ -4,6 +4,55 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.0.8] - 2026-11-14
+
+- JagAI models can now write far longer replies in one step, up to four times as much as before on Claude and GPT models. Writing or rewriting a large file no longer stops the run.
+- A long JagAI reply no longer depends on one connection staying open while the model writes. The app hands the request over and collects the reply when it is ready.
+- When a reply still runs past a model's output limit, the run no longer fails. The agent is told, and does the same work in smaller steps.
+- An empty reply from JagAI is no longer reported as an OpenAI error.
+- JagAI credits go further on a long job. Each step of a run sends the conversation so far again, and the part a model has already read is now billed at its much lower cached price instead of the full input price.
+- A run keeps everything it did. Every file it read, every change and every command is saved as it happens and shown again when you open the conversation, also after a restart, a Stop or a failure, and your next message carries on from that work instead of starting over.
+- Long jobs keep going. A run now works for up to 200 steps, a number you can change in Settings, and when it reaches the limit it says so and offers Continue. When a conversation fills the model's context, the agent sums up the older part and carries on instead of failing.
+- You can type while the agent works. A message sent during a run waits in view, can be taken back, and reaches the agent before its next step. From a paired phone too.
+- The conversation shows what the agent says between its tool calls, and a new Thinking view shows a model's reasoning where the model gives it.
+- CodeMeYo tells you when a run ends, fails or waits for your approval while you are in another window: the taskbar or Dock signals it and the app shows a notice. An approval now waits for you instead of being refused after five minutes. You can turn the signals off in Settings.
+- The agent reads your project's AGENTS.md and CLAUDE.md, follows standing instructions you write in Settings, and keeps notes about a project from one conversation to the next. Workers get the same, and the agent can start a worker that only reads and searches.
+- Search finds text in every kind of file, including PHP, Vue, Ruby, C#, Kotlin and Swift, which it used to skip without saying so. It takes patterns, can ignore case, shows lines around a match and can filter by file name.
+- The agent's git commands accept a commit message with spaces, and it can revert, restore, move, remove and blame.
+- A command is no longer refused because a word such as halt or shutdown appears somewhere in it.
+- The agent reads part of a long file by line, sees images and reads PDF text, makes several changes to a file in one step, and refuses to overwrite a file that changed since it read it.
+- The agent can start a command in the background, such as a development server, keep working, read its output and stop it. A command's output shows on its card while it runs, and a command can run in a folder of the project.
+- The agent can read a web page you point it to, after asking.
+- Reads and searches the agent asks for together now run at the same time.
+- Browser tools are offered to the model only when a browser is connected, which makes every step smaller.
+- Type @ in the message box to name a file of your project, and / to use a prompt you saved in Settings.
+- Code in a reply has a copy button, and colours on desktop. The conversation list searches what was said, not only titles. Deleting a conversation asks first. A finished run shows the tokens it used and about what it cost.
+- Create, rename and delete files and folders from the file list. Stage or unstage part of a file on the Git page. The Terminal keeps its folder from one command to the next.
+- On Windows and Linux, closing the window while a run is going asks first.
+- Tools from a connected MCP server whose name has an underscore now work, a server's time limit is respected, and images a tool returns reach the model.
+- The agent keeps a list of the job's steps, pinned above the message box, so you can see what is done, what it is working on and what is left. It shows on a paired phone too.
+- Plan first: turn it on beside Strategy and the agent only reads and searches, writes a plan, and changes nothing until you approve it. You can answer with what to change instead, and it plans again.
+- The agent can ask you a question with choices when your answer changes what it does next, and waits for it. Answer on the desktop or from your phone.
+- For a large job the agent can propose how many workers to put on it, say which pieces can run side by side, and ask you first. Your answer sets the number for that run.
+- Undo a run. CodeMeYo keeps each file as it was before the agent changed it, also across a restart, and every finished reply lists the files its run changed with Keep and Undo for the whole run, for one file, or for one part of a file.
+- Always allow in this project: approve a command, a git action, a website or a connected tool once and the agent no longer asks for it in that project. Your rules are listed in Settings, where you can remove them. A rule never lets a longer or riskier command through.
+- Change a command before you allow it, right on its approval card. The agent is told what you changed it to.
+- A JagAI reply now shows while the model writes it, instead of appearing all at once when it is finished.
+- The agent can search the web. A search runs through your CodeMeYo account and uses JagAI credits, whatever model the run is on, and comes back with a short answer and the pages it rests on. The agent asks before it searches.
+- CodeMeYo sends a system notification when a run ends, fails or waits for you while you are in another window.
+- The Terminal page is a real terminal: your own shell, with colours, prompts, interactive programs and Ctrl+C. The CodeMeYo commands sit in a bar below it.
+- Commands the agent started no longer keep running when CodeMeYo closes unexpectedly.
+- Several conversations can work at the same time, up to four. Start a job in one, switch to another and start a second: each keeps going in the background and is stopped, answered and approved on its own. The conversation list marks the ones at work and the ones waiting for you.
+- Schedules: have a run start by itself every few hours, daily, on chosen weekdays or once at a set time, while CodeMeYo is open. Each schedule keeps a history of its runs, and a missed time can be caught up once.
+- Skills: the agent loads instructions for one kind of work from a skill folder in your project or your home folder, and you can call one by typing / and its name. Skills you already use with Claude work as they are.
+- Hooks: your own commands can run before or after a tool call, when a run ends or when it waits for you. A hook that runs before a tool call can block it and tell the agent why.
+- Commands the agent runs can be kept inside the project, with or without the network, on Linux and on the direct download for Mac. When a command needs more, you are asked to run it once with full access.
+- Thinking effort: choose how long JagAI models think on each step. The default is Medium, which uses fewer credits on simple steps.
+- What a JagAI run cost is now read from your account, so the figure matches what was charged, also when you stop a run while a request is still being answered.
+- On Windows and Linux, starting CodeMeYo a second time brings the open window forward instead of opening another one.
+- A web search answer is no longer cut short on a question that needs several searches.
+- A fresh install no longer shows the old JagAI tier prices before it has read the current rates.
+
 ## [2.0.7] - 2026-11-14
 
 - On Windows, a command the agent runs with a path in double quotes now works. Before, every such command failed, and the agent spent steps and credits trying other ways to write it.
