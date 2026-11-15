@@ -4,6 +4,52 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.1.1] - 2026-11-15
+
+- Code runs with your own OpenAI API key work with the newest OpenAI models again.
+- Code runs with your own Gemini API key no longer stop after the first tool step.
+- When a Codex, Claude or Grok subscription run fails, the app now says what went wrong and what to do, such as signing in again or choosing a model your plan includes.
+- Multi-model runs use everything you switched on. Deep Think and Consensus now include every model that is on and every extra model you ticked for multi-model runs, each once, and each is labelled with its own model.
+- A model that is too slow in a multi-model run is left behind after a set time, and the run says so instead of waiting on it.
+- Round Robin no longer stops when one model only says what it will do next. The run ends when a second model agrees the task is done.
+- DeepSeek now takes its turn in Round Robin, Deep Think and Consensus runs alongside other models.
+- The reply of a multi-model run shows the model that wrote it, with its tokens, cost and duration.
+- Talk instead of typing on Windows: a microphone in the message box, or Ctrl+Shift+D, starts Windows voice typing, and the words appear in the box for you to edit before you send. On a Mac, use Edit, Start Dictation.
+- CodeMeYo can keep running by the clock on Windows and in the menu bar on a Mac when you close or minimize its window, so your runs, schedules and paired phones carry on. Choose what the close button and minimize do in Settings, Prompts and alerts.
+- Pair up to five phones with one desktop. The Remote page lists each phone and can end one or all, and ending one leaves the others paired. When two phones answer the same approval or question, the first answer counts and the others see who answered.
+- New Files screen on the phone: browse the desktop's open project and read its files, with pictures shown as pictures. A setting on the desktop's Remote page turns this off. Phones never change files.
+- Ask for help inside CodeMeYo: open Support under You, write a ticket, and our replies show up right there, with a count when we have answered. The same tickets are under your account on the website.
+- The Models page is now called LLMs, and the Claude subscription is called Claude Sub.
+- The editor beside the conversation always fits the window. On a narrower window it opens over the conversation when you ask for it, and its scroll bar preview shows again.
+- The top bar of the Workspace stays on one row. LLMs that do not fit are listed under a +N button, and the lead LLM always shows.
+- The Files page shows the project's files in one list.
+- Long lists are easier to read: the Usage request log and your account's devices show ten at a time with Previous and Next. The Devices list also shows which devices were revoked.
+- Tools you add under MCP now start on Windows.
+- A conversation started with the New conversation button is named after its first message.
+- The Terminal's /git branches command lists your branches again.
+- Long coding runs on JagAI no longer end early. A run used to stop at about 48 steps.
+- Every model now knows its own name and the current date and time, so it can answer when you ask.
+- With your own Claude, Gemini or DeepSeek key, the agent can write much longer files in one reply.
+- Local Ollama models load with enough room for coding, get a lighter setup on small models, and show their reply as they write it. A model too small for coding says so right away.
+- Work done by Claude Sub, Codex Sub and Grok Sub shows in the run step by step, and every file they change is listed under the reply with Keep and Undo.
+- If your ChatGPT plan can not use the model Codex is set to, Codex Sub switches to a model your plan supports and tells you which one it used.
+- New files show their content on the Git page before you stage them.
+- Push, Pull and Fetch say what happened in plain words. When git can not sign in to a host, the page names the host and says how to fix it.
+- The Terminal's command list is easier to read: drag the pane taller and it stays that way. Every command is also listed at codemeyo.com/guide/terminal.
+- Tools from the MCP catalog ask for the key they need before they start, and explain plainly when a tool stops right after starting.
+- The credit balance in the left bar no longer jumps back to an older number after a run.
+- The Usage page on codemeyo.com shows the right token and cost totals. It counted JagAI calls more than once and showed cost too high. What you were charged was never affected.
+- Writing a support ticket: when usage sharing or crash reports is off, the New ticket screen explains both and switches them on for you there.
+- With your own OpenAI, Grok, Mistral or Groq key, the agent can write much longer files in one reply, and Grok, Mistral and Groq replies show as they are written.
+- The tool catalog under MCP lists only tools their makers publish, each set up the way its maker documents. A tool that needs a key or a folder asks for it when you press Start.
+- Long lines of code wrap inside the editor, with a switch to scroll sideways instead. Drag the edge of the side panel, the editor or the Activity drawer to make it wider or narrower, or put it away. The app remembers the sizes.
+- CodeMeYo no longer reports a crash when Windows shuts down, restarts or signs out while the app is still running.
+- Voice typing on Windows: when the Windows key is switched off on the computer, the app says so instead of typing a letter into the message box.
+- Grok Sub no longer drops out of the later stages of a Consensus or Deep Think run on Windows.
+- In Consensus and Deep Think, models only read your project until the plan is agreed. Files are changed and commands run only when the plan is carried out.
+- A file open in the editor updates when a run, Git, the terminal or another program changes it. If you have unsaved edits in it, a bar tells you and lets you load the new version or keep your edits.
+- Undo of a run by Claude Sub, Codex Sub or Grok Sub puts each file back exactly as it was, line ends included, so Git no longer lists an undone file as changed.
+
 ## [2.1.0] - 2026-11-15
 
 - Fixed: version 2.0.8 closed as soon as the agent started working, in Chat and in Code, on every model. Runs start again.
