@@ -12,7 +12,7 @@ CodeMeYo gives you **three ways to access the world's best coding models**:
 
 - **It actually codes.** Give it a task and it reads your codebase, writes/edits files, installs deps, runs tests, fixes failures, commits, and pushes. Autonomously.
 - **One app, every top model.** Pick one, rotate between them, or run them in parallel.
-- **No API keys required (with JagAI).** Sign in to codemeyo.com, buy credits, and use Claude Opus 5, GPT-5.6, Grok 4.6, Gemini 3.7 Flash, DeepSeek V4, and Mistral with one balance. Three credit tiers (Spark / Nova / Apex) so cheap models cost less and flagships cost more.
+- **No API keys required (with JagAI).** Sign in to codemeyo.com, buy credits, and use hosted Claude, GPT and Grok models with one balance. Each model has its own price, with input and output each charged at its own rate, so smaller models cost less and flagships cost more. The [JagAI page](https://codemeyo.com/jagai) lists every model and its price.
 - **Or use what you already have.** SideKick mode pipes your Claude Pro/Max subscription straight into the agent — no extra spend.
 - **Conversation mode.** Chat with multiple AIs simultaneously in an interactive roundtable. You steer the discussion, @mention specific AIs, then hand off to execution.
 - **Deep Think mode.** Send the same hard problem to multiple AIs, watch them debate each other's proposals, and synthesize a unified plan that's stronger than any one model alone.
@@ -65,7 +65,6 @@ Already paying Anthropic for Claude Pro or Max? **SideKick mode** uses your exis
 | **Round Robin** | LLMs take turns on each iteration |
 | **Deep Think** | All analyze in parallel, debate, and synthesize a unified plan |
 | **Consensus** | Reconciliation flow — agents converge on common ground, dissent surfaced transparently |
-| **Fallback** | If one API fails, auto-switch to the next |
 
 ### Agent Capabilities
 
