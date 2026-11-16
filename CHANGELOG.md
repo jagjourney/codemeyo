@@ -4,6 +4,30 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.1.3] - 2026-11-16
+
+- JagAI models that hold a very long conversation, Claude Fable 5.2 among them, are now used at their full size. A long run is summed up when the model is really full, not far earlier, and a tool can hand the model much more at once.
+- A JagAI web search can now write an answer as long as its model allows, instead of one fixed length.
+- If you type the code from an earlier sign-in email after asking for a new one, CodeMeYo now tells you it is the earlier code, and it does not count as a wrong try.
+- A finished JagAI reply now waits for your app for up to 30 days, instead of 30 minutes.
+- A signed-in app is no longer asked to slow down: remote control from your phone, support tickets, updates and the model list answer as often as your app asks.
+- JagAI models can now see pictures: a picture you attach, a screenshot the agent takes and a picture file it reads all go to the model itself. When a model can not read pictures the run says so and carries on without them.
+- Thinking effort has two new choices, Minimum and Maximum: the lowest and the highest level each model takes. When a model thinks at another level than you picked, the run says which.
+- Web search can run as many searches as a question needs, and a long search is no longer cut off after about two minutes.
+- A model you typed in yourself on an API key card is no longer held to a fixed reply length: it writes as much as the model itself allows. Replies from workers and from Deep Think and Consensus models can now be as long as the model allows too.
+- A local model is now offered every tool its context has room for, tool servers, workers and questions included, and can write longer replies. When something does not fit, the run says what was left out.
+- A worker can now hire workers of its own for a part of the job that splits further. The worker count you set is how many work at once across the whole run, and the Subagents tab shows each worker under the one that hired it. A worker also gets the run's full step limit, not half.
+- A change of any size is now shown line by line: a long change opens in pages you can go through, on its approval card and in the list of files a run changed, and a long line is no longer cut.
+- The Git page now shows a new file or a folder of new files of any size, in pages you can go through. It no longer says a file is too large to show.
+- Undo now covers every file a signed-in Claude, Codex or Grok app changes in one step, however many files and however large.
+- Copies kept for Undo are no longer removed after 30 days. They stay until you keep or undo the change, and the list of files a run changed shows how much disk they hold, with one button to clear them all.
+- A running command's card keeps showing new output for as long as the command runs, and All output lets you page through everything it wrote.
+- The phone keeps every step of a run. Earlier steps brings back older ones, and no update is dropped when many arrive at once.
+- Photos sent from the phone go at their full size, still with location and other hidden data removed.
+- A skill's name can be as long as a folder name.
+- On an iPhone the app now says iPhone, not iPad.
+- On the emailed sign-in code screen, a code that is refused stays in the box, selected, so you can see which code it was and type over it, and the notice says when the newest code was sent.
+
 ## [2.1.2] - 2026-11-15
 
 - No more fixed limits on what you can do: attach files and pictures of any size, keep notes and skills of any length, read any file or folder to its end from your phone, keep every schedule run and every background command's output, undo a change to a file of any size, write support tickets of any length, and send as many photos from your phone as you like. Deep Think waits for every model as long as it is still working, long conversations are summed up instead of cut, and where a model or your disk truly runs out of room the app says so and tells you what to do.
