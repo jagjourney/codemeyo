@@ -85,7 +85,7 @@ Your old app-data directory stays on disk but unused. Delete `%APPDATA%\com.code
 ### "Rate limited" / 429
 
 1. Wait it out - rate limits are short-window. The agent usually retries automatically.
-2. Switch to **Fallback** strategy so we silently route around rate-limited providers.
+2. Switch to the **Round Robin** strategy, which skips a rate-limited provider and goes on with the next one.
 3. Pick a cheaper model (higher rate limits).
 
 ### "Model not found" / "Invalid model"
