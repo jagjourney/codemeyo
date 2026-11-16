@@ -126,14 +126,13 @@ Deep Think conversations used to lose their visual state on restart - you'd reop
 
 ---
 
-## Round Robin + Fallback (related strategies)
+## Round Robin (related strategy)
 
 For completeness:
 
-- **Round Robin** - not parallel. Each agent loop iteration uses the next enabled provider. Useful for cost-balancing across providers or working around per-minute rate limits.
-- **Fallback** - if the active provider fails (rate limit, 5xx), the agent silently retries on the next enabled provider. Single-provider behavior with a safety net.
+- **Round Robin** - not parallel. Each agent loop iteration uses the next enabled provider. When a provider fails, it is skipped and the next one takes the step. Useful for cost-balancing across providers or working around per-minute rate limits.
 
-Both are in the Strategy selector alongside Single / Deep Think / Consensus.
+It is in the Strategy selector alongside Single / Deep Think / Consensus.
 
 ---
 
