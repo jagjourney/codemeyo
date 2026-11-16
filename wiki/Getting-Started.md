@@ -26,21 +26,21 @@ Go to [codemeyo.com/download](https://codemeyo.com/download) while signed in. Yo
 | Platform | Minimum |
 |---|---|
 | Windows | Windows 10 (1803+) or Windows 11, WebView2 |
-| macOS | macOS 11 Big Sur+, Apple Silicon or Intel |
+| macOS | macOS 12 Monterey+, Apple Silicon or Intel |
 | Linux | Ubuntu 20.04+, Fedora 38+, or any distro with WebKitGTK 4.1 |
 | iOS | iOS 15+ (TestFlight during preview - see [Mobile App](Mobile-App)) |
 | Android | Android 10+ (aarch64 / armv7 - [Mobile App](Mobile-App)) |
 
 ### Windows
 
-1. Download the `.msi` or `.exe` installer for your architecture.
+1. Download the `.exe` installer.
 2. Run the installer.
 3. If SmartScreen flags the installer as unrecognized, click **More info** → **Run anyway**. We're working toward full EV code-signing; until then it shows as unsigned.
 4. Launch from the Start Menu.
 
 ### macOS
 
-1. Download the `.dmg`.
+1. Download the `.dmg`, or install CodeMeYo from the Mac App Store. One app runs on Apple Silicon and Intel Macs.
 2. Open the DMG and drag **CodeMeYo** to **Applications**.
 3. On first launch right-click the app and choose **Open** to bypass Gatekeeper. (Or **System Settings → Privacy & Security → Open Anyway**.)
 4. If the app reports as damaged after download: `xattr -cr /Applications/CodeMeYo.app`
@@ -50,16 +50,9 @@ If you had v1.8.x or earlier installed under the old bundle ID `com.codemeyo.app
 ### Linux
 
 ```bash
-# Debian / Ubuntu
-sudo dpkg -i codemeyo_1.9.1_amd64.deb
-sudo apt-get install -f        # if any deps are missing
-
-# Fedora / RHEL
-sudo rpm -i codemeyo-1.9.1-1.x86_64.rpm
-
-# Universal (AppImage)
-chmod +x CodeMeYo_1.9.1_amd64.AppImage
-./CodeMeYo_1.9.1_amd64.AppImage
+# One file for every distribution (AppImage)
+chmod +x CodeMeYo_*_amd64.AppImage
+./CodeMeYo_*_amd64.AppImage
 ```
 
 Runtime dependencies (Debian/Ubuntu):
