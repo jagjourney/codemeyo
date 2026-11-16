@@ -22,7 +22,10 @@ The desktop builds published to the feed are:
 |---|---|---|
 | `windows` | `x86_64` | Windows 10+, 64-bit Intel/AMD |
 | `darwin` | `aarch64` | macOS on Apple Silicon (M1 and later) |
+| `darwin` | `x86_64` | macOS on Intel Macs |
 | `linux` | `x86_64` | Linux 64-bit (AppImage) |
+
+One Mac app runs on both Apple Silicon and Intel Macs, so both kinds of Mac get the same update.
 
 ---
 
