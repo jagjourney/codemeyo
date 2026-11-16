@@ -4,6 +4,27 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.1.2] - 2026-11-15
+
+- No more fixed limits on what you can do: attach files and pictures of any size, keep notes and skills of any length, read any file or folder to its end from your phone, keep every schedule run and every background command's output, undo a change to a file of any size, write support tickets of any length, and send as many photos from your phone as you like. Deep Think waits for every model as long as it is still working, long conversations are summed up instead of cut, and where a model or your disk truly runs out of room the app says so and tells you what to do.
+- Talk instead of typing on a Mac: the microphone in the message box, or Ctrl+Shift+D, listens and writes what you say into the box as you speak, and pressing it again or Escape stops. Your Mac turns the speech into text on the Mac where it can, and the box says when Apple does it instead.
+- A conversation can now work in a copy of your project on a branch of its own, so several conversations at once never change the same files. See its changes, bring them into your project, keep the branch or discard the copy. Settings lists every copy with its size.
+- Tool servers that ask you to sign in with your account now work: press Sign in on the server's row and finish in your browser. The sign-in renews itself and you can sign out at any time.
+- Slack, Gmail, Google Drive, Google Calendar, Jira and Confluence, Asana, Canva and Vercel are back in the tool server catalog.
+- Clicking a CodeMeYo notification now opens the conversation it is about, and you choose which notices you get: a run waits for you, finishes, or fails.
+- While a run waits for you, the icon by the clock (in the menu bar on a Mac) says how many wait and lists each one. Schedules start on time with the window put away.
+- In Deep Think and Consensus, the files a signed-in app reads and the searches it runs before the plan now show under that model, marked "By the app", and count in the run's tool calls.
+- A JagAI coding step is no longer held to one fixed length: it can write as much as its model is set to allow. When your credits hold less, the step says so.
+- When a model's provider turns a JagAI request down before it runs, the app now says so and suggests another model, instead of a general error.
+- JagAI runs keep going when a model's provider is busy: the run says it is waiting and sends the step again. A conversation that has grown too long for the model is summed up and sent again, a step is never bigger than the room the conversation leaves, and the few models that cost more for a very long prompt show that rate on the JagAI page.
+- JagAI models that can not use tools, such as Grok 4.20 Multi Agent and the GPT-5 Search models, are marked "Chat only". They work in Chat as before, and in Code the app asks you to pick another model instead of starting a run that would fail. What you typed stays in the box.
+- Write to CodeMeYo Support from the contact page on the website. Your message becomes a support ticket: signed in, it shows under your account's tickets; signed out, we answer by email with a link where you read the answer and write back.
+- No more fixed tops: run as many conversations at once as you like, pair any number of phones, set any number of workers on any model, and let a run take every step it needs. The step limit now starts at No limit, and a number you set has no top. When a provider or your computer says no, the app tells you why and keeps going.
+- The Mac app now runs on Intel Macs as well as Apple Silicon. One download and one Mac App Store app serve both, and Intel Macs get updates in the app like every other Mac.
+- When JagAI stops working on a reply before it is finished, the credits held for it now come back and the app says so in plain words, instead of waiting several minutes for an answer that will not come.
+- Fewer limits again: the agent reads whole files and gets every search result and folder entry, and when something is more than the model can take it gets as much as fits and is told how to ask for the rest. Your instructions and the project's instruction files are sent whole, step lists and questions hold any number of items, a phone task can carry any number of photos, a hook runs as long as you set or with no time limit, a schedule can repeat every minute, and commands can run as long as they need.
+- Anyone signed in can now open a support ticket from the app, with usage sharing and crash reports on or off. With them off, the ticket carries only what you write.
+
 ## [2.1.1] - 2026-11-15
 
 - Code runs with your own OpenAI API key work with the newest OpenAI models again.
