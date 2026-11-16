@@ -125,7 +125,6 @@ CodeMeYo supports multiple agent modes that affect how commands are orchestrated
 | **Single** | One LLM provider codes the entire task |
 | **Round Robin** | Rotate between providers each iteration |
 | **Deep Think** | All providers analyze, debate, then one executes |
-| **Fallback** | Auto-switch to next provider on failure |
 
 In **Round Robin** mode, if a provider fails, it's skipped and the terminal shows a warning. The agent continues with the next provider.
 
