@@ -69,9 +69,9 @@ Full policy at [codemeyo.com/privacy](https://codemeyo.com/privacy).
 
 | Platform | Formats |
 |---|---|
-| Windows | `.msi`, `.exe` |
-| macOS | `.dmg` (Apple Silicon + Intel) |
-| Linux | `.deb`, `.rpm`, `.AppImage` |
+| Windows | `.exe` |
+| macOS | `.dmg` or the Mac App Store (Apple Silicon + Intel) |
+| Linux | `.AppImage` |
 | iOS | Via TestFlight (App Store submission pending) |
 | Android | Via Play Open Testing (listing pending), or sideload the signed `.apk` |
 
