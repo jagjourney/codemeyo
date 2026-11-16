@@ -4,6 +4,18 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.1.4] - 2026-11-16
+
+- A PDF you attach now goes to the model as the document itself where the model reads PDFs, so it sees the pages, tables and pictures and not only the text: Claude, OpenAI and Gemini models on JagAI or on your own key. Every other model still gets the text taken from the PDF, and so does a model whose provider would not take the file.
+- A PDF with more pages than a model's provider reads in one request now goes as its text straight away, and the model is told why, instead of the request being refused first.
+- JagAI now offers Google Gemini and DeepSeek models.
+- A GIF or WebP picture now reaches a Grok model, and a GIF reaches a Gemini model: the picture is converted for the model instead of being left out.
+- A picture now goes to each model at the largest size that model's provider takes, instead of one smaller size for every model, so a model that takes large pictures sees more of the detail.
+- The thinking effort you pick in Settings now works on your own API keys too: Claude, OpenAI, Grok, Gemini, DeepSeek, Mistral and Groq models think at the level you chose, or at the nearest level the model takes, and the run says which. It works for a model on your own computer with Ollama too, where the model can be asked to think, and for older Claude models.
+- A model you typed in yourself on an API key card is now sized by its own provider: where the provider states the model's size CodeMeYo asks it, and where it does not, CodeMeYo takes the size the provider names when a conversation no longer fits. A long run on such a model is summed up at the right point.
+- When a model's provider declines to answer a JagAI request under its content rules, the run now says so in plain words and tells you what was charged.
+- When a provider stops a reply halfway because it is short of capacity, the run now says so and carries on from where the reply stopped.
+
 ## [2.1.3] - 2026-11-16
 
 - JagAI models that hold a very long conversation, Claude Fable 5.2 among them, are now used at their full size. A long run is summed up when the model is really full, not far earlier, and a tool can hand the model much more at once.
