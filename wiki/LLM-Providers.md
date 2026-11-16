@@ -173,7 +173,6 @@ Any enabled provider can participate in any strategy. You don't pick providers p
 | **Round Robin** | Rotates between enabled providers each agent loop iteration |
 | **Deep Think** | All enabled providers analyze in parallel, critique, synthesize. Each provider contributes its **best** model automatically - see [Deep Think](Deep-Think). |
 | **Consensus** | Like Deep Think but debate continues until providers converge on an answer |
-| **Fallback** | If one provider fails (rate limit, 5xx), the agent silently retries on the next enabled provider |
 
 ---
 
