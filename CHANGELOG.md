@@ -4,6 +4,31 @@ Customer-facing additions, improvements, and fixes for CodeMeYo.
 
 ## Unreleased
 
+## [2.1.5] - 2026-11-21
+
+- JagAI works right after you sign in inside the app; before, a JagAI request sent before the app was restarted could end with a sign-in message.
+- A new account made in the app waits on a Confirm your email step with Send again, and signs you in by itself once the email is confirmed.
+- Signing in from the app no longer fails for people in some countries.
+- The download page now asks a visitor who is not signed in to pass a short check before the installer is sent.
+- When the account behind your own API key has run out of balance, the app now says it is that provider's account, not your CodeMeYo credits, and offers another model.
+- A model your API key's provider does not serve now says so plainly and suggests another model, instead of a hint to install it on your own computer.
+- After an update, the model lists shown before the app reaches codemeyo.com are this version's own, not the lists an older version saved.
+- On Windows and Linux, a HEIC photo you attach (the iPhone camera's format) is now seen by the model, as it already was on a Mac.
+- Workers can run on a model of their own: pick a cheaper model for workers and keep a stronger one for the main agent, in Settings, Agent, or in the Subagents tab.
+- When a run fails, its reply now says why in plain words, without "Agent error" in front.
+- When your ChatGPT plan does not allow the model Codex Sub is set to, the run now says so and carries on with a model your plan allows.
+- On a Mac, the window now comes back to exactly its size and place after full screen.
+- On a Mac and on Linux, signing in to your Claude, Codex or Grok account now opens a terminal window, so a sign-in that asks you to type something can finish.
+- On Linux, CodeMeYo can keep running by the clock with its window put away, as on Windows and a Mac, on desktops that show tray icons.
+- Each file change in the conversation, and the editor's comparison view, now has its own Keep and Undo.
+- Runs working or waiting in other projects now show in the conversation list, so you can jump to them in one click.
+- The Terminal page keeps its shell running while you look at another page, so a server you started there keeps going, and its command pane says which conversation each agent command came from and is easier to resize.
+- The agent is no longer told about browser tools when no browser is connected, which keeps each step a little smaller.
+- A conversation too long for an OpenAI model on JagAI is now summed up and carried on, instead of ending with an error.
+- When a JagAI model is busy at the very start of its reply, the step is sent again by itself.
+- A phone paired with an older desktop now shows the desktop as "Desktop" instead of "Desktop (auto-paired)".
+- When the site does not accept a pair code, the phone now says whether the code is not on your desktop, has run out or belongs to another account, and what to do next.
+
 ## [2.1.4] - 2026-11-16
 
 - A PDF you attach now goes to the model as the document itself where the model reads PDFs, so it sees the pages, tables and pictures and not only the text: Claude, OpenAI and Gemini models on JagAI or on your own key. Every other model still gets the text taken from the PDF, and so does a model whose provider would not take the file.
